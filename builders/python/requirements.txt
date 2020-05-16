@@ -18,6 +18,7 @@ click >= 7.0
 codecov>=2.0.22
 colorama >= 0.4.1
 coverage>=5.1
+# matplotlib
 cryptocompare>=0.6.6
 cryptography>=2.9
 decorator>=4.4.2

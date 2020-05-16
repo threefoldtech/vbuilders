@@ -1,11 +1,2 @@
-## base image
+## base for crystal development
 
-this is the base image for all further builds 
-it has
-
-- redis
-- nginx
-- htop
-- mc
-- ping
-- curl

@@ -22,5 +22,7 @@ services:
     stdin_open: true
     tty: true       
     depends_on: ["base","python"]    
-
-   
+  # tarantool:
+  #   build: tarantool
+  #   stdin_open: true
+  #   tty: true       
