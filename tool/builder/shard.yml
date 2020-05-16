@@ -1,0 +1,25 @@
+name: builder
+version: 0.1.0
+
+authors:
+  - kristof <kristof@incubaid.com>
+
+targets:
+  builder:
+    main: src/builder.cr
+
+crystal: 0.34.0
+
+license: MIT
+
+dependencies:
+  ssh2:
+    github: spider-gazelle/ssh2.cr
+    branch: master
+  earl:
+    github: ysbaddaden/earl
+    branch: master
+  icr:
+    github: crystal-community/icr
+    branch: master
+    

@@ -1,2 +1,7 @@
-# builders
-builders based on docker
+
+
+## to stop all containers
+
+```
+docker rm -f $(docker ps -a -q)
+```

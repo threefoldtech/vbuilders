@@ -1,0 +1,18 @@
+version: 1.0
+shards:
+  earl:
+    github: ysbaddaden/earl
+    commit: 2a732dfcca8241eaca86dc24c41435d7032dd5f2
+
+  icr:
+    github: crystal-community/icr
+    commit: 7da354f5c0a356aee77e68fc63c87e2ad35da7fb
+
+  readline:
+    github: crystal-lang/crystal-readline
+    commit: 0fb7d186da8e1b157998d98d1c96e99699b791eb
+
+  ssh2:
+    github: spider-gazelle/ssh2.cr
+    commit: cc5af1d6fcfbf4c72784e1c2445bddb678880e27
+
