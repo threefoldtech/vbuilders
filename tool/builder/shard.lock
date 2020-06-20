@@ -1,16 +1,20 @@
 version: 1.0
 shards:
+  crystaltools:
+    github: crystaluniverse/crystal_tools
+    commit: 636d43a5001f84d19755009fdc8a7737e766be28
+
+  crystar:
+    github: naqvis/crystar
+    version: 0.1.5
+
+  docker:
+    github: aca-labs/crystal-docker
+    commit: d68a89e1ed47f2e95ab9fd854e54f98e54e1697d
+
   earl:
     github: ysbaddaden/earl
     commit: 2a732dfcca8241eaca86dc24c41435d7032dd5f2
-
-  icr:
-    github: crystal-community/icr
-    commit: 7da354f5c0a356aee77e68fc63c87e2ad35da7fb
-
-  readline:
-    github: crystal-lang/crystal-readline
-    commit: 0fb7d186da8e1b157998d98d1c96e99699b791eb
 
   ssh2:
     github: spider-gazelle/ssh2.cr

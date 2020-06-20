@@ -1,0 +1,13 @@
+name: crystalserver
+version: 0.1.0
+
+authors:
+  - kristof <kristof@incubaid.com>
+
+targets:
+  crystalserver:
+    main: src/crystalserver.cr
+
+crystal: 0.34.0
+
+license: MIT

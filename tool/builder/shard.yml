@@ -19,7 +19,10 @@ dependencies:
   earl:
     github: ysbaddaden/earl
     branch: master
-  icr:
-    github: crystal-community/icr
-    branch: master
+  docker:
+    github: aca-labs/crystal-docker   
+  crystaltools:
+    github: crystaluniverse/crystal_tools 
+  
     
+
