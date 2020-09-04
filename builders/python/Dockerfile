@@ -2,7 +2,7 @@ FROM alpine:3.11.5
 
 # VERSIONS
 ENV ALPINE_VERSION=3.11 \
-    PYTHON_VERSION=3.8.2
+    PYTHON_VERSION=3.8.5
 
 # PATHS
 ENV PYTHON_PATH=/usr/local/bin/ \
@@ -18,6 +18,7 @@ ENV PYTHON_PATH=/usr/local/bin/ \
     #   * ca-certificates: for SSL verification during Pip and easy_install
     PACKAGES="\
       dumb-init \
+      nginx \
       musl \
       libc6-compat \
       linux-headers \

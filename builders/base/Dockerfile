@@ -1,7 +1,9 @@
 FROM alpine:edge
 RUN rm  -rf /tmp/* /var/cache/apk/*
 RUN apk add --no-cache redis && apk add --no-cache dumb-init 
-RUN apk add --no-cache nginx curl libssh2
+RUN apk add --no-cache curl libssh2
+
+RUN echo 'nameserver 8.8.8.8' > '/etc/resolv.conf'
 
 # add openssh and clean
 RUN apk add --no-cache openssh && rm  -rf /tmp/* /var/cache/apk/*

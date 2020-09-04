@@ -7,7 +7,7 @@ docker run -d --name builder_base -it -v $HOME/myhost:/myhost \
 
     # -v /run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock -e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock" \
 
-#UGLY HACK to remove know hosts file 
+#UGLY HACK to remove known hosts file 
 rm -f ~/.ssh/known_hosts
 sleep 0.6
 
