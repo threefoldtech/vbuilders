@@ -12,8 +12,8 @@ services:
   #   build: python
   #   stdin_open: true
   #   tty: true       
-  crystal:
-    build: crystal
+  vlang:
+    build: vlang
     stdin_open: true
     tty: true       
     depends_on: ["base"]
