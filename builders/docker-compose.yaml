@@ -1,9 +1,5 @@
 version: '3'
 services:
-  sonic:
-    build: sonic
-    stdin_open: true
-    tty: true       
   base:
     build: base
     stdin_open: true
