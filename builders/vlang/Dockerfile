@@ -20,7 +20,8 @@ RUN apk --no-cache add \
 ## RUN apk --no-cache add --virtual sdl2deps sdl2-dev sdl2_ttf-dev sdl2_mixer-dev sdl2_image-dev
 
 RUN cd /opt && git clone https://github.com/vlang/v
-RUN cd /opt/vlang && make && v -version
+RUN cd /opt/v && make && ./v symlink
+RUN v -version
 
 RUN echo 'VLANG DEV ENV WELCOMES YOU' > /etc/motd
 
