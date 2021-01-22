@@ -1,17 +1,17 @@
 version: '3'
 services:
-  # sonic:
-  #   build: sonic
-  #   stdin_open: true
-  #   tty: true       
+  sonic:
+    build: sonic
+    stdin_open: true
+    tty: true       
   base:
     build: base
     stdin_open: true
     tty: true       
-  # python:
-  #   build: python
-  #   stdin_open: true
-  #   tty: true       
+  python:
+     build: python
+     stdin_open: true
+     tty: true       
   vlang:
     build: vlang
     stdin_open: true
@@ -27,10 +27,10 @@ services:
     stdin_open: true
     tty: true       
     depends_on: ["golang"]    
-  # production:
-  #   build: production
-  #   stdin_open: true
-  #   tty: true       
-  #   depends_on: ["base","python"]    
+  production:
+    build: production
+    stdin_open: true
+    tty: true       
+    depends_on: ["base","python"]    
 
    
