@@ -20,6 +20,9 @@ RUN apk --no-cache add \
 ## RUN apk --no-cache add --virtual sdl2deps sdl2-dev sdl2_ttf-dev sdl2_mixer-dev sdl2_image-dev
 
 RUN cd /opt && git clone https://github.com/vlang/v
+#to test this does not work
+#do:
+#export VFLAGS=-cc gcc
 RUN cd /opt/v && make && ./v symlink
 RUN v -version
 

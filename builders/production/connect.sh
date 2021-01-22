@@ -13,7 +13,7 @@ sleep 0.6
 
 
 sh base/connect.sh nossh
-sh sonic/connect.sh nossh
+# sh sonic/connect.sh nossh
 sh python/connect.sh nossh
 
 ssh -A -o "StrictHostKeyChecking=no" root@localhost -p 5005
