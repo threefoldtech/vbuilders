@@ -27,8 +27,8 @@ echo "PermitRootLogin without-password" >> /etc/ssh/sshd_config
 /usr/sbin/sshd -E /var/log/auth.log
 
 # clone jumpscale
-mkdir -p /myhost/code && cd /myhost/code
-git clone https://github.com/threefoldtech/js-ng || echo "jumpscale repo already exists"
-cd js-ng
+mkdir -p /myhost/code
+cd /myhost/code && git clone https://github.com/threefoldtech/js-ng || echo "jumpscale repo already exists"
+
 
 sh

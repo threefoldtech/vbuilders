@@ -7,12 +7,13 @@ RUN chmod 770 /usr/local/bin/boot.sh
 
 # make sure we get fresh keys
 RUN rm -rf /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_dsa_key
+
 # install jumpscale to create the venv with current deps
 RUN echo "PATH=$PATH:/root/.poetry/bin/" > /etc/profile.d/poetry.sh
-RUN mkdir -p /myhost/code && cd /myhost/code
-RUN git clone https://github.com/threefoldtech/js-ng
+RUN mkdir -p /myhost/code
 RUN /root/.poetry/bin/poetry config virtualenvs.create false
-RUN cd js-ng && /root/.poetry/bin/poetry install
+RUN cd /myhost/code && git clone https://github.com/threefoldtech/js-ng && \
+    cd js-ng && /root/.poetry/bin/poetry install
 
 EXPOSE 22
 
