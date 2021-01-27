@@ -1,4 +1,4 @@
-#!/usr/bin/dumb-init /bin/sh
+#!/usr/bin/dumb-init /bin/bash
 set -ex
 
 if [ ! -f "/etc/ssh/ssh_host_rsa_key" ]; then
@@ -18,10 +18,17 @@ fi
 mkdir -p /root/.ssh/
 # linking will cause ownership problems with sshd
 cp /myhost/authorized_keys /root/.ssh/authorized_keys
-passwd -u root #to get pam to work
+passwd -u root
 
 # echo "UsePAM yes" >> /etc/ssh/sshd_config
 echo "PasswordAuthentication no" >> /etc/ssh/sshd_config
 echo "PermitRootLogin without-password" >> /etc/ssh/sshd_config
 
-sh
+/usr/sbin/sshd -E /var/log/auth.log
+
+# clone jumpscale
+mkdir -p /myhost/code && cd /myhost/code
+git clone https://github.com/threefoldtech/js-ng || echo "jumpscale repo already exists"
+cd js-ng
+
+chsh -s /bin/bash
