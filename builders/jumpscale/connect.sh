@@ -3,10 +3,17 @@ ssh-add -L > ~/myhost/authorized_keys
 SSH_PORT=5009
 SSH_TRAILS=10
 
+# clone jumpscale
+mkdir -p ~/myhost/code
+pushd ~/myhost/code
+git clone https://github.com/threefoldtech/js-ng || echo "jumpscale repo already exists"
+popd
+
 docker rm builder_jumpscale -f
 docker run -d --name builder_jumpscale -it \
     -v $HOME/myhost:/myhost \
     -v $HOME/myhost/config/jumpscale:/root/.config/jumpscale \
+    -v $HOME/myhost/config/jsng:/root/.jsng \
     -p $SSH_PORT:22 \
     --hostname jumpscale \
     builders_jumpscale

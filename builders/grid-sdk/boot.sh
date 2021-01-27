@@ -28,11 +28,5 @@ echo "PermitRootLogin without-password" >> /etc/ssh/sshd_config
 
 # clone jumpscale and sdk
 mkdir -p /myhost/code
-cd /myhost/code
-rmdir js-ng || echo "jumpscale directory is not empty"
-rmdir js-sdk || echo "jumpscale directory is not empty"
-git clone https://github.com/threefoldtech/js-ng || echo "jumpscale repo already exists"
-git clone https://github.com/threefoldtech/js-sdk || echo "sdk repo already exists"
-
 
 sh
