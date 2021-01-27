@@ -1,4 +1,4 @@
-# Jumpscale
+# Grid SDK
 
 Grid-sdk builder which is based on [jumpscale builder](../jumpscale/README.md).
 
