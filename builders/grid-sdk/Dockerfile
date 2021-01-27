@@ -2,6 +2,8 @@ FROM builders_jumpscale
 
 # for pillow
 RUN apk --no-cache add jpeg-dev zlib-dev libjpeg
+# for sdk
+RUN apk --no-cache add tmux redis nginx
 # install sdk
 RUN mkdir -p /myhost/code
 RUN cd /myhost/code && git clone https://github.com/threefoldtech/js-sdk && \

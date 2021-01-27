@@ -25,6 +25,7 @@ echo "PasswordAuthentication no" >> /etc/ssh/sshd_config
 echo "PermitRootLogin without-password" >> /etc/ssh/sshd_config
 
 /usr/sbin/sshd -E /var/log/auth.log
+redis-server --daemonize yes
 
 # clone jumpscale and sdk
 mkdir -p /myhost/code

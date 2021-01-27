@@ -1,5 +1,7 @@
 NAME=builder_grid_sdk
 SSH_PORT=5010
+HTTP_PORT=5011
+HTTPS_PORT=5012
 SSH_TRAILS=10
 
 mkdir -p ~/myhost/code
@@ -15,7 +17,10 @@ docker run -d --name $NAME -it \
     -v $HOME/myhost:/myhost \
     -v $HOME/myhost/config/jumpscale:/root/.config/jumpscale \
     -v $HOME/myhost/config/jsng:/root/.jsng \
+    -v $HOME/myhost/sandbox/jsng:/root/sandbox \
     -p $SSH_PORT:22 \
+    -p $HTTP_PORT:80 \
+    -p $HTTPS_PORT:443 \
     --hostname jumpscale \
     builders_grid_sdk
 
