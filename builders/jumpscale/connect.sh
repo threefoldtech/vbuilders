@@ -14,6 +14,7 @@ docker run -d --name builder_jumpscale -it \
     -v $HOME/myhost:/myhost \
     -v $HOME/myhost/config/jumpscale:/root/.config/jumpscale \
     -v $HOME/myhost/config/jsng:/root/.jsng \
+    -v $HOME/myhost/sandbox/jsng:/root/sandbox \
     -p $SSH_PORT:22 \
     --hostname jumpscale \
     builders_jumpscale
