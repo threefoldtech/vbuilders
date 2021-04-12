@@ -25,8 +25,6 @@ set -ex
 # /usr/sbin/sshd
 # # redis-server /etc/redis.conf  --daemonize yes
 
-export VVV =/opt/v
-export PATH=/opt/v:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-export VFLAGS=-cc gcc
+# export VFLAGS=-cc gcc
 
 sh

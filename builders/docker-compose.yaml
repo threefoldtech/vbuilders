@@ -4,29 +4,29 @@ services:
     build: base
     stdin_open: true
     tty: true       
-  python:
-     build: python
-     stdin_open: true
-     tty: true       
+  # python:
+  #    build: python
+  #    stdin_open: true
+  #    tty: true       
   vlang:
     build: vlang
     stdin_open: true
     tty: true       
     depends_on: ["base"]
-  golang:
-    build: golang
-    stdin_open: true
-    tty: true       
-    depends_on: ["base"]
-  yggdrasil:
-    build: yggdrasil
-    stdin_open: true
-    tty: true       
-    depends_on: ["golang"]    
-  production:
-    build: production
-    stdin_open: true
-    tty: true       
-    depends_on: ["base","python"]    
+  # golang:
+  #   build: golang
+  #   stdin_open: true
+  #   tty: true       
+  #   depends_on: ["base"]
+  # yggdrasil:
+  #   build: yggdrasil
+  #   stdin_open: true
+  #   tty: true       
+  #   depends_on: ["golang"]    
+  # production:
+  #   build: production
+  #   stdin_open: true
+  #   tty: true       
+  #   depends_on: ["base","python"]    
 
    

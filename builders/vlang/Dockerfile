@@ -1,7 +1,6 @@
-FROM builders_base
-# FROM alpine:3.12
+FROM alpine:3.12
 
-RUN rm  -rf /tmp/* /var/cache/apk/*
+LABEL maintainer="spytheman <spytheman@bulsynt.org>"
 
 WORKDIR /opt/vlang
 
@@ -17,14 +16,15 @@ RUN apk --no-cache add \
   openssl-dev sqlite-dev \
   libx11-dev glfw-dev freetype-dev
 
+RUN apk add --no-cache openssh-client git mc
+
+# Download public key for github.com
+RUN mkdir -p -m 0600 ~/.ssh && ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+
 ## RUN apk --no-cache add --virtual sdl2deps sdl2-dev sdl2_ttf-dev sdl2_mixer-dev sdl2_image-dev
 
-RUN cd /opt && git clone https://github.com/vlang/v
-#to test this does not work
-#do:
-#export VFLAGS=-cc gcc
-RUN cd /opt/v && make && ./v symlink
-RUN v -version
+RUN git clone https://github.com/vlang/v /opt/vlang && make && v -version
 
 RUN echo 'VLANG DEV ENV WELCOMES YOU' > /etc/motd
 

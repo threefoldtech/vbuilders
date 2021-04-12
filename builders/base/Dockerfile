@@ -1,4 +1,5 @@
-FROM alpine:edge
+# FROM alpine:edge
+FROM alpine:3.13
 RUN rm  -rf /tmp/* /var/cache/apk/*
 RUN apk add --no-cache redis && apk add --no-cache dumb-init 
 RUN apk add --no-cache curl libssh2
