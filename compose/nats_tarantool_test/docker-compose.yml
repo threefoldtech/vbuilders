@@ -3,7 +3,7 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 192.168.11.0/24
+        - subnet: 192.168.12.0/24
       driver: default
 services:
   nats-1:
@@ -35,7 +35,7 @@ services:
   vlang:
     container_name: vlang
     hostname: vlang
-    image: "vlangbuilder:latest"
+    image: "vbuilder:latest"
     networks:
       - main    
     volumes:
@@ -52,3 +52,7 @@ services:
       - main
     ports:
       - "13301:3301"
+    volumes:
+      - ./zinit/tools:/etc/zinit   #this copies in all parts we need for container
+      - ./scripts:/scripts
+      - ~/myhost/alpine:/source

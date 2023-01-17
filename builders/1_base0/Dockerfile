@@ -3,7 +3,7 @@ RUN rm  -rf /tmp/* /var/cache/apk/*
 RUN apk update
 RUN apk upgrade
 RUN apk add --no-cache redis && apk add --no-cache dumb-init 
-RUN apk add --no-cache curl libssh2 git
+RUN apk add --no-cache curl libssh2 git tmux zsh bash
 
 # add openssh and clean
 RUN apk add --no-cache openssh && rm  -rf /tmp/* /var/cache/apk/*

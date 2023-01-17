@@ -1,0 +1,4 @@
+exec: /bin/sh /scripts/tmuxp_install.sh
+oneshot: true
+after:
+  - copy

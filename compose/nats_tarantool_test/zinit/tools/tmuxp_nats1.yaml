@@ -1,0 +1,5 @@
+exec: tmuxp load /scripts/nats_test1.yaml -d
+oneshot: true
+after:
+  - copy
+  - tmuxp_install
