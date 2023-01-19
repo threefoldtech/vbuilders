@@ -1,2 +1,2 @@
 export BNAME="gobuilder"
-export NAME=$NAME
+export NAME=$BNAME
