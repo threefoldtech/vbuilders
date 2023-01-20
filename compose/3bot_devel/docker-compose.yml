@@ -1,0 +1,48 @@
+networks:
+  main:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.12.0/24
+      driver: default
+services:
+  nats-1:
+    container_name: nats
+    command:
+      - "-js"
+      - "-c"
+      - "/cfg/main.cfg"
+    image: "nats:latest"
+    networks:
+      - main
+    ports:
+      - "14222:4222"
+      - "16222:6222"
+      - "18222:8222"
+    volumes:
+      - ./cfg:/cfg
+      - /tmp/data:/data  
+  3bot:
+    container_name: 3bot
+    hostname: 3bot
+    image: "3bot:latest"
+    networks:
+      - main    
+    volumes:
+      - ./zinit/tools:/etc/zinit   #this copies in all parts we need for container
+      - ./scripts:/scripts
+      - ~/myhost/alpine:/source        
+  tarantool1:
+    container_name: tarantool
+    hostname: tarantool
+    image: tarantool/tarantool:latest
+    # environment:
+    #   TARANTOOL_REPLICATION: "tarantool1,tarantool2"
+    networks:
+      - main
+    ports:
+      - "13301:3301"
+    volumes:
+      - ./zinit/tools:/etc/zinit   #this copies in all parts we need for container
+      - ./scripts:/scripts
+      - ~/myhost/alpine:/source

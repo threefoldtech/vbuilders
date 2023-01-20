@@ -1,7 +1,7 @@
 set -x
 source conf.sh
 
-mkdir -p bin
+mkdir -p myhost
 rsync -rav --delete $HOME/myhost/alpine/zinit/ myhost/
 set +e
 echo " ** BUILD START ****** for ${BNAME}"
