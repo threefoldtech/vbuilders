@@ -6,4 +6,4 @@ curl https://raw.githubusercontent.com/threefoldtech/builders/master/scripts/ins
 
 npm install grid3_client -g
 
-echo " ** INSTALL V TFGRID DONE"
+echo " ** INSTALL V TFGRID DONE" 
