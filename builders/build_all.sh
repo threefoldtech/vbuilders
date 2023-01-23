@@ -8,3 +8,8 @@ do
     popd
     echo "Welcome $i times"
 done
+
+echo "BUILDING grid"
+pushd 20_grid
+bash buildall.sh
+popd
