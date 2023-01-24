@@ -9,7 +9,6 @@ do
     echo "Welcome $i times"
 done
 
-echo "BUILDING grid"
-pushd 20_grid
+pushd 20_tfgrid
 bash buildall.sh
 popd
