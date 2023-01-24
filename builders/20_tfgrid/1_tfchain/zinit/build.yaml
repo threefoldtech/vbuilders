@@ -1,0 +1,2 @@
+exec: /bin/sh /scripts/build.sh
+oneshot: true
