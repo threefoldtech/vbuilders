@@ -35,3 +35,5 @@ RUN apt-get install -y librocksdb-dev libclang-dev  clang lldb lld build-essenti
 
 ADD conf.sh /
 
+COPY --from=rustbuilder /bin/zinit /bin/zinit
+
