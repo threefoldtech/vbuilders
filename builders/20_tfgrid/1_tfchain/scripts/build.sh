@@ -9,7 +9,9 @@ mkdir tfchain
 cd tfchain
 
 
-wget -c https://github.com/threefoldtech/tfchain/archive/refs/tags/${TFCHAIN_VERSION}.tar.gz  -O - | tar -strip-components=1 -xzf --strip-components=1 - -C ./
+wget -cnv https://github.com/threefoldtech/tfchain/archive/refs/tags/${TFCHAIN_VERSION}.tar.gz  -O /tmp/tfchain.tar.gz
+tar -strip-components=1 -xzf /tmp/tfchain.tar.gz -C ./
+rm /tmp/tfchain.tar.gz 
 
 cd substrate-node
 cargo build --release
