@@ -8,3 +8,7 @@ do
     popd
     echo "Welcome $i times"
 done
+
+pushd 20_tfgrid
+bash buildall.sh
+popd
