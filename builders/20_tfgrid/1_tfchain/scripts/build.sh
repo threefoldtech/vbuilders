@@ -13,5 +13,6 @@ wget -cnv https://github.com/threefoldtech/tfchain/archive/refs/tags/${TFCHAIN_V
 tar --strip-components=1 -xzf /tmp/tfchain.tar.gz -C ./
 rm /tmp/tfchain.tar.gz 
 
+source /usr/local/cargo/env
 cd substrate-node
 cargo build --release

@@ -1,4 +1,4 @@
-exec: /bin/sh /scripts/copy.sh
+exec: /bin/bash /scripts/copy.sh
 oneshot: true
 after:
   - build

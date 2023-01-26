@@ -9,14 +9,8 @@ if test -f "env.sh"; then
 fi
 
 
-export PS1="${NAME}: "
-
-# mkdir -p /myhost/alpine/${NAME}/bin
-# cp /app/bin/* /myhost/alpine/${NAME}/bin/
-
-# export PATH=/root/.nsccli/bin:$PATH
-
-# sh
+mkdir -p /myhost/ubuntu/tfchain/bin
+cp /code/threefoldtech/tfchain/substrate-node/target/release/tfchain /myhost/ubuntu/tfchain/bin/
 
 echo " ** COPY DONE"
 
