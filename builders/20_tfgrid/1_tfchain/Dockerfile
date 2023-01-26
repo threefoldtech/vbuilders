@@ -33,7 +33,6 @@ RUN rustup target add wasm32-unknown-unknown --toolchain nightly-2022-11-15
 # Extra substrate/tfchain requirements
 RUN apt-get install -y librocksdb-dev libclang-dev  clang lldb lld build-essential protobuf-compiler
 
-ADD conf.sh /
-
 COPY --from=rustbuilder /bin/zinit /bin/zinit
 
+ENTRYPOINT ["/bin/zinit","init","--container"]
