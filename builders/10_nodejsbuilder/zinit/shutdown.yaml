@@ -1,0 +1,2 @@
+exec: zinit shutdown
+oneshot: true
