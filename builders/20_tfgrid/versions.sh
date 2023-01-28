@@ -1,1 +1,2 @@
 export TFCHAIN_VERSION='2.2.0-rc8'
+export GRAPHQL_VERSION='v2.7.1'
