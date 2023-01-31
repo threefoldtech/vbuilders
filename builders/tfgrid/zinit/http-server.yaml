@@ -1,0 +1,3 @@
+exec: bash -c "cd ~/grid3_client_ts && npm run http_server"
+after: 
+  - config-client

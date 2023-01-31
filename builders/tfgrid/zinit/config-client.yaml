@@ -1,0 +1,2 @@
+exec: bash /etc/zinit/config-client.sh
+oneshot: true
