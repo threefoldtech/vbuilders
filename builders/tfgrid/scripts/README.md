@@ -35,4 +35,5 @@ then open a terminal window and excute the script like.
 ```sh
     v run scripts/funds.v
 ```
+
 > Note, Make sure that you have [vlang](https://github.com/vlang/v) on your local machine
