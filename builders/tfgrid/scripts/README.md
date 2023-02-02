@@ -28,8 +28,11 @@ WIP
 
 ### Run the scripts by using `Vlang` on the local machine
 
-Just open a terminal window then excute the script like.
+You should run the [http server](https://github.com/threefoldtech/grid3_client_ts/blob/development/docs/http_server.md) for `deploy_vm` and `funds` scripts, if you want to run the `rmb` script you have to run the [rmb server](https://github.com/threefoldtech/rmb_go), otherways, if you implemented your own script so we suggest you to run the correct server [see server docs](https://github.com/threefoldtech/grid3_client_ts/tree/development/docs)
+
+then open a terminal window and excute the script like.
 
 ```sh
     v run scripts/funds.v
 ```
+> Note, Make sure that you have [vlang](https://github.com/vlang/v) on your local machine
