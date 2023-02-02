@@ -1,0 +1,2 @@
+exec: sh /etc/zinit/ygg-config.sh
+oneshot: true
