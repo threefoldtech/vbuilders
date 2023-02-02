@@ -29,7 +29,9 @@ COPY --from=builder /src/yggdrasil /usr/bin/yggdrasil
 COPY --from=builder /src/yggdrasilctl /usr/bin/yggdrasilctl
 COPY --from=builder /src/genkeys /usr/bin/genkeys
 
-# RUN v install --git https://github.com/threefoldtech/vgrid &&\
-#     cd /root/.vmoudles/freeflowuniverse/crystallib &&\
-#     git fetch --all &&\
-#     git checkout origin/development_improve_twinclient_module
+RUN v install --git https://github.com/threefoldtech/vgrid &&\
+    cd ~/.vmodules/ &&\
+    mv vgrid/ threefoldtech/ &&\
+    cd freeflowuniverse/crystallib &&\
+    git fetch --all &&\
+    git checkout origin/development_improve_twinclient_module

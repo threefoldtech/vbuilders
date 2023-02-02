@@ -1,5 +1,5 @@
 - [x] add ygg
-- [ ] run scripts inside tmuxp
+- [x] run scripts inside tmuxp
 - [ ] move compsoe outside
 - [ ] vgrid/gridclient already installed?
 - [ ] zinit already installed?
