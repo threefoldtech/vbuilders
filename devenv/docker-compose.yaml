@@ -1,7 +1,7 @@
 services:
-  tfgrid:
-    image: tfgrid
-    container_name: tfgrid
+  devenv:
+    image: devenv
+    container_name: devenv
     volumes:
       - ./zinit:/etc/zinit
       - ./tmuxp:/etc/tmuxp

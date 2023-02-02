@@ -4,8 +4,8 @@ windows:
     layout: tiled
     shell_command_before:
       - cd ~/scripts
-    panes:
-      - v run deploy_vm.v
-      - v run funds.v
-      - v run grid_proxy.v
-      - v run rmb.v
+    # panes:
+    #   - v run deploy_vm.v
+    #   - v run funds.v
+    #   - v run grid_proxy.v
+    #   - v run rmb.v

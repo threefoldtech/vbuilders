@@ -12,6 +12,10 @@ RUN ./build && go build -o /src/genkeys cmd/genkeys/main.go
 
 FROM 3bot
 
+COPY --from=builder /src/yggdrasil /usr/bin/yggdrasil
+COPY --from=builder /src/yggdrasilctl /usr/bin/yggdrasilctl
+COPY --from=builder /src/genkeys /usr/bin/genkeys
+
 RUN apk add wget && \
     wget https://github.com/threefoldtech/zinit/releases/download/v0.2.5/zinit -O /sbin/zinit  && \
     chmod +x /sbin/zinit && \
@@ -24,10 +28,6 @@ RUN wget https://github.com/threefoldtech/go-rmb/releases/download/v0.2.1/msgbus
 RUN git clone https://github.com/threefoldtech/grid3_client_ts ~/grid3_client_ts && \
     cd ~/grid3_client_ts && \
     npm install --force
-
-COPY --from=builder /src/yggdrasil /usr/bin/yggdrasil
-COPY --from=builder /src/yggdrasilctl /usr/bin/yggdrasilctl
-COPY --from=builder /src/genkeys /usr/bin/genkeys
 
 RUN v install --git https://github.com/threefoldtech/vgrid &&\
     cd ~/.vmodules/ &&\
