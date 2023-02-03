@@ -1,0 +1,15 @@
+version: '3.9'
+name: "tfgrid"
+
+services:
+  tfchain:
+    build:
+      context: ~/myhost
+      dockerfile: ubuntu.Dockerfile
+    ports:
+      - "30333:30333"
+    restart: unless-stopped
+    volumes:
+      - ./tfchain/zinit/:/etc/zinit
+      - ./tfchain/scripts:/scripts
+      - ~/myhost/:/source

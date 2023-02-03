@@ -5,8 +5,8 @@
 ```bash
 docker exec -ti tools /bin/sh
 ```
-in this case container is tools
 
+in this case container is tools
 
 ```bash
 #to see containers
@@ -14,11 +14,11 @@ docker ps
 ```
 
 - installed in containers
-    - mc (great tool to investigate the container)
-    - htop (see resources used)
-    - zinit (to manage the startup processes) eg. do zinit list
+  - mc (great tool to investigate the container)
+  - htop (see resources used)
+  - zinit (to manage the startup processes) eg. do zinit list
 - you can reach the other containers by using the container name e.g. 'nats' is the machine from nats server
-    - e.g. test with ```ping nats```
+  - e.g. test with ```ping nats```
 
 ## to test if nats works
 
@@ -54,14 +54,14 @@ nats subscribe test.kristof
 
 ## usage of tmuxp in tools container
 
-- is a very cool tool to manage tmux see https://tmuxp.git-pull.com/
+- is a very cool tool to manage tmux see <https://tmuxp.git-pull.com/>
 - see /scripts/nats_test1.yaml to how it works
 
 - go into the tmux session
-    - tmux a
-- to load   
-    - killall tmux //first kill 
-    - tmuxp load /scripts/nats_test1.yaml -d
+  - tmux a
+- to load
+  - killall tmux //first kill
+  - tmuxp load /scripts/nats_test1.yaml -d
 - some shortcuts
-    - ctrl b o  //move between windows
-    - ctrl b d  //detach
+  - ctrl b o  //move between windows
+  - ctrl b d  //detach
