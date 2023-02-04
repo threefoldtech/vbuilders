@@ -4,7 +4,6 @@ name: "tfgrid"
 services:
   tfchain:
     build:
-      context: ~/myhost
       dockerfile: ubuntu.Dockerfile
     ports:
       - "30333:30333"
