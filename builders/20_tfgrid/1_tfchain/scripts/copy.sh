@@ -15,7 +15,7 @@ cp /code/threefoldtech/tfchain/substrate-node/target/release/tfchain /myhost/ubu
 mkdir -p /myhost/ubuntu/tfchain/etc
 rm -rf /myhost/ubuntu/tfchain/etc/*
 
-cp -R cp /code/threefoldtech/tfchain/substrate-node/chainspecs /myhost/ubuntu/tfchain/etc/
+cp -R /code/threefoldtech/tfchain/substrate-node/chainspecs /myhost/ubuntu/tfchain/etc/
 
 echo " ** COPY DONE"
 
