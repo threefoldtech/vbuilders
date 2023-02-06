@@ -12,4 +12,71 @@ services:
     volumes:
       - ./tfchain/zinit/:/etc/zinit
       - ./tfchain/scripts:/scripts
-      - ~/myhost/:/source
+      - ${distfolder}:/source
+
+  # GraphQL Indexer
+
+  indexer_db:
+    image: cockroachdb/cockroach:v22.2.2
+    restart: unless-stopped
+    command: start-single-node --insecure
+    volumes:
+      - ~/data/indexer/:/cockroach/cockroach-data
+
+  indexer_ingest:
+    depends_on:
+      - tfchain
+      - indexer_db
+    container_name: indexer_ingest
+    image: subsquid/substrate-ingest:1
+    restart: unless-stopped
+    volumes:
+      - "${distfolder}/unknown/tfchain_graphql/app/typegen/typesBundle.json:/configs/typesBundle.json"
+    command:
+      [
+        "-e",
+        "ws://tfchain:9944",
+        "-c",
+        "20",
+        "--out",
+        "postgres://root@indexer_db:26257/defaultdb",
+        "--types-bundle",
+        "/configs/typesBundle.json"
+      ]
+
+  indexer_gateway:
+    depends_on:
+      - indexer_ingest
+    image: subsquid/substrate-gateway:2.5.0
+    container_name: indexer_gateway
+    restart: unless-stopped
+    #    ports:
+    #      - "8888:8000"
+    environment:
+      DATABASE_MAX_CONNECTIONS: 5
+      RUST_LOG: "actix_web=info,actix_server=info"
+    command:
+      [
+        "--database-url",
+        "postgres://root@indexer_db:26257/defaultdb"
+      ]
+
+  indexer_explorer:
+    depends_on:
+      - indexer_gateway
+    container_name: indexer_explorer
+    image: subsquid/substrate-explorer:firesquid
+    restart: unless-stopped
+    networks:
+      tfgrid_bknd:
+        ipv4_address: 172.28.0.6
+    #    ports:
+    #      - "4444:3000"
+    environment:
+      DB_TYPE: cockroach
+      DB_HOST: indexer_db
+      DB_PORT: "26257"
+      DB_NAME: "defaultdb"
+      DB_USER: "root"
+
+# GraphQL Processor
