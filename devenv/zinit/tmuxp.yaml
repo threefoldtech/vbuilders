@@ -1,2 +1,4 @@
-exec: bash -c "export LANG=en_US.utf8 && tmuxp load /etc/tmuxp/example.yaml -d"
+exec: bash -c "sleep 5 && export LANG=en_US.utf8 && tmuxp load /etc/tmuxp/example.yaml -d"
 oneshot: true
+after: 
+ - http-server
