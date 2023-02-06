@@ -5,7 +5,7 @@ fn main(){
 	grid.connect()!
 	nodes := grid.filter_nodes()!
 	if nodes.len > 0{
-		grid.zos_statistics_get(nodes[0].node_id)!
+		grid.zos_get_node_statistics(nodes[0].node_id)!
 	} else {
 		grid.no_nodes_found()
 	}

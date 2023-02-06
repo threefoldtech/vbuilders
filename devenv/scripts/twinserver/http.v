@@ -76,9 +76,12 @@ pub fn (mut grd Grid3)machines_delete(name string) !tw.ContractResponse {
 	return deleted
 }
 
-pub fn (mut grd Grid3)zos_statistics_get(node_id u32)! string{
+pub fn (mut grd Grid3)zos_get_node_statistics(node_id u32)! tw.ZOSNodeStatisticsResponse{
 	println(term.blue("🏃 | + | Request to get node statistics...") + "\n")
-	return "It's working... this is the requested $node_id?"
+	statistics := grd.grid.zos_get_node_statistics(node_id)!
+	println(term.blue("✅ | + | Node statistics found!") + "\n")
+	println(term.green(statistics.str()))
+	return statistics
 }
 
 pub fn (mut grd Grid3)no_nodes_found(){
