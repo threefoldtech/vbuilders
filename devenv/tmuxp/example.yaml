@@ -8,4 +8,4 @@ windows:
       - v run deploy_vm.v
       - v run funds.v
       - v run grid_proxy.v
-      - v run states.v
+      - v run node_statistics.v

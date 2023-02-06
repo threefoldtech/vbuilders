@@ -10,5 +10,6 @@ RUN mkdir -p ~/.vmodules/threefoldtech &&\
     cd ~/.vmodules/threefoldtech &&\
     git clone https://github.com/threefoldtech/vgrid
 
-RUN cd ~/.vmodules/freeflowuniverse/crystallib &&\
-    git pull
+# to make sure packages are updated 
+RUN cd ~/.vmodules/freeflowuniverse/crystallib && git pull
+RUN npm update -g grid3_client
