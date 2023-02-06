@@ -24,7 +24,7 @@ it's also so simple, it does not require modifying anything you only need to be 
 
 ### Run the scripts by using `docker-compose`
 
-WIP
+check [here](../README.md)
 
 ### Run the scripts by using `Vlang` on the local machine
 
