@@ -1,3 +1,0 @@
-exec: bash -c "yggdrasil -useconffile /etc/yggdrasil.conf"
-after: 
-  - ygg-config

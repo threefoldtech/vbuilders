@@ -1,8 +1,8 @@
-cat <<EOF > ~/grid3_client_ts/src/server/config.json
+cat <<EOF > /usr/local/lib/node_modules/grid3_client/dist/node/server/config.json
 {
-    "network": "dev",
+    "network": "$NETWORK",
     "mnemonic": "$MNEMONICS",
-    "rmb_proxy": false,
+    "rmb_proxy": true,
     "storeSecret": "secret",
     "keypairType": "sr25519"
 }
