@@ -1,5 +1,6 @@
 import threefoldtech.vgrid.gridproxy.model as gmodel
 import threefoldtech.vgrid.gridproxy as gp
+import term
 
 pub fn find_nodes()? []gmodel.Node{
 	mut gproxy := gp.get(.test, false)
@@ -9,8 +10,12 @@ pub fn find_nodes()? []gmodel.Node{
 
 
 fn main(){
-	println("Searching for available nodes")
+	println(term.blue("🔍 | + | Searching for available nodes") + "\n")
 	nodes := find_nodes()?
-	println("nodes found!")
-	println(nodes)
+	if nodes.len > 0 {
+		println(term.green("✅ | + | Found node ${nodes[0].node_id}.") + "\n")
+		println(term.green(nodes.str()))
+	} else {
+		println(term.red("😱 | - | No nodes were found."))
+	}
 }
