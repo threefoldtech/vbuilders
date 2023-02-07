@@ -11,9 +11,9 @@ fn main() {
 	}
 
 	mut nodes := grid.filter_nodes()!
-	if nodes.len > 0 {
-		grid.machines_deploy(nodes[0], machine_name)!
-	} else {
-		grid.no_nodes_found()
+	reach_node := grid.ping_nodes(nodes, 3)!
+	if reach_node != 0 {
+		// That means there is node we can use it.
+		grid.machines_deploy(reach_node, machine_name)!	
 	}
 }
