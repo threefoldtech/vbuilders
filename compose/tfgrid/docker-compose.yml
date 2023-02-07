@@ -21,7 +21,7 @@ services:
     restart: unless-stopped
     command: start-single-node --insecure
     volumes:
-      - ~/data/indexer/:/cockroach/cockroach-data
+      - ${datafolder}/indexer/:/cockroach/cockroach-data
 
   indexer_ingest:
     depends_on:
