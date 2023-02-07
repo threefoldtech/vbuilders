@@ -79,4 +79,63 @@ services:
       DB_NAME: "defaultdb"
       DB_USER: "root"
 
-# GraphQL Processor
+  # GraphQL Processor
+
+
+  processor_db:
+    image: postgres:14
+    restart: unless-stopped
+    #    ports:
+    #      - "5432:5432"
+    volumes:
+      - ${datafolder}/processor/:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: tfgrid-graphql
+
+  processor:
+    depends_on:
+      - processor_db
+      - indexer_gateway
+    restart: unless-stopped
+    #    ports:
+    #      - 44233:44233
+    build:
+      dockerfile: node.Dockerfile
+      context: ./
+    volumes:
+      - ./graphql/processor/zinit/:/etc/zinit
+      - ./graphql/processor/scripts:/scripts
+      - ${distfolder}:/source
+    environment:
+      - INDEXER_ENDPOINT_URL=http://indexer_gateway:8000/graphql
+      - WS_URL=ws://tfchain:9944
+      - DB_HOST=processor_db
+      - POLL_INTERVAL_MS=300
+      - TYPEORM_LOGGING=error
+      - DB_NAME=tfgrid-graphql
+      - DB_USER=postgres
+      - DB_PASS=postgres
+      - DB_PORT="5432"
+
+  processor_query-node:
+    depends_on:
+      - processor
+    image: query-node:latest
+    restart: unless-stopped
+    #    ports:
+    #      - 4000:4000
+    build:
+      dockerfile: node.Dockerfile
+      context: ./
+    volumes:
+      - ./graphql/processor_querynode/zinit/:/etc/zinit
+      - ./graphql/processor_querynode/scripts:/scripts
+      - ${distfolder}:/source
+    environment:
+      - DB_HOST=processor_db
+      - DB_NAME=tfgrid-graphql
+      - DB_USER=postgres
+      - DB_PASS=postgres
+      - DB_PORT="5432"
