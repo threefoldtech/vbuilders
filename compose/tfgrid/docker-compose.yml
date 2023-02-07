@@ -139,3 +139,18 @@ services:
       - DB_USER=postgres
       - DB_PASS=postgres
       - DB_PORT="5432"
+
+  ## Activation service
+
+  tfchain_activation_service:
+    depends_on:
+      - tfchain
+    build:
+      dockerfile: node.Dockerfile
+      context: ./
+    restart: unless-stopped
+    environment:
+      - URL=ws://tfchain:9944
+      - MNEMONIC=news mad appear brave weekend first eyebrow blouse mask hedgehog toilet exhaust
+      - KYC_PUBLIC_KEY=somekey
+      - ACTIVATION_AMOUNT=1000000
