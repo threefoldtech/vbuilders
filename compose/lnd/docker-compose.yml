@@ -1,0 +1,72 @@
+networks:
+  main:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.15.0/24
+      driver: default
+services:
+  tools:
+    container_name: tools
+    hostname: tools
+    image: "tools:latest"
+    networks:
+      - main    
+    volumes:
+      - ./tools/zinit:/etc/zinit
+      - ./tools/scripts:/scripts
+      - ./tools/tmuxp:/tmuxp
+  lnd:
+    container_name: lnd
+    hostname: lnd
+    image: lnd:latest
+    networks:
+      - main
+    ports:
+      - 10009:10009
+      - 10080:10080
+      - 8443:8443
+    volumes:
+      - ./lnd/zinit:/etc/zinit
+      - ./lnd/scripts:/scripts
+      - .lnddata:/root/.lnd
+  # rtl:
+  #   container_name: rtl
+  #   image: shahanafarooqui/rtl:0.12.0
+  #   restart: unless-stopped
+  #   depends_on:
+  #     - lnd
+  #   volumes:
+  #     - /tmp/lightning_shared:/shared:ro
+  #     - /tmp/rtl_db:/database
+  #   ports:
+  #     - "10081:10081"
+  #   environment:
+  #     PORT: 10081
+  #     HOST: rtl
+  #     MACAROON_PATH: /shared
+  #     LN_SERVER_URL: http://lnd:10080
+  #     CONFIG_PATH: ''
+  #     LN_IMPLEMENTATION: LND
+  #     SWAP_SERVER_URL: http://lnd:10009
+  #     SWAP_MACAROON_PATH: /shared
+  #     BOLTZ_SERVER_URL: https://boltz.exchange
+  #     BOLTZ_MACAROON_PATH: /shared
+  #     RTL_SSO: 0
+  #     RTL_COOKIE_PATH: ''
+  #     LOGOUT_REDIRECT_LINK: ''
+  #     RTL_CONFIG_PATH: /RTL
+  #     BITCOIND_CONFIG_PATH: ''
+  #     CHANNEL_BACKUP_PATH: /shared/lnd/backup
+  #     ENABLE_OFFERS: false
+  #     ENABLE_PEERSWAP: false      
+  # vlang:
+  #   container_name: vlang
+  #   hostname: vlang
+  #   image: "vbuilder:latest"
+  #   networks:
+  #     - main    
+  #   volumes:
+  #     - ./zinit/tools:/etc/zinit   #this copies in all parts we need for container
+  #     - ./scripts:/scripts
+  #     - ~/myhost/alpine:/source          
