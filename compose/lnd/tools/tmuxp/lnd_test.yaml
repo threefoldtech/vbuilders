@@ -1,0 +1,14 @@
+session_name: 4-pane-split
+windows:
+  - window_name: dev window
+    layout: tiled
+    shell_command_before:
+      - cd ~/ # run as a first command in all panes
+    panes:
+      - shell_command:
+          - sleep 0.5 && echo hi
+          - echo ho
+      - shell_command:
+          - mc
+      - echo third pane # pane no. 3
+      - echo forth pane # pane no. 4

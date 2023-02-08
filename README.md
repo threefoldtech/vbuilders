@@ -1,10 +1,16 @@
 # Builders
 
-## the base docker builders builder 
+## prerequisites
+
+- docker and docker compose
+
+    execute the [docker install script](scripts/installers/docker.sh) if on Ubuntu
+
+## the base docker builders builder
 
 - see dir builders
 
-## vlang install 
+## vlang install
 
 ```bash
 curl https://raw.githubusercontent.com/threefoldtech/builders/master/scripts/install.sh > /tmp/install.sh && bash /tmp/install.sh
@@ -12,7 +18,6 @@ curl https://raw.githubusercontent.com/threefoldtech/builders/master/scripts/ins
 #if you want to debug do
 curl https://raw.githubusercontent.com/threefoldtech/builders/master/scripts/install.sh > /tmp/install.sh && bash -x /tmp/install.sh
 ```
-
 
 ## install on remote server over ssh
 

@@ -1,0 +1,4 @@
+exec: bash /scripts/tmuxpstart.sh
+oneshot: true
+after:
+  - redis
