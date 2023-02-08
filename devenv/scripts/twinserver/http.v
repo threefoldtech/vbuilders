@@ -1,6 +1,7 @@
 module twinserver
 import freeflowuniverse.crystallib.twinclient as tw
 import term
+import rand
 
 pub struct Grid3{
 	mut:
@@ -165,11 +166,12 @@ pub fn (mut grd Grid3) machines_deploy(node_id u32, name string) !tw.DeployRespo
 	// Deploy new machin on an exact node.
 	println(term.blue("✅ | + | Node ${term.green(node_id.str())} ${term.blue('is reachable')}") + "\n")
 	println(term.green("🥏 | + | Deploying on node id ${node_id}...") + "\n")
+	random_uuid := rand.uuid_v4()
 	payload := tw.MachinesModel{
 		name: name
 		network: tw.Network{
 			ip_range: '10.200.0.0/16'
-			name: 'net'
+			name: random_uuid.split("-")[0]
 			add_access: false
 		}
 		machines: [
