@@ -67,9 +67,6 @@ services:
     container_name: indexer_explorer
     image: subsquid/substrate-explorer:firesquid
     restart: unless-stopped
-    networks:
-      tfgrid_bknd:
-        ipv4_address: 172.28.0.6
     #    ports:
     #      - "4444:3000"
     environment:
@@ -149,6 +146,10 @@ services:
       dockerfile: node.Dockerfile
       context: ./
     restart: unless-stopped
+    volumes:
+      - ./tfchain/zinit/:/etc/zinit
+      - ./tfchain/scripts:/scripts
+      - ${distfolder}:/source
     environment:
       - URL=ws://tfchain:9944
       - MNEMONIC=news mad appear brave weekend first eyebrow blouse mask hedgehog toilet exhaust
