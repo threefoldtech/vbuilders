@@ -6,4 +6,8 @@ curl https://raw.githubusercontent.com/threefoldtech/builders/master/scripts/ins
 
 npm install grid3_client -g
 
+mkdir -p ~/.vmodules/threefoldtech
+cd ~/.vmodules/threefoldtech
+git clone https://github.com/threefoldtech/vgrid
+
 echo " ** INSTALL V TFGRID DONE" 

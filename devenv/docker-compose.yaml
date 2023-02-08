@@ -1,6 +1,6 @@
 services:
   devenv:
-    image: devenv
+    image: 3bot
     container_name: devenv
     volumes:
       - ./zinit:/etc/zinit

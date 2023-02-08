@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine
 RUN rm  -rf /tmp/* /var/cache/apk/*
 RUN apk update
 RUN apk upgrade
