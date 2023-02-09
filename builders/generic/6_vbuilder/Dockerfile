@@ -11,5 +11,5 @@ RUN cd  /opt/vlang && make VFLAGS='-cc gcc'
 RUN cd  /opt/vlang && ./v -version 
 RUN cd  /opt/vlang && ./v symlink
 
-ADD scripts/* /bin/
+# ADD scripts/* /bin/
 ADD conf.sh /
