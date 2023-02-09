@@ -2,27 +2,19 @@ FROM ubuntu:22.04
 
 RUN apt-get update
 RUN apt-get upgrade -y
-RUN apt-get install git wget -y
+RUN apt-get install git wget curl -y
 
 # Install rust
 
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
     PATH=/usr/local/cargo/bin:$PATH \
-    RUST_VERSION=1.66.1 \
-    rustArch='x86_64-unknown-linux-gnu' \
-    rustupSha256='5cc9ffd1026e82e7fb2eec2121ad71f4b0f044e88bca39207b3f6b769aaa799c'
+    RUST_VERSION=1.67.0 \
+    rustArch='x86_64-unknown-linux-gnu' 
 
-RUN url="https://static.rust-lang.org/rustup/archive/1.25.1/${rustArch}/rustup-init"; \
-    wget "$url"; \
-    echo "${rustupSha256} *rustup-init" | sha256sum -c -; \
-    chmod +x rustup-init; \
-    ./rustup-init -y --no-modify-path --default-toolchain $RUST_VERSION --default-host ${rustArch}; \
-    rm rustup-init; \
+RUN curl https://sh.rustup.rs -sSf | sh -s --  -y --no-modify-path --default-toolchain $RUST_VERSION --default-host ${rustArch}; \
     chmod -R a+w $RUSTUP_HOME $CARGO_HOME; \
-    rustup --version; \
-    cargo --version; \
-    rustc --version;
+    rustup --version; 
 
 # Substrate's wasm builder requires a nightly release of rust 
 # https://github.com/paritytech/substrate/blob/cb4f2491b00af7d7817f3a54209c26b20faa1f51/utils/wasm-builder/src/prerequisites.rs
