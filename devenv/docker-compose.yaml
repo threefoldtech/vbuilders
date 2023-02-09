@@ -8,5 +8,5 @@ services:
       - ./scripts:/root/scripts
     environment: 
       NETWORK: "qa"
-      MNEMONICS: "mom picnic deliver again rug night rabbit music motion hole lion where"
+      MNEMONICS: ""
     entrypoint: [ "/sbin/zinit", "init" ]
