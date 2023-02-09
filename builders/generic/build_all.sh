@@ -6,6 +6,7 @@ do
     pushd $name
     bash build.sh
     popd
-    echo "Welcome $i times"
 done
+
+echo "*** BUILD OF ALL DOCKERS WORKED***"
 

@@ -1,2 +1,2 @@
-exec: /bin/bash /scripts/copy.sh
+exec: /bin/sh /scripts/copy.sh
 oneshot: true

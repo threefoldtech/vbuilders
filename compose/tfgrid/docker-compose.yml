@@ -147,8 +147,8 @@ services:
       context: ./
     restart: unless-stopped
     volumes:
-      - ./tfchain/zinit/:/etc/zinit
-      - ./tfchain/scripts:/scripts
+      - ./tfchain_activation_service/zinit/:/etc/zinit
+      - ./tfchain_activation_service/scripts:/scripts
       - ${distfolder}:/source
     environment:
       - URL=ws://tfchain:9944

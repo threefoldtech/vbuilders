@@ -2,7 +2,6 @@ set -ex
 source conf.sh
 
 echo " ** BUILD"
-set +e
 mkdir -p myhost
 rsync -rav $HOME/myhost/alpine/nsc/ myhost/
 rsync -rav $HOME/myhost/alpine/natstools/ myhost/
@@ -10,7 +9,6 @@ echo " ** BUILD START ****** for ${BNAME}"
 docker build . -t ${BNAME}
 rm -rf myhost
 echo " ** BUILD OK ****** for ${BNAME}"
-set -e
 
 
 # #will start a docker and then will shutdown because of the zinit shutdown

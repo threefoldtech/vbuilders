@@ -2,7 +2,15 @@
 
 ## prerequisites
 
+
+### for ubuntu 
+
 - docker and docker compose
+
+```bash
+curl https://raw.githubusercontent.com/threefoldtech/builders/master/scripts/installers/docker.sh > /tmp/install.sh && bash /tmp/install.sh
+```
+
 
     execute the [docker install script](scripts/installers/docker.sh) if on Ubuntu
 

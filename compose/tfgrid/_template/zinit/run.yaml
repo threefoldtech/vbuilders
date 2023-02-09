@@ -1,4 +1,4 @@
-exec: /bin/bash /scripts/run.sh
+exec: /bin/sh /scripts/run.sh
 oneshot: true
 after:
   - copy
