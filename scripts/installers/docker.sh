@@ -1,4 +1,6 @@
 
+apt-get remove docker docker-engine docker.io containerd runc -y 
+
 set -ex
 
 export OURHOME="$HOME/play"
@@ -32,7 +34,7 @@ function os_update {
     fi
 }
 
-apt-get remove docker docker-engine docker.io containerd runc -y 
+
 
 mkdir -p /etc/apt/keyrings
 

@@ -30,7 +30,7 @@ docker exec -ti lnd sh -c "lncli create"
 docker exec -ti lnd sh -c "lncli unlock"
 ```
 
-./lndconnect -l -j
+lndconnect -l -j
 
 /scripts/litd --uipassword=kds007kds --httpslisten=0.0.0.0:8443
 open https://127.0.0.1:8443/
