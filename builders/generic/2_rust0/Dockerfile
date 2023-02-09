@@ -11,6 +11,8 @@ ENV RUSTUP_HOME=/usr/local/rustup \
     PATH=/usr/local/cargo/bin:$PATH \
     RUST_VERSION=1.66.1
 
+RUN curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
 RUN set -eux; \
     apkArch="$(apk --print-arch)"; \
     case "$apkArch" in \

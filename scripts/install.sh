@@ -96,6 +96,27 @@ function gridstarter_get {
 
 }
 
+function gridbuilder_get {
+    mkdir -p $DIR_CODE/github/threefoldtech
+    if [[ -d "$DIR_CODE/github/threefoldtech/builder" ]]
+    then
+        pushd $DIR_CODE/github/despiegk/gridstarter 2>&1 >> /dev/null
+        git pull
+        popd 2>&1 >> /dev/null
+    else
+        pushd $DIR_CODE/github/despiegk 2>&1 >> /dev/null
+        git clone --depth 1 --no-single-branch https://github.com/despiegk/gridstarter.git
+        popd 2>&1 >> /dev/null
+    fi
+
+    mkdir -p ~/.vmodules/freeflowuniverse
+    rm -f ~/.vmodules/freeflowuniverse/gridstarter
+    ln -s ~/code/github/despiegk/gridstarter ~/.vmodules/freeflowuniverse/gridstarter 
+
+
+}
+
+
 function vstor_get {
     mkdir -p $DIR_CODE/github/threefoldtech
     if [[ -d "$DIR_CODE/github/threefoldtech/vstor" ]]

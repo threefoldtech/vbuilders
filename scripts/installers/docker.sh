@@ -3,8 +3,14 @@ apt-get remove docker docker-engine docker.io containerd runc -y
 
 set -ex
 
+export OURHOME="$HOME"
+export DIR_CODE="$OURHOME/code"
 export OURHOME="$HOME/play"
 mkdir -p $OURHOME
+
+if [ -z "$TERM" ]; then
+    export TERM=xterm
+fi
 
 function github_keyscan {
     mkdir -p ~/.ssh
@@ -34,6 +40,21 @@ function os_update {
     fi
 }
 
+function gridbuilder_get {
+    mkdir -p $DIR_CODE/github/threefoldtech
+    if [[ -d "$DIR_CODE/github/threefoldtech/builders" ]]
+    then
+        pushd $DIR_CODE/github/threefoldtech/builders 2>&1 >> /dev/null
+        git pull
+        popd 2>&1 >> /dev/null
+    else
+        pushd $DIR_CODE/github/threefoldtech 2>&1 >> /dev/null
+        git clone --depth 1 --no-single-branch git@github.com:threefoldtech/builders.git
+        popd 2>&1 >> /dev/null
+    fi
+
+}
+
 
 
 mkdir -p /etc/apt/keyrings
@@ -50,5 +71,8 @@ apt-get update
 apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 
 docker run hello-world
+
+gridbuilder_get
+
 
 echo "*** INSTALL DOCKER OK ***"
