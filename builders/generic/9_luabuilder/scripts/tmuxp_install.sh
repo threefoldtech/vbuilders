@@ -6,6 +6,6 @@ apk add --no-cache py3-pip
 pip install --user -e git+https://github.com/tmux-python/tmuxp.git#egg=tmuxp
 # ln -s /root/.local/bin/tmuxp /usr/local/bin/tmuxp
 
-set +ex
+rm -f /usr/local/bin/tmuxp
 cp /root/.local/bin/tmuxp /usr/local/bin/tmuxp
 
