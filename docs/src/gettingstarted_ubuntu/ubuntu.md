@@ -38,3 +38,15 @@ cd ~/code/github/threefoldtech/builders/builders/generic/
 bash build_all.sh
 ```
 
+## Re-Build the base dockers
+
+
+```
+cd ~/code/github/threefoldtech/builders/builders/generic/
+bash delete_all.sh
+bash build_all.sh
+```
+
+
+
+
