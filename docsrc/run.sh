@@ -15,6 +15,6 @@ pushd src
 git add * -f 
 popd
 mdbook build
-rsync -rav book/ $DIR_PATH/
+rsync -rav --delete book/ ../$DIR_PATH/docs/
 rm -rf book
 
