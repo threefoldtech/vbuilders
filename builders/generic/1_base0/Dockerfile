@@ -17,6 +17,7 @@ RUN apk add --no-cache mc htop rsync wget
 
 ADD binscripts/* /bin/
 ADD env.sh /
+ADD conf.sh /
 
 RUN chmod 770 /bin/shell.sh
 

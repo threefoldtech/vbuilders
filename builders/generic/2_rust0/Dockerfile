@@ -23,7 +23,15 @@ RUN set -eux; \
     rustup --version; \
     cargo --version; \
     rustc --version;
-    
+
+RUN apk add --no-cache git musl-dev
+
+RUN rustup target add x86_64-unknown-linux-musl
+
+# idea was to update crates.io, but doesn't work as expected, redownloads next time
+# RUN cargo search --limit 0
+
+ADD conf.sh /
 
 
 # RUN set -eux; \
