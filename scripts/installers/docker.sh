@@ -56,23 +56,28 @@ function gridbuilder_get {
 }
 
 
+function docker_install {
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then 
+        export DEBIAN_FRONTEND=noninteractive
+        mkdir -p /etc/apt/keyrings
 
-mkdir -p /etc/apt/keyrings
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+        echo \
+        "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+        $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+        chmod a+r /etc/apt/keyrings/docker.gpg
+        apt-get update
 
-chmod a+r /etc/apt/keyrings/docker.gpg
-apt-get update
+        apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
 
-apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
+        docker run hello-world
+    fi
+}
 
-docker run hello-world
-
+github_keyscan
+docker_install
 gridbuilder_get
-
 
 echo "*** INSTALL DOCKER OK ***"
