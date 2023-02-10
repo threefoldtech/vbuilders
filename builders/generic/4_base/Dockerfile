@@ -13,13 +13,17 @@ RUN mkdir -p /etc/zinit/
 RUN mkdir -p /etc/zinit
 # ADD myhost/bin/zinit /bin/zinit
 
-RUN apk add wget && \
-    wget https://github.com/threefoldtech/zinit/releases/download/v0.2.5/zinit -O /sbin/zinit  && \
-    chmod +x /sbin/zinit
+# WE HAD OUR OWN BUILDS THIS BROKE IT
+# RUN apk add wget && \
+#     wget https://github.com/threefoldtech/zinit/releases/download/v0.2.5/zinit -O /sbin/zinit  && \
+#     chmod +x /sbin/zinit
 
-# ADD scripts/* /bin/
+
+RUN mkdir -p /etc/zinit
+ADD myhost/bin/zinit /bin/zinit
+
 # ADD env.sh /
-# ADD conf.sh /
+ADD conf.sh /
 
 
 ENTRYPOINT ["/sbin/zinit","init","--container"]

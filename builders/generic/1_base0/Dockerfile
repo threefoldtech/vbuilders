@@ -8,7 +8,7 @@ RUN apk add --no-cache curl libssh2 git tmux zsh bash
 # add openssh and clean
 RUN apk add --no-cache openssh && rm  -rf /tmp/* /var/cache/apk/*
 
-RUN apk add --no-cache mc htop rsync
+RUN apk add --no-cache mc htop rsync wget
 
 # EXPOSE 22
 # EXPOSE 6379
