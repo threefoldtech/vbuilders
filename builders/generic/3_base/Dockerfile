@@ -1,4 +1,4 @@
-FROM despiegk/rust0 as builder
+FROM despiegk/rustbuilder as builder
 
 RUN rm  -rf /tmp/* /var/cache/apk/*
 
