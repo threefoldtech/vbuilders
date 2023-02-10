@@ -1,4 +1,4 @@
-FROM vbuilder
+FROM despiegk/vbuilder
 
 RUN rm  -rf /tmp/* /var/cache/apk/*
 

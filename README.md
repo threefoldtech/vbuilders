@@ -1,5 +1,7 @@
 # Builders
 
+Documentation on https://threefoldtech.github.io/builders/ (work in progress)
+
 ## prerequisites
 
 
@@ -11,12 +13,18 @@
 curl https://raw.githubusercontent.com/threefoldtech/builders/master/scripts/installers/docker.sh > /tmp/install.sh && bash /tmp/install.sh
 ```
 
-
-    execute the [docker install script](scripts/installers/docker.sh) if on Ubuntu
+execute the [docker install script](scripts/installers/docker.sh) if on Ubuntu
 
 ## the base docker builders builder
 
-- see dir builders
+- see dir builder
+
+### to push the images and build multiplatform
+
+- now only on m.1 osx
+- do 'export DOCKERPUSH=1'
+
+to check result of building `docker manifest inspect despiegk/base0:latest`
 
 ## vlang install
 

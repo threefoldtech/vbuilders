@@ -1,4 +1,4 @@
-FROM gobuilder as builder
+FROM despiegk/gobuilder as builder
 
 RUN rm  -rf /tmp/* /var/cache/apk/*
 
@@ -30,7 +30,7 @@ RUN git clone https://github.com/LN-Zap/lndconnect.git /go/src/github.com/LN-Zap
 
 
 # Start a new, final image.
-FROM base as final
+FROM despiegk/base as final
 
 # Define a root volume for data persistence.
 VOLUME /root/.lnd

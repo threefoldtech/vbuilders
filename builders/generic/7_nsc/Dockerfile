@@ -1,4 +1,4 @@
-FROM base
+FROM despiegk/base
 
 ADD conf.sh /
 

@@ -1,4 +1,4 @@
-FROM base0
+FROM despiegk/base0
 RUN rm  -rf /tmp/* /var/cache/apk/*
 # RUN apk update
 # RUN apk upgrade

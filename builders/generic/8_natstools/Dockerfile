@@ -1,4 +1,4 @@
-FROM gobuilder
+FROM despiegk/gobuilder
 
 RUN rm  -rf /tmp/* /var/cache/apk/*
 

@@ -42,17 +42,21 @@ function os_update {
 
 function buildx_install {
     export BUILDXDEST=$HOME/.docker/cli-plugins/docker-buildx
-    mkdir -p /root/.docker/cli-plugins/
+    mkdir -p $HOME/.docker/cli-plugins/
     if [[ "$OSTYPE" == "linux-gnu"* ]]; then 
-        export BUILDXURL='https://github.com/docker/buildx/releases/download/v0.10.2/buildx-v0.10.2.linux-amd64'        
+        export BUILDXURL='https://github.com/docker/buildx/releases/download/v0.10.2/buildx-v0.10.2.linux-amd64' 
+
+        rm -f $BUILDXDEST
+        curl -L $BUILDXURL > $BUILDXDEST
+        chmod +x $BUILDXDEST
+        docker buildx install
+        docker buildx create --use --name multi-arch-builder               
+
     elif [[ "$OSTYPE" == "darwin"* ]]; then
         export BUILDXURL='https://github.com/docker/buildx/releases/download/v0.10.2/buildx-v0.10.2.darwin-arm64'
+        #dont think its needed for osx
     fi
-    rm -f $BUILDXDEST
-    curl -L $BUILDXURL > $BUILDXDEST
-    chmod +x $BUILDXDEST
-    docker buildx install
-    docker buildx create --use --name multi-arch-builder
+
 }
 
 
@@ -96,6 +100,7 @@ function docker_install {
 github_keyscan
 docker_install
 gridbuilder_get
+buildx_install
 
 
 echo "*** INSTALL DOCKER OK ***"

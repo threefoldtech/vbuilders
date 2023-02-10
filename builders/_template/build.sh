@@ -9,7 +9,15 @@ if test -f "$PWD/copyindocker.sh"; then
 fi
 
 echo " ** BUILD START ****** for ${BNAME}"
-docker build . -t despiegk/${BNAME}
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then 
+    docker build . -t despiegk/${BNAME}
+else
+    if [[ -z "${DOCKERPUSH}" ]]; then
+        docker build . -t despiegk/${BNAME}
+    else
+        docker buildx build . -t despiegk/${BNAME} --platform=linux/arm64,linux/amd64 --push
+    fi
+fi
 echo " ** BUILD OK ****** for ${BNAME}"
 
 
