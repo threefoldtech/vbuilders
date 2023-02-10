@@ -1,4 +1,5 @@
 FROM alpine:latest
+
 RUN rm  -rf /tmp/* /var/cache/apk/*
 RUN apk update
 RUN apk upgrade
@@ -20,7 +21,6 @@ ADD env.sh /
 ADD conf.sh /
 
 RUN chmod 770 /bin/shell.sh
-
 
 RUN echo 'THREEFOLD BASE DEV ENV WELCOMES YOU' > /etc/motd
 

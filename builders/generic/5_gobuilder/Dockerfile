@@ -7,6 +7,5 @@ RUN apk add --update go
 WORKDIR /app
 ENV GOPATH /app
 
-ADD scripts/* /scripts/
 ADD conf.sh /
 

@@ -1,5 +1,7 @@
 #!/bin/sh
-set -e
+
+
+set -ex
 
 if test -f "/env.sh"; then
     source /env.sh
@@ -8,16 +10,13 @@ if test -f "env.sh"; then
     source env.sh
 fi
 
-# touch /myhost/WORKS
 
 export PS1="${NAME}: "
 
-mkdir -p /myhost/alpine/${NAME}/bin
-cp /bin/nsc /myhost/alpine/${NAME}/bin/
+mkdir -p /myhost/alpine/zinit/bin
+cp /code/zinit/target/release/zinit /myhost/alpine/zinit/bin/
 
 # export PATH=/root/.nsccli/bin:$PATH
-
-# sh
 
 echo " ** COPY DONE"
 
