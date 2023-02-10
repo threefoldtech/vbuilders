@@ -1,4 +1,4 @@
-set -e
+set -ex
 
 ## IS A GOOD TRICK SO WE CAN RUN IT FROM ANY DIR AND WE CHECK ON LENGTH NAME
 SCRIPT_PATH="${BASH_SOURCE[0]:-$0}";
@@ -10,12 +10,11 @@ if ! [ ${#NAME} -ge 3 ];then
     exit 1
 fi
 
-# rm -rf book
-# pushd src
-# git add * -f 
-# popd
-# mdbook build
-# rsync -rav --delete book/ ../../docs/$NAME/
-# rsync -rav --delete book/ ~/Documents/tfbooks/output/$NAME/
-# rm -rf book
+rm -rf book
+pushd src
+git add * -f 
+popd
+mdbook build
+rsync -rav book/ $DIR_PATH/
+rm -rf book
 
