@@ -9,3 +9,6 @@ do
     bash build.sh
     popd
 done
+
+
+echo "*** BUILD OF ALL DOCKERS WORKED FOR TFGRID***"

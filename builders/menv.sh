@@ -1,0 +1,2 @@
+export DOCKER_BUILDKIT=1
+export DOCKER_CLI_EXPERIMENTAL=enabled
