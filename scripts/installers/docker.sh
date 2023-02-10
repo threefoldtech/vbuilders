@@ -33,12 +33,29 @@ function os_update {
         apt-mark hold grub-efi-amd64-signed
         apt-get -o Dpkg::Options::="--force-confold" -o Dpkg::Options::="--force-confdef" upgrade -q -y --allow-downgrades --allow-remove-essential --allow-change-held-packages
         apt-mark hold grub-efi-amd64-signed
-        os_package_install "mc curl tmux net-tools git htop ca-certificates gnupg lsb-release"
+        os_package_install "mc curl tmux net-tools git htop ca-certificates gnupg lsb-release mc"
         apt upgrade -y
     elif [[ "$OSTYPE" == "darwin"* ]]; then
         echo 
     fi
 }
+
+function buildx_install {
+    export BUILDXDEST=$HOME/.docker/cli-plugins/docker-buildx
+    mkdir -p /root/.docker/cli-plugins/
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then 
+        export BUILDXURL='https://github.com/docker/buildx/releases/download/v0.10.2/buildx-v0.10.2.linux-amd64'        
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        export BUILDXURL='https://github.com/docker/buildx/releases/download/v0.10.2/buildx-v0.10.2.darwin-arm64'
+    fi
+    rm -f $BUILDXDEST
+    curl -L $BUILDXURL > $BUILDXDEST
+    chmod +x $BUILDXDEST
+    docker buildx install
+    docker buildx create --use --name multi-arch-builder
+}
+
+
 
 function gridbuilder_get {
     mkdir -p $DIR_CODE/github/threefoldtech
@@ -68,11 +85,17 @@ echo \
 chmod a+r /etc/apt/keyrings/docker.gpg
 apt-get update
 
-apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin -y
+apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin binfmt-support -y
+
+mkdir -p /proc/sys/fs/binfmt_misc
 
 docker run hello-world
 
+
+
 gridbuilder_get
+
+buildx_install
 
 
 echo "*** INSTALL DOCKER OK ***"
