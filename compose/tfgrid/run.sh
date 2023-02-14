@@ -4,5 +4,6 @@
 mkdir -p bin
 cp ~/myhost/alpine/zinit/bin/zinit bin/
 
+docker compose build
 docker compose up
 
