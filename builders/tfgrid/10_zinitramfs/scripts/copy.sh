@@ -10,7 +10,9 @@ fi
 
 
 mkdir -p /myhost/zos/initramfs
-rm -f /myhost/zos/initramfs
+rm -rf /myhost/zos/initramfs/*
+
+cp /code/staging/vmlinuz.efi /myhost/zos/initramfs/
 
 echo " ** COPY DONE"
 
