@@ -2,3 +2,4 @@ scry
 compose/tfgrid/bin
 bin/
 .lnddata/
+*.dSYM

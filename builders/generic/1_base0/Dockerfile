@@ -3,7 +3,10 @@ FROM alpine:latest
 RUN rm  -rf /tmp/* /var/cache/apk/*
 RUN apk update
 RUN apk upgrade
-RUN apk add --no-cache redis && apk add --no-cache dumb-init 
+RUN apk add --no-cache redis \
+    && apk add --no-cache dumb-init \
+    && echo
+    
 RUN apk add --no-cache curl libssh2 git tmux zsh bash
 
 # add openssh and clean
