@@ -2,6 +2,33 @@ version: '3.9'
 name: "tfgrid"
 
 services:
+  hub_zdb:
+    build:
+      context: .
+      dockerfile: alpine.Dockerfile
+    restart: unless-stopped
+    ports:
+      - "9900:9900"
+    volumes:
+      - ./hub/zdb/zinit:/etc/zinit
+      - ./hub/zdb/scripts:/scripts
+      - ${distfolder}:/source
+
+  hub:
+    depends_on:
+      - hub_zdb
+    build:
+      context: .
+      dockerfile: ubuntu-python.Dockerfile
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./hub/hub/zinit:/etc/zinit
+      - ./hub/hub/scripts:/scripts
+      - ./hub/hub/config:/config
+      - ${distfolder}:/source
+
   tfchain:
     build:
       context: .
