@@ -1,6 +1,6 @@
 module gobuilder
 
-import threefoldtech.docker
+import freeflowuniverse.crystallib.docker
 import threefoldtech.vbuilder.base
 
 pub fn build(args docker.BuildArgs)!{

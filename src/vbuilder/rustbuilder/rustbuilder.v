@@ -1,6 +1,6 @@
 module rustbuilder
 
-import threefoldtech.docker
+import freeflowuniverse.crystallib.docker
 import threefoldtech.vbuilder.rust0
 
 pub fn build(args docker.BuildArgs)!{

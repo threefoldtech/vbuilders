@@ -1,6 +1,6 @@
 module base
 
-import threefoldtech.docker
+import freeflowuniverse.crystallib.docker
 import threefoldtech.vbuilder.base0
 
 pub fn build(args docker.BuildArgs)!{
