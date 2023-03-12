@@ -10,8 +10,8 @@ fn do() ! {
 
 	// gobuilder.build(reset:false)!
 	// nodejsbuilder.build(reset:false)!
-	// vbuilder.build(reset:false)!
-	natstools.build(reset:false)!
+	vbuilder.build(reset:true)!
+	// natstools.build(reset:false)!	
 
 }
 
