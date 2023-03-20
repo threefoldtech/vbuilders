@@ -12,3 +12,6 @@ tar --strip-components=1 -xzf /tmp/src.tar.gz -C ./
 rm /tmp/src.tar.gz
 
 bash setup/template.sh
+
+cat db/schema.sql | sqlite3 db/bootstrap.sqlite3
+
