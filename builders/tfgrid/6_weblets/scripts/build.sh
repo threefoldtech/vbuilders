@@ -12,7 +12,7 @@ rm /tmp/src.tar.gz
 
 # avoid `JavaScript heap out of memory`
 # webpack workaround for node17+
-export NODE_OPTIONS="--max-old-space-size=5120 --openssl-legacy-provider"
+export NODE_OPTIONS="--max-old-space-size=6144 --openssl-legacy-provider"
 
 npm install -g yarn
 # no optional deps since this installs and compiles sodium-native
