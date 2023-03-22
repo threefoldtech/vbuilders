@@ -1,4 +1,4 @@
-FROM despiegk/base0
+FROM base0
 RUN rm  -rf /tmp/* /var/cache/apk/*
 # RUN apk update
 # RUN apk upgrade
@@ -20,7 +20,7 @@ RUN mkdir -p /etc/zinit
 
 
 RUN mkdir -p /etc/zinit
-ADD myhost/bin/zinit /bin/zinit
+COPY --from=rustbuilder /bin/zinit /sbin/zinit
 
 # ADD env.sh /
 ADD conf.sh /

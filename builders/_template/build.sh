@@ -10,7 +10,7 @@ fi
 
 echo " ** BUILD START ****** for ${BNAME}"
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then 
-    docker build . -t despiegk/${BNAME}
+    docker build . -t ${BNAME}
 else
     if [[ -z "${DOCKERPUSH}" ]]; then
         docker build . -t despiegk/${BNAME}

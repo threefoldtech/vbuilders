@@ -1,4 +1,4 @@
-FROM despiegk/base
+FROM base
 
 RUN apk add --no-cache nodejs npm
 

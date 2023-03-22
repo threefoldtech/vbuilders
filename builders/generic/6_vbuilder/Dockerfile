@@ -1,4 +1,4 @@
-FROM despiegk/base
+FROM base
 
 RUN rm  -rf /tmp/* /var/cache/apk/*
 RUN apk add --no-cache git musl-dev clang gcc openssh-client make
