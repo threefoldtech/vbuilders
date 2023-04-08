@@ -1,1 +1,2 @@
-../../_template/build.sh
+docker build . -t base
+
