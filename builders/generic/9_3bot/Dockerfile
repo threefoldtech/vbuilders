@@ -1,9 +1,13 @@
+<<<<<<< HEAD
 FROM despiegk/natstools as builder
 
 ADD conf.sh /
 
 
 FROM despiegk/vbuilder as final
+=======
+FROM vbuilder
+>>>>>>> master
 
 RUN rm  -rf /tmp/* /var/cache/apk/*
 

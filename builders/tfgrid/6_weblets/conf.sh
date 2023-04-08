@@ -1,2 +1,2 @@
-export BNAME="nodejsbuilder"
+export BNAME="webletsbuilder"
 export NAME="webletsbuilder"

@@ -1,10 +1,10 @@
-FROM despiegk/base0
+FROM base0
 
 RUN rm  -rf /tmp/* /var/cache/apk/*
 
 RUN apk add --no-cache \
-        ca-certificates \
-        gcc
+    ca-certificates \
+    gcc
 
 ENV RUSTUP_HOME=/usr/local/rustup \
     CARGO_HOME=/usr/local/cargo \
@@ -14,9 +14,9 @@ ENV RUSTUP_HOME=/usr/local/rustup \
 RUN set -eux; \
     apkArch="$(apk --print-arch)"; \
     case "$apkArch" in \
-        x86_64) rustArch='x86_64-unknown-linux-musl';; \
-        aarch64) rustArch='aarch64-unknown-linux-musl';; \
-        *) echo >&2 "unsupported architecture: $apkArch"; exit 1 ;; \
+    x86_64) rustArch='x86_64-unknown-linux-musl';; \
+    aarch64) rustArch='aarch64-unknown-linux-musl';; \
+    *) echo >&2 "unsupported architecture: $apkArch"; exit 1 ;; \
     esac; \
     curl https://sh.rustup.rs -sSf | sh -s --  -y --no-modify-path --profile minimal --default-toolchain $RUST_VERSION --default-host ${rustArch}; \
     chmod -R a+w $RUSTUP_HOME $CARGO_HOME; \
@@ -24,14 +24,6 @@ RUN set -eux; \
     cargo --version; \
     rustc --version;
 
-RUN apk add --no-cache git musl-dev
-
-RUN rustup target add x86_64-unknown-linux-musl
-
-# idea was to update crates.io, but doesn't work as expected, redownloads next time
-# RUN cargo search --limit 0
-
-ADD conf.sh /
 
 
 # RUN set -eux; \
@@ -51,5 +43,5 @@ ADD conf.sh /
 #     rustup --version; \
 #     cargo --version; \
 #     rustc --version;
-    
+
 

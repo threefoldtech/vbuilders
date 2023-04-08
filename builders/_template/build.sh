@@ -34,8 +34,20 @@ if test -f "$PWD/copyindocker.sh"; then
 fi
 
 echo " ** BUILD START ****** for ${BNAME}"
+<<<<<<< HEAD
 docker buildx build . -t despiegk/${BNAME}:${TAG} --ssh default=${SSH_AUTH_SOCK} ${NOCACHE} ${BPLATFORM} ${BPUSH}
 # docker image prune -a --force
+=======
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then 
+    docker build . -t ${BNAME}
+else
+    if [[ -z "${DOCKERPUSH}" ]]; then
+        docker build . -t despiegk/${BNAME}
+    else
+        docker buildx build . -t despiegk/${BNAME} --platform=linux/arm64,linux/amd64 --push
+    fi
+fi
+>>>>>>> master
 echo " ** BUILD OK ****** for ${BNAME}"
 
 
