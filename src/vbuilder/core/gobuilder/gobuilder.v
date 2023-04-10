@@ -1,13 +1,15 @@
 module gobuilder
 
 import freeflowuniverse.crystallib.docker
-import threefoldtech.vbuilder.base
+import threefoldtech.vbuilder.core.base
 
 pub fn build(args docker.BuildArgs) ! {
-	// make sure dependency has been build
-	base.build(reset: args.reset, strict: args.strict)!
+	mut engine := args.engine
 
-	mut engine := docker.new()!
+	println(" - build gobuilder: reset:$args.reset")
+	
+	// make sure dependency has been build
+	base.build(engine: engine, reset: args.reset, strict: args.strict)!
 
 	// specify we want to build an alpine version
 	mut r := engine.recipe_new(name: 'gobuilder', platform: .alpine)

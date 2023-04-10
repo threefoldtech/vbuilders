@@ -3,8 +3,11 @@ module dashboard
 import freeflowuniverse.crystallib.docker
 
 pub fn build(args docker.BuildArgs) ! {
+	mut engine := args.engine
 
-	mut engine := docker.new()!
+	println(" - build dashboard: reset:$args.reset")
+
+
 	mut r := engine.recipe_new(name: 'dashboard', platform: .alpine)
 
 	r.add_from(image: 'nginx', tag: 'alpine')!

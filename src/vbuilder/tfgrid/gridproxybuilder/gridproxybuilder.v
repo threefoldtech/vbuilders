@@ -1,19 +1,21 @@
 module gridproxybuilder
 
 import freeflowuniverse.crystallib.docker
-import threefoldtech.vbuilder.base
-import threefoldtech.vbuilder.gobuilder
+
+import threefoldtech.vbuilder.core.gobuilder
 
 
 pub fn build(args docker.BuildArgs) !{
-	gobuilder.build(reset: args.reset, strict: args.strict)!
+	mut engine := args.engine
+	
+	gobuilder.build(engine: engine, reset: args.reset, strict: args.strict)!
 
-	mut engine := docker.new()!
 	mut r := engine.recipe_new(name: 'gridproxy', platform: .alpine, zinit: true)
 
 	r.add_from(image: 'gobuilder')!
 
-	r.add_zinit()!
+	//QUESTION: I don;t think next is needed, prob done automatically 
+	// r.add_zinit()! 
 	r.add_run(cmd:"apk add git")!
 	r.add_run(cmd: "git clone https://github.com/threefoldtech/tfgridclient_proxy")!
 	r.add_workdir(workdir: "./tfgridclient_proxy")!

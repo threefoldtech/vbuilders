@@ -1,12 +1,11 @@
 module tfchainbuilder
 
 import freeflowuniverse.crystallib.docker
-import threefoldtech.vbuilder.base
-import threefoldtech.vbuilder.gobuilder
 
 
 pub fn build(args docker.BuildArgs) !{
-	mut engine := docker.new()!
+	mut engine := args.engine
+
 	mut r := engine.recipe_new(name: 'tfchain', platform: .ubuntu, zinit: false)
 	r.add_from(image: 'paritytech/ci-linux', tag: 'production', alias: 'builder')!
 	

@@ -3,7 +3,10 @@ module base0
 import freeflowuniverse.crystallib.docker
 
 pub fn build(args docker.BuildArgs) ! {
-	mut engine := docker.new()!
+
+	println(" - build base0: reset:$args.reset")
+
+	mut engine := args.engine
 
 	// specify we want to build an alpine version
 	mut r := engine.recipe_new(name: 'base0', platform: .alpine, zinit: false)

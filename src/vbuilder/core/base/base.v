@@ -1,13 +1,15 @@
 module base
 
 import freeflowuniverse.crystallib.docker
-import threefoldtech.vbuilder.base0
+import threefoldtech.vbuilder.core.base0
 
 pub fn build(args docker.BuildArgs) ! {
-	// make sure dependency has been build
-	base0.build(reset: args.reset, strict: args.strict)!
+	mut engine := args.engine
+	
+	println(" - build base: reset:$args.reset")
 
-	mut engine := docker.new()!
+	// make sure dependency has been build
+	base0.build(engine: engine, reset: args.reset, strict: args.strict)!
 
 	// specify we want to build an alpine version
 	mut r := engine.recipe_new(name: 'base', platform: .alpine)

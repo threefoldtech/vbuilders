@@ -1,14 +1,17 @@
 module rust0
 
 import freeflowuniverse.crystallib.docker
-import threefoldtech.vbuilder.base0
+import threefoldtech.vbuilder.core.base0
 
 const rustversion = '1.67.0'
 
 pub fn build(args docker.BuildArgs) ! {
-	base0.build(reset: args.reset, strict: args.strict)!
+	mut engine := args.engine
 
-	mut engine := docker.new()!
+	println(" - build rust0: reset:$args.reset")
+
+	base0.build(engine: engine, reset: args.reset, strict: args.strict)!
+
 
 	// specify we want to build an alpine version
 	mut r := engine.recipe_new(name: 'rust0', platform: .alpine, zinit: false)

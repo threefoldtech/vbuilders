@@ -1,13 +1,16 @@
 module rustbuilder
 
 import freeflowuniverse.crystallib.docker
-import threefoldtech.vbuilder.rust0
+import threefoldtech.vbuilder.core.rust0
 
 pub fn build(args docker.BuildArgs) ! {
-	// make sure dependency has been build
-	rust0.build(reset: args.reset, strict: args.strict)!
+	mut engine := args.engine
 
-	mut engine := docker.new()!
+	println(" - build rustbuilder: reset:$args.reset")
+	
+	// make sure dependency has been build
+	rust0.build(engine: engine, reset: args.reset, strict: args.strict)!
+
 
 	// specify we want to build an alpine version
 	mut r := engine.recipe_new(name: 'rustbuilder', platform: .alpine)
