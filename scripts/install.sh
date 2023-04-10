@@ -201,7 +201,9 @@ function v_install {
 function docker_install {
     if [[ "$OSTYPE" == "linux-gnu"* ]]; then 
 
+        set +ex
         apt-get remove docker docker-engine docker.io containerd runc -y 
+        set -ex
 
         mkdir -p /etc/apt/keyrings
 
