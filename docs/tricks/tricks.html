@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Getting Started Ubuntu - TFGrid Docker Builder</title>
+        <title>tricks - TFGrid Docker Builder</title>
 
 
         <!-- Custom HTML head -->
@@ -81,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="../gettingstarted_ubuntu/ubuntu.html" class="active"><strong aria-hidden="true">1.</strong> Getting Started Ubuntu</a></li><li class="chapter-item expanded "><a href="../tricks/tricks.html"><strong aria-hidden="true">2.</strong> tricks</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tricks/2phase.html"><strong aria-hidden="true">2.1.</strong> 2 phase build</a></li><li class="chapter-item expanded "><a href="../tricks/code_get.html"><strong aria-hidden="true">2.2.</strong> code get</a></li><li class="chapter-item expanded "><a href="../tricks/zinit.html"><strong aria-hidden="true">2.3.</strong> use zinit</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../gettingstarted_ubuntu/ubuntu.html"><strong aria-hidden="true">1.</strong> Getting Started Ubuntu</a></li><li class="chapter-item expanded "><a href="../tricks/tricks.html" class="active"><strong aria-hidden="true">2.</strong> tricks</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tricks/2phase.html"><strong aria-hidden="true">2.1.</strong> 2 phase build</a></li><li class="chapter-item expanded "><a href="../tricks/code_get.html"><strong aria-hidden="true">2.2.</strong> code get</a></li><li class="chapter-item expanded "><a href="../tricks/zinit.html"><strong aria-hidden="true">2.3.</strong> use zinit</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -142,44 +142,17 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="getting-started-ubuntu"><a class="header" href="#getting-started-ubuntu">Getting Started Ubuntu</a></h1>
-<h2 id="deploy-a-vm-on-tfgrid"><a class="header" href="#deploy-a-vm-on-tfgrid">Deploy a VM on TFGrid</a></h2>
-<p>steps</p>
-<ul>
-<li>go to https://play.grid.tf/#/</li>
-<li>chose VM deployer, make sure to have some TFT in your wallet</li>
-<li>I chose 200 GB of storage and 8 Gb of memory</li>
-</ul>
-<p>result is something like</p>
-<p><img src="img/play_ubuntu_done.png" alt="" /></p>
-<p>Login to your VM with</p>
-<pre><code class="language-bash">#the -A forwards your SSH key
-ssh -A root@195.192.213.4
-</code></pre>
-<h2 id="prepare-the-vm"><a class="header" href="#prepare-the-vm">Prepare the VM</a></h2>
-<p>inside the VM do the following</p>
-<ul>
-<li>docker and docker compose</li>
-</ul>
-<pre><code class="language-bash">#install docker and builder
-curl https://raw.githubusercontent.com/threefoldtech/builders/master/scripts/installers/docker.sh &gt; /tmp/install.sh &amp;&amp; bash /tmp/install.sh
-</code></pre>
-<h2 id="build-the-base-dockers"><a class="header" href="#build-the-base-dockers">Build the base dockers</a></h2>
-<pre><code>cd ~/code/github/threefoldtech/builders/builders/generic/
-bash build_all.sh
-</code></pre>
-<h2 id="re-build-the-base-dockers"><a class="header" href="#re-build-the-base-dockers">Re-Build the base dockers</a></h2>
-<pre><code>cd ~/code/github/threefoldtech/builders/builders/generic/
-bash delete_all.sh
-bash build_all.sh
-</code></pre>
+                        <h2 id="tricks"><a class="header" href="#tricks">Tricks</a></h2>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../gettingstarted_ubuntu/ubuntu.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
 
-                            <a rel="next" href="../tricks/tricks.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next" href="../tricks/2phase.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
 
@@ -189,8 +162,11 @@ bash build_all.sh
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../gettingstarted_ubuntu/ubuntu.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
 
-                    <a rel="next" href="../tricks/tricks.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next" href="../tricks/2phase.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
             </nav>

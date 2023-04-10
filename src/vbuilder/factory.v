@@ -1,92 +1,85 @@
 module vbuilder
 
 import freeflowuniverse.crystallib.docker
-
 import threefoldtech.vbuilder.core.gobuilder
 import threefoldtech.vbuilder.core.vbuilder
 import threefoldtech.vbuilder.core.rustbuilder
 import threefoldtech.vbuilder.core.nodejsbuilder
 import threefoldtech.vbuilder.core.natstools
+import threefoldtech.vbuilder.core.caddy
+import threefoldtech.vbuilder.core.ca
 import threefoldtech.vbuilder.tfgrid.dashboard
 // import threefoldtech.vbuilder.tfgrid.playground
 import threefoldtech.vbuilder.tfgrid.tfchainbuilder
 import threefoldtech.vbuilder.tfgrid.gridproxybuilder
 
-
-pub struct UniverseBuilder{
+pub struct UniverseBuilder {
 	dockerregistry_datapath string
-	prefix string
-	localonly bool
+	prefix                  string
+	localonly               bool
 }
-
 
 [params]
-pub struct UniverseBuilderArgs{
+pub struct UniverseBuilderArgs {
 	dockerregistry_datapath string
-	prefix string
-	localonly bool
+	prefix                  string
+	localonly               bool
 }
 
-
-//get a new builder
-pub fn new(args UniverseBuilderArgs)!UniverseBuilder{
-	mut ub:=UniverseBuilder{
-		dockerregistry_datapath:args.dockerregistry_datapath
-		prefix:args.prefix
+// get a new builder
+pub fn new(args UniverseBuilderArgs) !UniverseBuilder {
+	mut ub := UniverseBuilder{
+		dockerregistry_datapath: args.dockerregistry_datapath
+		prefix: args.prefix
 	}
 	return ub
-
 }
 
 [params]
-pub struct BuildArgs{
+pub struct BuildArgs {
 	reset bool
 }
 
-//be careful reset removes all your local docker images and containers !!!
-pub fn (mut ub UniverseBuilder) build_base(args BuildArgs)!{
-	mut engine := docker.new(prefix:ub.prefix,localonly:ub.localonly)!
+// be careful reset removes all your local docker images and containers !!!
+pub fn (mut ub UniverseBuilder) build_base(args BuildArgs) ! {
+	mut engine := docker.new(prefix: ub.prefix, localonly: ub.localonly)!
 
-	if ub.dockerregistry_datapath.len>0{
-		engine.registry_add(datapath:ub.dockerregistry_datapath)! //this means we run one locally
+	if ub.dockerregistry_datapath.len > 0 {
+		engine.registry_add(datapath: ub.dockerregistry_datapath)! // this means we run one locally
 	}
-	
-	if args.reset{
-		//TODO: prob better to only remove what is relevant to building
+
+	if args.reset {
+		// TODO: prob better to only remove what is relevant to building
 		engine.reset_all()!
 	}
 
-	
-	gobuilder.build(engine:&engine,reset:args.reset)!
-	nodejsbuilder.build(engine:&engine,reset:args.reset)!
-	vbuilder.build(engine:&engine,reset:args.reset)!
-	rustbuilder.build(engine:&engine,reset:args.reset)!
-	natstools.build(engine:&engine,reset:args.reset)!	
+	gobuilder.build(engine: &engine, reset: args.reset)!
+	nodejsbuilder.build(engine: &engine, reset: args.reset)!
+	vbuilder.build(engine: &engine, reset: args.reset)!
+	rustbuilder.build(engine: &engine, reset: args.reset)!
+	natstools.build(engine: &engine, reset: args.reset)!
+	caddy.build(engine: &engine, reset: args.reset)!
+	ca.build(engine: &engine, reset: args.reset)!
 }
 
+// be careful reset removes all your local docker images and containers !!!
+pub fn (mut ub UniverseBuilder) build_tfgrid(args BuildArgs) ! {
+	mut engine := docker.new(prefix: ub.prefix, localonly: ub.localonly)!
 
-
-//be careful reset removes all your local docker images and containers !!!
-pub fn (mut ub UniverseBuilder) build_tfgrid(args BuildArgs)!{
-	mut engine := docker.new(prefix:ub.prefix,localonly:ub.localonly)!
-
-	if ub.dockerregistry_datapath.len>0{
-		engine.registry_add(datapath:ub.dockerregistry_datapath)! //this means we run one locally
+	if ub.dockerregistry_datapath.len > 0 {
+		engine.registry_add(datapath: ub.dockerregistry_datapath)! // this means we run one locally
 	}
-	
-	if args.reset{
-		//TODO: prob better to only remove what is relevant to building
+
+	if args.reset {
+		// TODO: prob better to only remove what is relevant to building
 		engine.reset_all()!
 	}
 
-	//make sure we have the base done
+	// make sure we have the base done
 	ub.build_base()!
 
-	dashboard.build(engine:&engine,reset:false)!
+	dashboard.build(engine: &engine, reset: false)!
 	// playground.build(engine:&engine,reset:false)!
-	tfchainbuilder.build(engine:&engine,reset:true)!
-	gridproxybuilder.build(engine:&engine,reset:true)!
-
+	tfchainbuilder.build(engine: &engine, reset: true)!
+	gridproxybuilder.build(engine: &engine, reset: true)!
 }
-
-

@@ -3,8 +3,7 @@ module base0
 import freeflowuniverse.crystallib.docker
 
 pub fn build(args docker.BuildArgs) ! {
-
-	println(" - build base0: reset:$args.reset")
+	println(' - build base0: reset:${args.reset}')
 
 	mut engine := args.engine
 
@@ -23,8 +22,8 @@ pub fn build(args docker.BuildArgs) ! {
 	"
 	)!
 
-	r.add_file(source: 'shell0.sh', dest: '/bin/shell.sh', make_executable: true)!
-	r.add_file(source: 'env.sh', dest: '/')!
+	r.add_file_embedded(source: 'shell0.sh', dest: '/bin/shell.sh', make_executable: true)!
+	r.add_file_embedded(source: 'env.sh', dest: '/')!
 
 	r.add_cmd(cmd: '/bin/shell.sh')!
 

@@ -3,8 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>TFGrid Docker Builder</title>
-        <meta name="robots" content="noindex" />
+        <title>2 phase build - TFGrid Docker Builder</title>
 
 
         <!-- Custom HTML head -->
@@ -14,21 +13,21 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        <link rel="icon" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
 
@@ -36,7 +35,7 @@
     <body>
         <!-- Provide site root to javascript -->
         <script type="text/javascript">
-            var path_to_root = "";
+            var path_to_root = "../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
@@ -82,7 +81,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="gettingstarted_ubuntu/ubuntu.html"><strong aria-hidden="true">1.</strong> Getting Started Ubuntu</a></li><li class="chapter-item expanded "><a href="tricks/tricks.html"><strong aria-hidden="true">2.</strong> tricks</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tricks/2phase.html"><strong aria-hidden="true">2.1.</strong> 2 phase build</a></li><li class="chapter-item expanded "><a href="tricks/code_get.html"><strong aria-hidden="true">2.2.</strong> code get</a></li><li class="chapter-item expanded "><a href="tricks/zinit.html"><strong aria-hidden="true">2.3.</strong> use zinit</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="../gettingstarted_ubuntu/ubuntu.html"><strong aria-hidden="true">1.</strong> Getting Started Ubuntu</a></li><li class="chapter-item expanded "><a href="../tricks/tricks.html"><strong aria-hidden="true">2.</strong> tricks</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../tricks/2phase.html" class="active"><strong aria-hidden="true">2.1.</strong> 2 phase build</a></li><li class="chapter-item expanded "><a href="../tricks/code_get.html"><strong aria-hidden="true">2.2.</strong> code get</a></li><li class="chapter-item expanded "><a href="../tricks/zinit.html"><strong aria-hidden="true">2.3.</strong> use zinit</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -114,7 +113,7 @@
                     <h1 class="menu-title">TFGrid Docker Builder</h1>
 
                     <div class="right-buttons">
-                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
 
@@ -143,39 +142,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="getting-started-ubuntu"><a class="header" href="#getting-started-ubuntu">Getting Started Ubuntu</a></h1>
-<h2 id="deploy-a-vm-on-tfgrid"><a class="header" href="#deploy-a-vm-on-tfgrid">Deploy a VM on TFGrid</a></h2>
-<p>steps</p>
-<ul>
-<li>go to https://play.grid.tf/#/</li>
-<li>chose VM deployer, make sure to have some TFT in your wallet</li>
-<li>I chose 200 GB of storage and 8 Gb of memory</li>
-</ul>
-<p>result is something like</p>
-<p><img src="gettingstarted_ubuntu/img/play_ubuntu_done.png" alt="" /></p>
-<p>Login to your VM with</p>
-<pre><code class="language-bash">#the -A forwards your SSH key
-ssh -A root@195.192.213.4
-</code></pre>
-<h2 id="prepare-the-vm"><a class="header" href="#prepare-the-vm">Prepare the VM</a></h2>
-<p>inside the VM do the following</p>
-<ul>
-<li>docker and docker compose</li>
-</ul>
-<pre><code class="language-bash">#install docker and builder
-curl https://raw.githubusercontent.com/threefoldtech/builders/master/scripts/installers/docker.sh &gt; /tmp/install.sh &amp;&amp; bash /tmp/install.sh
-</code></pre>
-<h2 id="build-the-base-dockers"><a class="header" href="#build-the-base-dockers">Build the base dockers</a></h2>
-<pre><code>cd ~/code/github/threefoldtech/builders/builders/generic/
-bash build_all.sh
-</code></pre>
-<h2 id="re-build-the-base-dockers"><a class="header" href="#re-build-the-base-dockers">Re-Build the base dockers</a></h2>
-<pre><code>cd ~/code/github/threefoldtech/builders/builders/generic/
-bash delete_all.sh
-bash build_all.sh
-</code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="tricks"><a class="header" href="#tricks">Tricks</a></h2>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="2-phase--make-smaller-containers"><a class="header" href="#2-phase--make-smaller-containers">2 phase , make smaller containers</a></h2>
+                        <h2 id="2-phase--make-smaller-containers"><a class="header" href="#2-phase--make-smaller-containers">2 phase , make smaller containers</a></h2>
 <pre><code class="language-golang">module goca
 
 import freeflowuniverse.crystallib.docker
@@ -210,76 +177,18 @@ pub fn build(args docker.BuildArgs) ! {
 
 </code></pre>
 <p>now the resulting docker image will be much smaller because we had a 2nd layer</p>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="get-code-from-repository"><a class="header" href="#get-code-from-repository">get code from repository</a></h2>
-<p>Its best not to manually get code from a gitrepo, but use this snippet</p>
-<pre><code class="language-golang">r.add_codeget(url:'git@github.com:kairoaraujo/goca.git',dest:'/code/goca')!
-
-r.add_run(
-	cmd: '
-	cd /code/goca/rest-api
-	go build -o main .
-	cp main /bin/goca
-	'
-)!
-</code></pre>
-<p>the code wil get checked out locally in the build dir and then added to /code/... (the dest)</p>
-<p>This is way more reliable than doing it inside the container and can use our VLANG constructs, e.g. deal with ssh git access and our ssh-keys</p>
-<div style="break-before: page; page-break-before: always;"></div><h2 id="use-zinit"><a class="header" href="#use-zinit">use zinit</a></h2>
-<p>Zinit is our own init manager from ZOS</p>
-<pre><code class="language-golang">module goca
-
-import freeflowuniverse.crystallib.docker
-import threefoldtech.vbuilder.core.gobuilder
-
-pub fn build(args docker.BuildArgs) ! {
-	mut engine := args.engine
-	
-	// make sure dependency has been build
-	gobuilder.build(engine: engine, reset: args.reset, strict: args.strict)!
-
-	// specify we want to build an alpine version
-	mut r := engine.recipe_new(name: 'goca', platform: .alpine)
-    
-    //A LOT OF THINGS MIGHT HAVE BEEN ADDED HERE TO THE DOCKER RECIPE
-
-	r.add_env('CAPATH' ,'/goca/data')!
-	r.add_workdir(workdir:&quot;/goca/data&quot;)!
-	r.add_expose(ports:['80'])!
-
-	//HERE we add 3 services to the docker
-	r.add_zinit_cmd(name:&quot;goca&quot;, exec:&quot;/bin/goca&quot;)!
-	r.add_zinit_cmd(name:&quot;redis&quot;, exec:&quot;redis-server --port 7777&quot;, test:&quot;redis-cli -p 7777 PING&quot;)!
-	r.add_zinit_cmd(name:&quot;redis2&quot;, exec:&quot;redis-server --port 7778&quot;)!
-
-	r.build(args.reset)!
-}
-
-</code></pre>
-<p>when we start the docker this 3 services should be running</p>
-<p>more info how to use see https://github.com/threefoldtech/zinit/tree/master/docs</p>
-<p>not implemented</p>
-<ul>
-<li>ENV, because docker has this already</li>
-<li>LOG: is default to ring (which means you need to use '''zinit log''' to see it)</li>
-</ul>
-<h3 id="multi-line-commands"><a class="header" href="#multi-line-commands">multi line commands</a></h3>
-<p>special: the cmd can be multiline, if thats the case then a executable file will be created and zinit will launch that one, only bash files supported</p>
-<pre><code class="language-golang">r.add_zinit_cmd(name:&quot;goca&quot;, 
-		exec:'
-			mkdir -p /goca/data
-			cd /goca/data
-			/bin/goca
-		')!
-</code></pre>
-<ul>
-<li>if no <code>set -ex</code> or simular at 1nd line then will add one (this to make sure the script dies if some error happens inside)</li>
-</ul>
 
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../tricks/tricks.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
 
+                            <a rel="next" href="../tricks/code_get.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -287,7 +196,13 @@ pub fn build(args docker.BuildArgs) ! {
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../tricks/tricks.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
 
+                    <a rel="next" href="../tricks/code_get.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
             </nav>
 
         </div>
@@ -300,23 +215,18 @@ pub fn build(args docker.BuildArgs) ! {
         </script>
 
 
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
 
         <!-- Custom JS scripts -->
-        <script type="text/javascript" src="mermaid.min.js"></script>
-        <script type="text/javascript" src="mermaid-init.js"></script>
+        <script type="text/javascript" src="../mermaid.min.js"></script>
+        <script type="text/javascript" src="../mermaid-init.js"></script>
 
-        <script type="text/javascript">
-        window.addEventListener('load', function() {
-            window.setTimeout(window.print, 100);
-        });
-        </script>
 
     </body>
 </html>

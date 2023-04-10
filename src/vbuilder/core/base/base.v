@@ -5,8 +5,8 @@ import threefoldtech.vbuilder.core.base0
 
 pub fn build(args docker.BuildArgs) ! {
 	mut engine := args.engine
-	
-	println(" - build base: reset:$args.reset")
+
+	println(' - build base: reset:${args.reset}')
 
 	// make sure dependency has been build
 	base0.build(engine: engine, reset: args.reset, strict: args.strict)!
