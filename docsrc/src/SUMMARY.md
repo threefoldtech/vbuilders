@@ -1,5 +1,6 @@
 # TFGrid Builder
 
+- [Welcome](welcome.md)
 - [Getting Started](gettingstarted/gettingstarted.md)
   - [Ubuntu](gettingstarted/ubuntu/ubuntu.md)
 - [tricks](tricks/tricks.md)
