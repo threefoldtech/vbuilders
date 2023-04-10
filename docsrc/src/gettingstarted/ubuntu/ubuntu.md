@@ -33,25 +33,17 @@ rm -f /root/env.sh
 
 ### install crystal lib
 
+> THIS WILL ONLY WORK IF YOU LOGGED IN WITH YOUR SSH-AGENT AND SSHKEYS AS USED IN GITHUB LOADED and SSH -A was used
+
 ```bash
 #if you want to reset and make sure all is clean (BE CAREFULL WILL REMOVE CODE DIRS)
 export FULLRESET=1
 #the next line is needed if you want to change a branch (first one is for crylstallib, 2nd builders)
 # export CLBRANCH=development2
 # export BUILDERBRANCH=development
-curl https://raw.githubusercontent.com/threefoldtech/builders/development/scripts/install.sh > /tmp/crystal.sh && bash /tmp/crystal.sh
+curl https://raw.githubusercontent.com/threefoldtech/builders/development/scripts/install.sh > /tmp/install.sh && bash /tmp/install.sh
 ```
 
-
-###  docker and docker compose
-
-```bash
-#install docker and builder
-curl https://raw.githubusercontent.com/threefoldtech/builders/development/scripts/installers/docker.sh > /tmp/docker.sh && bash /tmp/docker.sh
-```
-
-
-theck the output you should see that you are on the right branch
 
 ## Builders
 
@@ -65,7 +57,7 @@ v -cg run  /root/code/github/threefoldtech/builders/examples/base/vbuild_base.v
 ### an example server in golang
 
 ```
- v -cg run /root/code/github/threefoldtech/builders/examples/goca/play_goca.v
+v -cg run /root/code/github/threefoldtech/builders/examples/goca/play_goca.v
 ```
 
 
