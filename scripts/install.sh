@@ -44,68 +44,63 @@ function redis_install {
 }
 
 function crystal_lib_get {
+    if [[ -z "${CLBRANCH}" ]]; then 
+        export CLBRANCH="development2"
+    fi
     mkdir -p $DIR_CODE/github/freeflowuniverse
     if [[ -d "$DIR_CODE/github/freeflowuniverse/crystallib" ]]
     then
         pushd $DIR_CODE/$2 2>&1 >> /dev/null
-        # git pull
+        git pull
+        git checkout $CLBRANCH
         popd 2>&1 >> /dev/null
     else
         pushd $DIR_CODE/github/freeflowuniverse 2>&1 >> /dev/null
         git clone --depth 1 --no-single-branch https://github.com/freeflowuniverse/crystallib.git
+        git checkout $CLBRANCH
         popd 2>&1 >> /dev/null
     fi
-    if [[ -z "${CLBRANCH}" ]]; then 
-        echo ' - no branch set'
-    else
-        if [[ "$CLBRANCH" == "development" ]]; then 
-            echo
-        else
-            echo ' - switch to branch ${CLBRANCH} for crystallib'
-            pushd $DIR_CODE/github/freeflowuniverse/crystallib 2>&1 >> /dev/null
-            git checkout $CLBRANCH
-            git pull
-            popd 2>&1 >> /dev/null
-        fi
-    fi
-
-
     mkdir -p ~/.vmodules/freeflowuniverse
     rm -f ~/.vmodules/freeflowuniverse/crystallib
     ln -s ~/code/github/freeflowuniverse/crystallib ~/.vmodules/freeflowuniverse/crystallib 
 
 }
 
-function gridstarter_get {
-    mkdir -p $DIR_CODE/github/despiegk
-    if [[ -d "$DIR_CODE/github/despiegk/gridstarter" ]]
-    then
-        pushd $DIR_CODE/github/despiegk/gridstarter 2>&1 >> /dev/null
-        git pull
-        popd 2>&1 >> /dev/null
-    else
-        pushd $DIR_CODE/github/despiegk 2>&1 >> /dev/null
-        git clone --depth 1 --no-single-branch https://github.com/despiegk/gridstarter.git
-        popd 2>&1 >> /dev/null
-    fi
+# function gridstarter_get {
+#     mkdir -p $DIR_CODE/github/despiegk
+#     if [[ -d "$DIR_CODE/github/despiegk/gridstarter" ]]
+#     then
+#         pushd $DIR_CODE/github/despiegk/gridstarter 2>&1 >> /dev/null
+#         git pull
+#         popd 2>&1 >> /dev/null
+#     else
+#         pushd $DIR_CODE/github/despiegk 2>&1 >> /dev/null
+#         git clone --depth 1 --no-single-branch https://github.com/despiegk/gridstarter.git
+#         popd 2>&1 >> /dev/null
+#     fi
 
-    mkdir -p ~/.vmodules/freeflowuniverse
-    rm -f ~/.vmodules/freeflowuniverse/gridstarter
-    ln -s ~/code/github/despiegk/gridstarter ~/.vmodules/freeflowuniverse/gridstarter 
+#     mkdir -p ~/.vmodules/freeflowuniverse
+#     rm -f ~/.vmodules/freeflowuniverse/gridstarter
+#     ln -s ~/code/github/despiegk/gridstarter ~/.vmodules/freeflowuniverse/gridstarter 
 
 
-}
+# }
 
 function gridbuilder_get {
+    if [[ -z "${BUILDERBRANCH}" ]]; then 
+        export BUILDERBRANCH="development"
+    fi    
     mkdir -p $DIR_CODE/github/threefoldtech
     if [[ -d "$DIR_CODE/github/threefoldtech/builder" ]]
     then
         pushd $DIR_CODE/github/threefoldtech/builder 2>&1 >> /dev/null
         git pull
+        git checkout $BUILDERBRANCH
         popd 2>&1 >> /dev/null
     else
         pushd $DIR_CODE/github/threefoldtech 2>&1 >> /dev/null
         git clone --depth 1 --no-single-branch https://github.com/threefoldtech/builder.git
+        git checkout $BUILDERBRANCH
         popd 2>&1 >> /dev/null
     fi
 

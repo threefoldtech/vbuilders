@@ -15,7 +15,7 @@ result is something like
 Login to your VM with
 
 ```bash
-#the -A forwards your SSH key
+#the -A forwards your SSH key (important)
 #the ip address is the address as given back by the deploy of the VM on threefold play
 ssh -A root@195.192.213.4
 ```
@@ -24,12 +24,21 @@ ssh -A root@195.192.213.4
 
 inside the VM do the following
 
+### if you want to reinstall do
+
+```bash
+rm -rf /root/.vmodules
+rm -f /root/env.sh
+```
+
 ### install crystal lib
 
 ```bash
-#install docker and builder
+#the next line is needed if you want to change a branch
+# export CLBRANCH=development2
 curl https://raw.githubusercontent.com/threefoldtech/builders/development/scripts/install.sh > /tmp/crystal.sh && bash /tmp/crystal.sh
 ```
+
 
 
 ###  docker and docker compose
@@ -42,27 +51,19 @@ curl https://raw.githubusercontent.com/threefoldtech/builders/development/script
 ### to make sure you are using the right branch of crystal and builder tools
 
 ```bash
-cd ~/.vmodules/freeflowuniverse/gridstarter && git checkout development
+cd ~/.vmodules/threefoldtech/builder && git checkout development
 cd ~/.vmodules/freeflowuniverse/crystallib && git checkout development2
-
 ```
+
+theck the output you should see that you are on the right branch
 
 ## Build the base dockers
 
 
 ```
-cd ~/code/github/threefoldtech/builders/builders/generic/
-bash build_all.sh
-```
-
-## Re-Build the base dockers
-
 
 ```
-cd ~/code/github/threefoldtech/builders/builders/generic/
-bash delete_all.sh
-bash build_all.sh
-```
+
 
 
 
