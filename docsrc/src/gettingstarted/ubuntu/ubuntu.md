@@ -55,11 +55,17 @@ theck the output you should see that you are on the right branch
 
 ## Builders
 
+### our base dockers
+
+```
+v -cg run  /root/code/github/threefoldtech/builders/examples/base/vbuild_base.v
+```
+
 
 ### an example server in golang
 
 ```
- v -cg run  /root/code/github/threefoldtech/builders/src/examples/goca/play_goca.v
+ v -cg run /root/code/github/threefoldtech/builders/examples/goca/play_goca.v
 ```
 
 
@@ -71,7 +77,7 @@ theck the output you should see that you are on the right branch
 export CLBRANCH=development2
 export BUILDERBRANCH=development
 pushd ~/.vmodules/freeflowuniverse/crystallib && git pull && git checkout $CLBRANCH && popd
-pushd ~/.vmodules/threefoldtech/builders && git pull && checkout $BUILDERBRANCH && popd
+pushd ~/.vmodules/threefoldtech/builders && git pull && git checkout $BUILDERBRANCH && popd
 ```
 
 
