@@ -4,3 +4,8 @@ bin/
 .lnddata/
 *.dSYM
 *.log
+
+vbuild_base
+vbuild_tfgrid
+vbuild_play
+play_goca
