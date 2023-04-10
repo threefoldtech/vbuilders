@@ -6,6 +6,8 @@ steps
 
 - go to https://play.grid.tf/#/
 - chose VM deployer, make sure to have some TFT in your wallet
+- depoy an ubuntu 22.04
+- make sure you chose pub IP address and you have your SSH key loaded
 - I chose 200 GB of storage and 8 Gb of memory
 
 result is something like
