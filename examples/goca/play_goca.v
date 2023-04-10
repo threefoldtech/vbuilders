@@ -13,7 +13,7 @@ fn do() ! {
 	dockerregistry_datapath:=""
 	// dockerregistry_datapath:="/Volumes/FAST/DOCKERHUB"
 	prefix:="despiegk/" //dont forget trailing slash
-	reset:=false
+	reset:=true
 	localonly:=false
 
 	mut engine := docker.new(prefix:prefix,localonly:localonly)!
@@ -28,7 +28,7 @@ fn do() ! {
 	}
 
 	
-	goca.build(engine:&engine,reset:true)!
+	goca.build(engine:&engine,reset:false)!
 
 }
 
