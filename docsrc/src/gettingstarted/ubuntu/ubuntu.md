@@ -16,6 +16,7 @@ Login to your VM with
 
 ```bash
 #the -A forwards your SSH key
+#the ip address is the address as given back by the deploy of the VM on threefold play
 ssh -A root@195.192.213.4
 ```
 
@@ -23,11 +24,19 @@ ssh -A root@195.192.213.4
 
 inside the VM do the following
 
-- docker and docker compose
+### install crystal lib
 
 ```bash
 #install docker and builder
-curl https://raw.githubusercontent.com/threefoldtech/builders/master/scripts/installers/docker.sh > /tmp/install.sh && bash /tmp/install.sh
+curl https://raw.githubusercontent.com/threefoldtech/builders/development/scripts/install.sh > /tmp/crystal.sh && bash /tmp/crystal.sh
+```
+
+
+###  docker and docker compose
+
+```bash
+#install docker and builder
+curl https://raw.githubusercontent.com/threefoldtech/builders/development/scripts/installers/docker.sh > /tmp/docker.sh && bash /tmp/docker.sh
 ```
 
 ## Build the base dockers
