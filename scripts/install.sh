@@ -56,7 +56,7 @@ function crystal_lib_get {
         popd 2>&1 >> /dev/null
     else
         pushd $DIR_CODE/github/freeflowuniverse 2>&1 >> /dev/null
-        git clone --depth 1 --no-single-branch https://github.com/freeflowuniverse/crystallib.git
+        git clone --depth 1 --no-single-branch https://github.com/freeflowuniverse/crystallib
         git checkout $CLBRANCH
         popd 2>&1 >> /dev/null
     fi
@@ -91,22 +91,22 @@ function gridbuilder_get {
         export BUILDERBRANCH="development"
     fi    
     mkdir -p $DIR_CODE/github/threefoldtech
-    if [[ -d "$DIR_CODE/github/threefoldtech/builder" ]]
+    if [[ -d "$DIR_CODE/github/threefoldtech/builders" ]]
     then
-        pushd $DIR_CODE/github/threefoldtech/builder 2>&1 >> /dev/null
+        pushd $DIR_CODE/github/threefoldtech/builders 2>&1 >> /dev/null
         git pull
         git checkout $BUILDERBRANCH
         popd 2>&1 >> /dev/null
     else
         pushd $DIR_CODE/github/threefoldtech 2>&1 >> /dev/null
-        git clone --depth 1 --no-single-branch https://github.com/threefoldtech/builder.git
+        git clone --depth 1 --no-single-branch https://github.com/threefoldtech/builders
         git checkout $BUILDERBRANCH
         popd 2>&1 >> /dev/null
     fi
 
     mkdir -p ~/.vmodules/threefoldtech
-    rm -f ~/.vmodules/threefoldtech/builder
-    ln -s ~/code/github/threefoldtech/builder ~/.vmodules/threefoldtech/builder
+    rm -f ~/.vmodules/threefoldtech/builders
+    ln -s ~/code/github/threefoldtech/builders ~/.vmodules/threefoldtech/builders
 
 
 }

@@ -34,11 +34,11 @@ rm -f /root/env.sh
 ### install crystal lib
 
 ```bash
-#the next line is needed if you want to change a branch
+#the next line is needed if you want to change a branch (first one is for crylstallib, 2nd builders)
 # export CLBRANCH=development2
+# export BUILDERBRANCH=development
 curl https://raw.githubusercontent.com/threefoldtech/builders/development/scripts/install.sh > /tmp/crystal.sh && bash /tmp/crystal.sh
 ```
-
 
 
 ###  docker and docker compose
@@ -51,8 +51,10 @@ curl https://raw.githubusercontent.com/threefoldtech/builders/development/script
 ### to make sure you are using the right branch of crystal and builder tools
 
 ```bash
-cd ~/.vmodules/threefoldtech/builder && git checkout development
-cd ~/.vmodules/freeflowuniverse/crystallib && git checkout development2
+export CLBRANCH=development2
+export BUILDERBRANCH=development
+cd ~/.vmodules/freeflowuniverse/crystallib && git checkout $CLBRANCH
+cd ~/.vmodules/threefoldtech/builder && git checkout $BUILDERBRANCH
 ```
 
 theck the output you should see that you are on the right branch
