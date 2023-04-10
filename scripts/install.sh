@@ -100,18 +100,18 @@ function gridbuilder_get {
     mkdir -p $DIR_CODE/github/threefoldtech
     if [[ -d "$DIR_CODE/github/threefoldtech/builder" ]]
     then
-        pushd $DIR_CODE/github/despiegk/gridstarter 2>&1 >> /dev/null
+        pushd $DIR_CODE/github/threefoldtech/builder 2>&1 >> /dev/null
         git pull
         popd 2>&1 >> /dev/null
     else
-        pushd $DIR_CODE/github/despiegk 2>&1 >> /dev/null
-        git clone --depth 1 --no-single-branch https://github.com/despiegk/gridstarter.git
+        pushd $DIR_CODE/github/threefoldtech 2>&1 >> /dev/null
+        git clone --depth 1 --no-single-branch https://github.com/threefoldtech/builder.git
         popd 2>&1 >> /dev/null
     fi
 
-    mkdir -p ~/.vmodules/freeflowuniverse
-    rm -f ~/.vmodules/freeflowuniverse/gridstarter
-    ln -s ~/code/github/despiegk/gridstarter ~/.vmodules/freeflowuniverse/gridstarter 
+    mkdir -p ~/.vmodules/threefoldtech
+    rm -f ~/.vmodules/threefoldtech/builder
+    ln -s ~/code/github/threefoldtech/builder ~/.vmodules/threefoldtech/builder
 
 
 }
@@ -343,7 +343,8 @@ if ! [[ -f "$HOME/.vmodules/done_crystallib" ]]; then
     mkdir -p ~/.vmodules/freeflowuniverse/    
 
     crystal_lib_get
-    gridstarter_get
+    # gridstarter_get
+    gridbuilder_get
     # vstor_get
 
     touch "$HOME/.vmodules/done_crystallib"

@@ -39,6 +39,14 @@ curl https://raw.githubusercontent.com/threefoldtech/builders/development/script
 curl https://raw.githubusercontent.com/threefoldtech/builders/development/scripts/installers/docker.sh > /tmp/docker.sh && bash /tmp/docker.sh
 ```
 
+### to make sure you are using the right branch of crystal and builder tools
+
+```bash
+cd ~/.vmodules/freeflowuniverse/gridstarter && git checkout development
+cd ~/.vmodules/freeflowuniverse/crystallib && git checkout development2
+
+```
+
 ## Build the base dockers
 
 
