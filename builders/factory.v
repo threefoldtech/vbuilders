@@ -1,4 +1,4 @@
-module vbuilder
+module builders
 
 import freeflowuniverse.crystallib.docker
 import threefoldtech.builders.core.gobuilder
@@ -7,7 +7,7 @@ import threefoldtech.builders.core.rustbuilder
 import threefoldtech.builders.core.nodejsbuilder
 import threefoldtech.builders.core.natstools
 import threefoldtech.builders.core.caddy
-import threefoldtech.builders.core.ca
+// import threefoldtech.builders.play.ca
 import threefoldtech.builders.tfgrid.dashboard
 // import threefoldtech.builders.tfgrid.playground
 import threefoldtech.builders.tfgrid.tfchainbuilder
@@ -59,7 +59,7 @@ pub fn (mut ub UniverseBuilder) build_base(args BuildArgs) ! {
 	rustbuilder.build(engine: &engine, reset: args.reset)!
 	natstools.build(engine: &engine, reset: args.reset)!
 	caddy.build(engine: &engine, reset: args.reset)!
-	ca.build(engine: &engine, reset: args.reset)!
+	// ca.build(engine: &engine, reset: args.reset)!
 }
 
 // be careful reset removes all your local docker images and containers !!!

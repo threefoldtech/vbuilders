@@ -12,7 +12,7 @@ fn do() ! {
 	reset:=false
 
 
-	mut ub:=vbuilder.new(dockerregistry_datapath:dockerregistry_datapath,prefix:prefix)!
+	mut ub:=builders.new(dockerregistry_datapath:dockerregistry_datapath,prefix:prefix)!
 	
 	ub.build_base(reset:reset)!	
 

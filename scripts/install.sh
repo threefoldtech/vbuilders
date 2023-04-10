@@ -116,7 +116,7 @@ function gridbuilder_get {
 
     mkdir -p ~/.vmodules/threefoldtech
     rm -f ~/.vmodules/threefoldtech/builders
-    ln -s ~/code/github/threefoldtech/builders/src ~/.vmodules/threefoldtech/builders
+    ln -s ~/code/github/threefoldtech/builders/builders ~/.vmodules/threefoldtech/builders
 
 
 }
