@@ -82,7 +82,7 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="gettingstarted_ubuntu/ubuntu.html"><strong aria-hidden="true">1.</strong> Getting Started Ubuntu</a></li><li class="chapter-item expanded "><a href="tricks/tricks.html"><strong aria-hidden="true">2.</strong> tricks</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tricks/2phase.html"><strong aria-hidden="true">2.1.</strong> 2 phase build</a></li><li class="chapter-item expanded "><a href="tricks/code_get.html"><strong aria-hidden="true">2.2.</strong> code get</a></li><li class="chapter-item expanded "><a href="tricks/zinit.html"><strong aria-hidden="true">2.3.</strong> use zinit</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="gettingstarted/gettingstarted.html"><strong aria-hidden="true">1.</strong> Getting Started</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="gettingstarted/ubuntu/ubuntu.html"><strong aria-hidden="true">1.1.</strong> Ubuntu</a></li></ol></li><li class="chapter-item expanded "><a href="tricks/tricks.html"><strong aria-hidden="true">2.</strong> tricks</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="tricks/2phase.html"><strong aria-hidden="true">2.1.</strong> 2 phase build</a></li><li class="chapter-item expanded "><a href="tricks/code_get.html"><strong aria-hidden="true">2.2.</strong> code get</a></li><li class="chapter-item expanded "><a href="tricks/zinit.html"><strong aria-hidden="true">2.3.</strong> use zinit</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
@@ -143,36 +143,54 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="getting-started-ubuntu"><a class="header" href="#getting-started-ubuntu">Getting Started Ubuntu</a></h1>
+                        <h1 id="gettingstarted"><a class="header" href="#gettingstarted">Gettingstarted</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="getting-started-ubuntu"><a class="header" href="#getting-started-ubuntu">Getting Started Ubuntu</a></h1>
 <h2 id="deploy-a-vm-on-tfgrid"><a class="header" href="#deploy-a-vm-on-tfgrid">Deploy a VM on TFGrid</a></h2>
 <p>steps</p>
 <ul>
 <li>go to https://play.grid.tf/#/</li>
 <li>chose VM deployer, make sure to have some TFT in your wallet</li>
+<li>depoy an ubuntu 22.04</li>
+<li>make sure you chose pub IP address and you have your SSH key loaded</li>
 <li>I chose 200 GB of storage and 8 Gb of memory</li>
 </ul>
 <p>result is something like</p>
-<p><img src="gettingstarted_ubuntu/img/play_ubuntu_done.png" alt="" /></p>
+<p><img src="gettingstarted/ubuntu/img/play_ubuntu_done.png" alt="" /></p>
 <p>Login to your VM with</p>
-<pre><code class="language-bash">#the -A forwards your SSH key
+<pre><code class="language-bash">#the -A forwards your SSH key (important)
+#the ip address is the address as given back by the deploy of the VM on threefold play
 ssh -A root@195.192.213.4
 </code></pre>
 <h2 id="prepare-the-vm"><a class="header" href="#prepare-the-vm">Prepare the VM</a></h2>
 <p>inside the VM do the following</p>
-<ul>
-<li>docker and docker compose</li>
-</ul>
-<pre><code class="language-bash">#install docker and builder
-curl https://raw.githubusercontent.com/threefoldtech/builders/master/scripts/installers/docker.sh &gt; /tmp/install.sh &amp;&amp; bash /tmp/install.sh
+<h3 id="if-you-want-to-reinstall-do"><a class="header" href="#if-you-want-to-reinstall-do">if you want to reinstall do</a></h3>
+<pre><code class="language-bash">rm -rf /root/.vmodules
+rm -f /root/env.sh
 </code></pre>
-<h2 id="build-the-base-dockers"><a class="header" href="#build-the-base-dockers">Build the base dockers</a></h2>
-<pre><code>cd ~/code/github/threefoldtech/builders/builders/generic/
-bash build_all.sh
+<h3 id="install-crystal-lib"><a class="header" href="#install-crystal-lib">install crystal lib</a></h3>
+<blockquote>
+<p>THIS WILL ONLY WORK IF YOU LOGGED IN WITH YOUR SSH-AGENT AND SSHKEYS AS USED IN GITHUB LOADED and SSH -A was used</p>
+</blockquote>
+<pre><code class="language-bash">#if you want to reset and make sure all is clean (BE CAREFULL WILL REMOVE CODE DIRS)
+export FULLRESET=1
+#the next line is needed if you want to change a branch (first one is for crylstallib, 2nd builders)
+# export CLBRANCH=development2
+# export BUILDERBRANCH=development
+curl https://raw.githubusercontent.com/threefoldtech/builders/development/scripts/install.sh &gt; /tmp/install.sh &amp;&amp; bash /tmp/install.sh
 </code></pre>
-<h2 id="re-build-the-base-dockers"><a class="header" href="#re-build-the-base-dockers">Re-Build the base dockers</a></h2>
-<pre><code>cd ~/code/github/threefoldtech/builders/builders/generic/
-bash delete_all.sh
-bash build_all.sh
+<h2 id="builders"><a class="header" href="#builders">Builders</a></h2>
+<h3 id="our-base-dockers"><a class="header" href="#our-base-dockers">our base dockers</a></h3>
+<pre><code>v -cg run  /root/code/github/threefoldtech/builders/examples/base/vbuild_base.v
+</code></pre>
+<h3 id="an-example-server-in-golang"><a class="header" href="#an-example-server-in-golang">an example server in golang</a></h3>
+<pre><code>v -cg run /root/code/github/threefoldtech/builders/examples/goca/play_goca.v
+</code></pre>
+<h2 id="troubleshooting"><a class="header" href="#troubleshooting">troubleshooting</a></h2>
+<h3 id="to-make-sure-you-are-using-the-right-branch-of-crystal-and-builder-tools"><a class="header" href="#to-make-sure-you-are-using-the-right-branch-of-crystal-and-builder-tools">to make sure you are using the right branch of crystal and builder tools</a></h3>
+<pre><code class="language-bash">export CLBRANCH=development2
+export BUILDERBRANCH=development
+pushd ~/.vmodules/freeflowuniverse/crystallib &amp;&amp; git pull &amp;&amp; git checkout $CLBRANCH &amp;&amp; popd
+pushd ~/.vmodules/threefoldtech/builders &amp;&amp; git pull &amp;&amp; git checkout $BUILDERBRANCH &amp;&amp; popd
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="tricks"><a class="header" href="#tricks">Tricks</a></h2>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="2-phase--make-smaller-containers"><a class="header" href="#2-phase--make-smaller-containers">2 phase , make smaller containers</a></h2>

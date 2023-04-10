@@ -1,11 +1,11 @@
 set -ex
-rm -rf src/vbuilder/_docs
+rm -rf src/_docs
 rm -rf docsv
-v fmt -w src/vbuilder
-pushd src/vbuilder
+v fmt -w src
+pushd src
 v doc -m -f html . -readme -comments -no-timestamp 
 popd
-mv src/vbuilder/_docs docsv
+mv src/_docs docsv
 open docsv/index.html
 
 # open https://threefoldfoundation.github.io/dao_research/liqpool/docs/liquidity.html
