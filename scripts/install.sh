@@ -1,5 +1,14 @@
 set -ex
 
+if [[ -z "${CLBRANCH}" ]]; then 
+    export CLBRANCH="development2"
+fi
+
+
+if [[ -z "${BUILDERBRANCH}" ]]; then 
+    export BUILDERBRANCH="development"
+fi    
+
 export OURHOME="$HOME/play"
 mkdir -p $OURHOME
 
@@ -10,6 +19,23 @@ function github_keyscan {
         ssh-keyscan github.com >> ~/.ssh/known_hosts
     fi
 }
+
+if [[ -z "${FULLRESET}" ]]; 
+then
+    echo
+else
+    rm -rf ~/.vmodules
+    rm -f ~/env.sh    
+    rm -rf ~/code  
+fi  
+
+if [[ -z "${RESET}" ]]; 
+then
+    echo
+else
+    rm -rf ~/.vmodules
+    rm -f ~/env.sh    
+fi  
 
 export DEBIAN_FRONTEND=noninteractive
 
@@ -44,19 +70,17 @@ function redis_install {
 }
 
 function crystal_lib_get {
-    if [[ -z "${CLBRANCH}" ]]; then 
-        export CLBRANCH="development2"
-    fi
     mkdir -p $DIR_CODE/github/freeflowuniverse
     if [[ -d "$DIR_CODE/github/freeflowuniverse/crystallib" ]]
     then
-        pushd $DIR_CODE/$2 2>&1 >> /dev/null
+        pushd $DIR_CODE/github/freeflowuniverse/crystallib 2>&1 >> /dev/null
         git pull
         git checkout $CLBRANCH
         popd 2>&1 >> /dev/null
     else
         pushd $DIR_CODE/github/freeflowuniverse 2>&1 >> /dev/null
         git clone --depth 1 --no-single-branch https://github.com/freeflowuniverse/crystallib
+        cd crystallib
         git checkout $CLBRANCH
         popd 2>&1 >> /dev/null
     fi
@@ -87,9 +111,7 @@ function crystal_lib_get {
 # }
 
 function gridbuilder_get {
-    if [[ -z "${BUILDERBRANCH}" ]]; then 
-        export BUILDERBRANCH="development"
-    fi    
+
     mkdir -p $DIR_CODE/github/threefoldtech
     if [[ -d "$DIR_CODE/github/threefoldtech/builders" ]]
     then
@@ -100,6 +122,7 @@ function gridbuilder_get {
     else
         pushd $DIR_CODE/github/threefoldtech 2>&1 >> /dev/null
         git clone --depth 1 --no-single-branch https://github.com/threefoldtech/builders
+        cd builders        
         git checkout $BUILDERBRANCH
         popd 2>&1 >> /dev/null
     fi
@@ -371,6 +394,13 @@ fi
 # build
 # clear
 # ct_help
+
+pushd ~/.vmodules/freeflowuniverse/crystallib
+git status
+popd
+pushd  ~/.vmodules/threefoldtech/builders
+git status
+popd
 
 echo "**** INSTALL WAS OK ****"
 

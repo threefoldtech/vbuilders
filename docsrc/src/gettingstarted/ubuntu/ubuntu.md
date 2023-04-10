@@ -34,6 +34,8 @@ rm -f /root/env.sh
 ### install crystal lib
 
 ```bash
+#if you want to reset and make sure all is clean (BE CAREFULL WILL REMOVE CODE DIRS)
+export FULLRESET=1
 #the next line is needed if you want to change a branch (first one is for crylstallib, 2nd builders)
 # export CLBRANCH=development2
 # export BUILDERBRANCH=development
