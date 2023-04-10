@@ -12,7 +12,8 @@ fn do() ! {
 
 	dockerregistry_datapath:=""
 	// dockerregistry_datapath:="/Volumes/FAST/DOCKERHUB"
-	prefix:="despiegk/" //dont forget trailing slash
+	// prefix:="despiegk/" //dont forget trailing slash
+	prefix:=""
 	reset:=true
 	localonly:=false
 
