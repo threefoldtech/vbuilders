@@ -1,7 +1,7 @@
 module natstools
 
 import freeflowuniverse.crystallib.docker
-import threefoldtech.vbuilder.core.gobuilder
+import threefoldtech.builders.core.gobuilder
 
 pub fn build(args docker.BuildArgs) ! {
 	mut engine := args.engine

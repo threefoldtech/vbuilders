@@ -4,7 +4,7 @@ module main
 
 import freeflowuniverse.crystallib.docker
 
-import threefoldtech.vbuilder.play.goca
+import threefoldtech.builders.play.goca
 
 
 

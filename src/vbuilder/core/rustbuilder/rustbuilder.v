@@ -1,7 +1,7 @@
 module rustbuilder
 
 import freeflowuniverse.crystallib.docker
-import threefoldtech.vbuilder.core.rust0
+import threefoldtech.builders.core.rust0
 
 pub fn build(args docker.BuildArgs) ! {
 	mut engine := args.engine

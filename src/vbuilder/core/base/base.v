@@ -1,7 +1,7 @@
 module base
 
 import freeflowuniverse.crystallib.docker
-import threefoldtech.vbuilder.core.base0
+import threefoldtech.builders.core.base0
 
 pub fn build(args docker.BuildArgs) ! {
 	mut engine := args.engine

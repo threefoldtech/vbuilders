@@ -1,7 +1,7 @@
 module nodejsbuilder
 
 import freeflowuniverse.crystallib.docker
-import threefoldtech.vbuilder.core.base
+import threefoldtech.builders.core.base
 
 pub fn build(args docker.BuildArgs) ! {
 	mut engine := args.engine

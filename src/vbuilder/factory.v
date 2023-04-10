@@ -1,17 +1,17 @@
 module vbuilder
 
 import freeflowuniverse.crystallib.docker
-import threefoldtech.vbuilder.core.gobuilder
-import threefoldtech.vbuilder.core.vbuilder
-import threefoldtech.vbuilder.core.rustbuilder
-import threefoldtech.vbuilder.core.nodejsbuilder
-import threefoldtech.vbuilder.core.natstools
-import threefoldtech.vbuilder.core.caddy
-import threefoldtech.vbuilder.core.ca
-import threefoldtech.vbuilder.tfgrid.dashboard
-// import threefoldtech.vbuilder.tfgrid.playground
-import threefoldtech.vbuilder.tfgrid.tfchainbuilder
-import threefoldtech.vbuilder.tfgrid.gridproxybuilder
+import threefoldtech.builders.core.gobuilder
+import threefoldtech.builders.core.vbuilder
+import threefoldtech.builders.core.rustbuilder
+import threefoldtech.builders.core.nodejsbuilder
+import threefoldtech.builders.core.natstools
+import threefoldtech.builders.core.caddy
+import threefoldtech.builders.core.ca
+import threefoldtech.builders.tfgrid.dashboard
+// import threefoldtech.builders.tfgrid.playground
+import threefoldtech.builders.tfgrid.tfchainbuilder
+import threefoldtech.builders.tfgrid.gridproxybuilder
 
 pub struct UniverseBuilder {
 	dockerregistry_datapath string

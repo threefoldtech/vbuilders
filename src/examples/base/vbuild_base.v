@@ -2,7 +2,7 @@
 module main
 
 
-import threefoldtech.vbuilder
+import threefoldtech.builders
 
 fn do() ! {
 

@@ -50,14 +50,6 @@ curl https://raw.githubusercontent.com/threefoldtech/builders/development/script
 curl https://raw.githubusercontent.com/threefoldtech/builders/development/scripts/installers/docker.sh > /tmp/docker.sh && bash /tmp/docker.sh
 ```
 
-### to make sure you are using the right branch of crystal and builder tools
-
-```bash
-export CLBRANCH=development2
-export BUILDERBRANCH=development
-cd ~/.vmodules/freeflowuniverse/crystallib && git checkout $CLBRANCH
-cd ~/.vmodules/threefoldtech/builder && git checkout $BUILDERBRANCH
-```
 
 theck the output you should see that you are on the right branch
 
@@ -69,6 +61,15 @@ theck the output you should see that you are on the right branch
 ```
 
 
+## troubleshooting
 
+### to make sure you are using the right branch of crystal and builder tools
+
+```bash
+export CLBRANCH=development2
+export BUILDERBRANCH=development
+cd ~/.vmodules/freeflowuniverse/crystallib && git checkout $CLBRANCH
+cd ~/.vmodules/threefoldtech/builder && git checkout $BUILDERBRANCH
+```
 
 
