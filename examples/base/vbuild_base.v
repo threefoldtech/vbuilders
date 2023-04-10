@@ -8,7 +8,8 @@ fn do() ! {
 
 	// dockerregistry_datapath:="/Volumes/FAST/DOCKERREGISTRY"
 	dockerregistry_datapath:=""
-	prefix:="despiegk/" //dont forget trailing slash
+	// prefix:="despiegk/" //dont forget trailing slash
+	prefix:=""
 	reset:=false
 
 
