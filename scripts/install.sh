@@ -9,8 +9,16 @@ if [[ -z "${BUILDERBRANCH}" ]]; then
     export BUILDERBRANCH="development"
 fi    
 
+export DEBIAN_FRONTEND=noninteractive
+
+export OURHOME="$HOME"
+export DIR_CODE="$OURHOME/code"
 export OURHOME="$HOME/play"
 mkdir -p $OURHOME
+
+if [ -z "$TERM" ]; then
+    export TERM=xterm
+fi
 
 function github_keyscan {
     mkdir -p ~/.ssh
@@ -37,7 +45,6 @@ else
     rm -f ~/env.sh    
 fi  
 
-export DEBIAN_FRONTEND=noninteractive
 
 function os_package_install {
     apt -o Dpkg::Options::="--force-confold" -o Dpkg::Options::="--force-confdef" install $1 -q -y --allow-downgrades --allow-remove-essential 
@@ -45,12 +52,11 @@ function os_package_install {
 
 function os_update {
     if [[ "$OSTYPE" == "linux-gnu"* ]]; then 
-        export DEBIAN_FRONTEND=noninteractive
         apt update -y
         apt-mark hold grub-efi-amd64-signed
         apt-get -o Dpkg::Options::="--force-confold" -o Dpkg::Options::="--force-confdef" upgrade -q -y --allow-downgrades --allow-remove-essential --allow-change-held-packages
         apt-mark hold grub-efi-amd64-signed
-        os_package_install "mc curl tmux net-tools git htop"
+        os_package_install "mc curl tmux net-tools git htop ca-certificates gnupg lsb-release mc"
         apt upgrade -y
     elif [[ "$OSTYPE" == "darwin"* ]]; then
         echo 
@@ -79,7 +85,7 @@ function crystal_lib_get {
         popd 2>&1 >> /dev/null
     else
         pushd $DIR_CODE/github/freeflowuniverse 2>&1 >> /dev/null
-        git clone --depth 1 --no-single-branch https://github.com/freeflowuniverse/crystallib
+        git clone --depth 1 --no-single-branch git@github.com:freeflowuniverse/crystallib.git
         cd crystallib
         git checkout $CLBRANCH
         popd 2>&1 >> /dev/null
@@ -90,25 +96,6 @@ function crystal_lib_get {
 
 }
 
-# function gridstarter_get {
-#     mkdir -p $DIR_CODE/github/despiegk
-#     if [[ -d "$DIR_CODE/github/despiegk/gridstarter" ]]
-#     then
-#         pushd $DIR_CODE/github/despiegk/gridstarter 2>&1 >> /dev/null
-#         git pull
-#         popd 2>&1 >> /dev/null
-#     else
-#         pushd $DIR_CODE/github/despiegk 2>&1 >> /dev/null
-#         git clone --depth 1 --no-single-branch https://github.com/despiegk/gridstarter.git
-#         popd 2>&1 >> /dev/null
-#     fi
-
-#     mkdir -p ~/.vmodules/freeflowuniverse
-#     rm -f ~/.vmodules/freeflowuniverse/gridstarter
-#     ln -s ~/code/github/despiegk/gridstarter ~/.vmodules/freeflowuniverse/gridstarter 
-
-
-# }
 
 function gridbuilder_get {
 
@@ -121,7 +108,7 @@ function gridbuilder_get {
         popd 2>&1 >> /dev/null
     else
         pushd $DIR_CODE/github/threefoldtech 2>&1 >> /dev/null
-        git clone --depth 1 --no-single-branch https://github.com/threefoldtech/builders
+        git clone --depth 1 --no-single-branch git@github.com:threefoldtech/builders.git
         cd builders        
         git checkout $BUILDERBRANCH
         popd 2>&1 >> /dev/null
@@ -134,104 +121,24 @@ function gridbuilder_get {
 
 }
 
-
-function vstor_get {
-    mkdir -p $DIR_CODE/github/threefoldtech
-    if [[ -d "$DIR_CODE/github/threefoldtech/vstor" ]]
-    then
-        pushd $DIR_CODE/github/threefoldtech/vstor 2>&1 >> /dev/null
-        git pull
-        popd 2>&1 >> /dev/null
-    else
-        pushd $DIR_CODE/github/threefoldtech 2>&1 >> /dev/null
-        git clone --depth 1 --no-single-branch git@github.com:threefoldtech/vstor.git
-        popd 2>&1 >> /dev/null
-    fi
-
-    mkdir -p ~/.vmodules/freeflowuniverse
-    rm -f ~/.vmodules/freeflowuniverse/vstor
-    ln -s ~/code/github/freeflowuniverse/vstor ~/.vmodules/freeflowuniverse/vstor 
-
-
-}
-
-function ansible_install {
-    if [[ -d "/root/play/ansible" ]]; then 
-        echo
-    else
-        cd /root/play
-        os_package_install python3 python3-venv
-        python3 -m venv ansible
-        source ansible/bin/activate
-        python3 -m pip install --upgrade pip
-        python3 -m pip install ansible
-        python3 -m pip install dnspython
-        ansible-galaxy collection install ansible.netcommon ansible.posix ansible.utils community.postgresql community.routeros containers.podman community.network community.libvirt community.docker
-        mkdir -p /root/.ansible/roles
-        
-    fi    
-}
-
-
-function v_install {
-    set -e
-    if [[ -z "${DIR_CODE_INT}" ]]; then 
-        echo 'Make sure to source env.sh before calling this script.'
-        exit 1
-    fi
-
-
-    if [ -d "$HOME/.vmodules" ]
-    then
-        if [[ -z "${USER}" ]]; then
-            sudo chown -R $USER:$USER ~/.vmodules
-        else
-            USER="$(whoami)"
-            sudo chown -R $USER ~/.vmodules
-        fi
-    fi
-
-
-    if [[ -d "$DIR_CODE_INT/v" ]]; then
-        pushd $DIR_CODE_INT/v
-        git pull
-        popd "$@" > /dev/null
-    else
-        mkdir -p $DIR_CODE_INT
-        pushd $DIR_CODE_INT
-        sudo rm -rf $DIR_CODE_INT/v
-        if [[ "$OSTYPE" == "linux-gnu"* ]]; then 
-            os_package_install "libgc-dev gcc make"
-        elif [[ "$OSTYPE" == "darwin"* ]]; then
-            brew install bdw-gc
-        else
-            echo "ONLY SUPPORT OSX AND LINUX FOR NOW"
-            exit 1
-        fi    
-        git clone https://github.com/vlang/v
-        popd "$@" > /dev/null
-    fi
-
-    pushd $DIR_CODE_INT/v
-    make
+function buildx_install {
+    export BUILDXDEST=$HOME/.docker/cli-plugins/docker-buildx
+    mkdir -p $HOME/.docker/cli-plugins/
     if [[ "$OSTYPE" == "linux-gnu"* ]]; then 
-        sudo ./v symlink
+        export BUILDXURL='https://github.com/docker/buildx/releases/download/v0.10.2/buildx-v0.10.2.linux-amd64' 
+
+        rm -f $BUILDXDEST
+        curl -L $BUILDXURL > $BUILDXDEST
+        chmod +x $BUILDXDEST
+        docker buildx install
+        docker buildx create --use --name multi-arch-builder               
+
     elif [[ "$OSTYPE" == "darwin"* ]]; then
-        ./v symlink
-    fi
-    popd "$@" > /dev/null
-
-    if ! [ -x "$(command -v v)" ]; then
-    echo 'vlang is not installed.' >&2
-    exit 1
+        export BUILDXURL='https://github.com/docker/buildx/releases/download/v0.10.2/buildx-v0.10.2.darwin-arm64'
+        #dont think its needed for osx
     fi
 
-    v ls --install
-    ln -s ~/.vls/bin/vls_linux_x64 /usr/local/bin/vls
 }
-
-
-
 
 function v_install {
     set -e
@@ -290,6 +197,30 @@ function v_install {
 
 
 
+
+function docker_install {
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then 
+
+        apt-get remove docker docker-engine docker.io containerd runc -y 
+
+        mkdir -p /etc/apt/keyrings
+
+        rm -f /etc/apt/keyrings/docker.gpg
+
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+
+        echo \
+        "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+        $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+        chmod a+r /etc/apt/keyrings/docker.gpg
+        apt-get update
+
+        apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin binfmt-support -y
+        # mkdir -p /proc/sys/fs/binfmt_misc
+        docker run hello-world
+    fi
+}
 
 # function crystal_tools_get {
 #     mkdir -p $DIR_CODE/github/freeflowuniverse
@@ -351,21 +282,24 @@ fi
 
 
 #CHECK IF DIR EXISTS, IF NOT CLONE
-if ! [[ -f "$HOME/.vmodules/done_crystallib" ]]; then
+if ! [[ -f "$HOME/.vmodules/done_crystallib_docker" ]]; then
 
     os_update
-    
     redis_install
 
-    sudo rm -rf ~/.vmodules/freeflowuniverse/
-    mkdir -p ~/.vmodules/freeflowuniverse/    
+    sudo rm -rf ~/.vmodules/
+    mkdir -p ~/.vmodules/freeflowuniverse/
+    mkdir -p ~/.vmodules/threefoldtech/   
+
+    github_keyscan
 
     crystal_lib_get
-    # gridstarter_get
     gridbuilder_get
-    # vstor_get
+    docker_install
+    # buildx_install
 
-    touch "$HOME/.vmodules/done_crystallib"
+
+    touch "$HOME/.vmodules/done_crystallib_docker"
 fi
 
 
