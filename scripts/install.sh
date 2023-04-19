@@ -215,6 +215,8 @@ function docker_install {
         $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
         chmod a+r /etc/apt/keyrings/docker.gpg
+        
+        apt-get update -y
 
         os_package_install docker-ce docker-ce-cli containerd.io docker-compose-plugin binfmt-support -y
         # mkdir -p /proc/sys/fs/binfmt_misc
