@@ -90,30 +90,33 @@ pub fn build(args docker.BuildArgs) ! {
 		after: "zerofs-setup",
 		oneshot: true,
 		exec: "
-			rfs --daemon --cache /mnt/cache --storage-url redis://[2001:728:1000:402:70b4:a3ff:fe89:bf13]:9900/604-22888-zdb1 --meta /root/bitcoin-snapshot.flist /mnt/snapshot/
+			rfs --daemon --cache /mnt/cache --storage-url redis://[2001:728:1000:402:70b4:a3ff:fe89:bf13]:9900/604-22888-zdb1 --meta /mnt/bitcoin-snapshot.flist /mnt/snapshot/
 			
 			mkdir -p /root/.bitcoin
 			mount -t overlay overlay -o lowerdir=/mnt/snapshot,upperdir=/mnt/readwrite,workdir=/mnt/workdir /root/.bitcoin/
 		"
 	)!
 
-
-	// FIXME: do not download from home.maxux.net, embed it
+	// put back sample config file
 	r.add_zinit_cmd(
-		name: "bitcoind-setup",
+		name: "bitcoind-setup", 
 		after: "zerofs-mount",
 		oneshot: true,
 		exec: "
-			wget http://home.maxux.net/temp/bitcoin-source.conf -O /root/bitcoin-source.conf
 			cp /root/bitcoin-source.conf /root/.bitcoin/bitcoin.conf
 		"
 	)!
 
-	// FIXME: set password via environment variable
 	r.add_zinit_cmd(
 		name: "bitcoind",
-		after: "bitcoin-setup",
-		exec: "bitcoind -rpcbind=:: -rpcallowip=200::/7 -rpcpassword=password"
+		after: "bitcoind-setup",
+		exec: "
+		    if [ -z \$BTCPWD ]; then
+			    BTCPWD=defaultbtc
+			fi
+
+			bitcoind -rpcbind=:: -rpcallowip=200::/7 -rpcpassword=\$BTCPWD
+		"
 	)!
 
 	r.build(args.reset)!
