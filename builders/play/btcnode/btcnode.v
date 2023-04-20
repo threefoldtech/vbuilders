@@ -41,6 +41,12 @@ pub fn build(args docker.BuildArgs) ! {
 		"
 	)!
 
+	// download sample config file from repository
+	r.add_run(
+		cmd: "
+			wget https://raw.githubusercontent.com/threefoldtech/builders/development/builders/play/btcnode/bitcoin-source.conf -O /root/bitcoin-source.conf
+		"
+	)!
 
 	r.add_from(image: 'base', alias: 'installer')!
 	
