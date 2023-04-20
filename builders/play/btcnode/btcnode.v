@@ -67,6 +67,11 @@ pub fn build(args docker.BuildArgs) ! {
 		name: "zerofs-setup",
 		oneshot: true,
 		exec: "
+		    if ! grep 'vda /mnt ' /proc/mounts; then
+			    echo External disk not mounted correctly >> /errors
+				exit 1
+			fi
+
 			mkdir -p /mnt/cache
 			mkdir -p /mnt/readwrite
 			mkdir -p /mnt/snapshot
