@@ -77,7 +77,9 @@ pub fn build(args docker.BuildArgs) ! {
 			mkdir -p /mnt/snapshot
 			mkdir -p /mnt/workdir
 
-			wget https://btc.grid.tf/snapshots/bitcoin-snapshot-2024-04-07.flist -O /root/bitcoin-snapshot.flist
+			if [ ! -f /mnt/bitcoin-snapshot.flist ]; then
+				wget https://btc.grid.tf/snapshots/bitcoin-snapshot-2024-04-07.flist -O /mnt/bitcoin-snapshot.flist
+			fi
 		"
 	)!
 
