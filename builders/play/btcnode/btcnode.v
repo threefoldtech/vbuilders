@@ -42,17 +42,15 @@ pub fn build(args docker.BuildArgs) ! {
 	)!
 
 	// download sample config file from repository
-	r.add_run(
-		cmd: "
-			wget https://raw.githubusercontent.com/threefoldtech/builders/development/builders/play/btcnode/bitcoin-source.conf -O /root/bitcoin-source.conf
-		"
-	)!
+	url = "https://raw.githubusercontent.com/threefoldtech/builders/development/builders/play/btcnode/bitcoin-source.conf"
+	r.add_run(cmd: "wget $url -O /root/bitcoin-source.conf")!
 
 	r.add_from(image: 'base', alias: 'installer')!
 	
 	r.add_copy(from: "builder", source: "/bin/rfs", dest: "/bin/rfs")!
 	r.add_copy(from: "builder", source: "/code/bitcoin/src/bitcoind", dest: "/bin/bitcoind")!
 	r.add_copy(from: "builder", source: "/code/bitcoin/src/bitcoin-cli", dest: "/bin/bitcoin-cli")!
+	r.add_copy(from: "builder", source: "/root/bitcoin-source.conf", dest: "/root/bitcoin-source.conf")!
 
 	// fix for rfs expecting fusermount on absolute path
 	r.add_run(cmd: "ln -sf /bin/fusermount /usr/bin/fusermount")!
