@@ -1,4 +1,5 @@
-module goca
+
+module web3proxy
 
 import freeflowuniverse.crystallib.docker
 import threefoldtech.builders.core.gobuilder
@@ -10,7 +11,7 @@ pub fn build(args docker.BuildArgs) ! {
 	gobuilder.build(engine: engine, reset: args.reset, strict: args.strict)!
 
 	// specify we want to build an alpine version
-	mut r := engine.recipe_new(name: 'goca', platform: .alpine)
+	mut r := engine.recipe_new(name: 'web3proxy', platform: .alpine)
 
 	r.add_from(image: 'gobuilder', alias: 'builder')!
 
