@@ -41,22 +41,23 @@ pub fn build(args docker.BuildArgs) ! {
 	// compiling zdb
 	r.add_run(
 		cmd: "
-			cd /code/zdb/libzdb
-			make release
-			cd ../zdbd
-			make release
+			make -C /code/zdb/libzdb release
+			make -C /code/zdb/zdbd release
 		"
 	)!
 
 	// compiling zflist
 	r.add_run(
 		cmd: "
-			cd /code/zflist/libflist
-			make alpine
-			cd ../zflist
-			make alpine
+			make -C /code/zflist/libflist alpine
+			make -C /code/zflist/zflist alpine
 		"
 	)!
+
+	// download customized config easier to populate
+	configurl := "https://raw.githubusercontent.com/threefoldtech/builders/development/builders/play/tfhub/config.py.sample"
+	r.add_run(cmd: "wget $configurl -O /root/config.py")!
+
 
 
 	r.add_from(image: 'base', alias: 'installer')!
@@ -67,9 +68,10 @@ pub fn build(args docker.BuildArgs) ! {
 	// copy binaries from builder, we don't keep source files
 	r.add_copy(from: "builder", source: "/code/zdb/zdbd/zdb", dest: "/bin/zdb")!
 	r.add_copy(from: "builder", source: "/code/zflist/zflist/zflist", dest: "/bin/zflist")!
+	r.add_copy(from: "builder", source: "/root/config.py", dest: "/root/config.py")!
 
 	// but we need to add runtime libraries dependencies
-	r.add_package(name: "libtar libb2 zlib jansson hiredis sqlite fts snappy curl sqlite-libs")!
+	r.add_package(name: "libtar libb2 zlib jansson hiredis sqlite fts snappy curl sqlite-libs openssl")!
 	
 	r.add_sshserver()!
 
@@ -79,79 +81,70 @@ pub fn build(args docker.BuildArgs) ! {
 	// runtime python dependencies not available via apk
 	r.add_run(cmd: "pip3 install python-jose docker")!
 
-	// create customized config
+	// create customized config not runtime dependant
 	r.add_run(
 		cmd: "
 			cd /code/hub/src
-			cp config.py.sample config.py
-
-			sed -i 's#/opt/0-flist/zflist/zflist#/bin/zflist#g'
-
-			openssl genpkey -algorithm x25519 -out private.key
-			privkey=$(openssl pkey -in private.key -text | xargs | sed -e 's/.*priv\:\(.*\)pub\:.*/\1/' | xxd -r -p | base64)
-	
-
-		"
-	)!
-
-	/*
-	// init script to download bitcoin snapshot
-	r.add_zinit_cmd(
-		name: "zerofs-setup",
-		oneshot: true,
-		exec: "
-		    if ! grep 'vda /mnt ' /proc/mounts; then
-			    echo External disk not mounted correctly >> /errors
-				exit 1
-			fi
-
-			mkdir -p /mnt/cache
-			mkdir -p /mnt/readwrite
-			mkdir -p /mnt/snapshot
-			mkdir -p /mnt/workdir
-
-			if [ ! -f /mnt/bitcoin-snapshot.flist ]; then
-				wget https://btc.grid.tf/snapshots/bitcoin-snapshot-2024-04-07.flist -O /mnt/bitcoin-snapshot.flist
-			fi
-		"
-	)!
-
-	// init script to start rfs with downloaded snapshot and mount it
-	// on the right location
-	r.add_zinit_cmd(
-		name: "zerofs-mount",
-		after: "zerofs-setup",
-		oneshot: true,
-		exec: "
-			rfs --daemon --cache /mnt/cache --storage-url redis://[2001:728:1000:402:70b4:a3ff:fe89:bf13]:9900/604-22888-zdb1 --meta /mnt/bitcoin-snapshot.flist /mnt/snapshot/
+			cp /root/config.py ./config.py
 			
-			mkdir -p /root/.bitcoin
-			mount -t overlay overlay -o lowerdir=/mnt/snapshot,upperdir=/mnt/readwrite,workdir=/mnt/workdir /root/.bitcoin/
+			sed -i 's#ZFLIST-BIN#/bin/zflist#' config.py
 		"
 	)!
 
 	// put back sample config file
 	r.add_zinit_cmd(
-		name: "bitcoind-setup", 
-		after: "zerofs-mount",
+		name: "zdb", 
 		oneshot: true,
 		exec: "
-			cp /root/bitcoin-source.conf /root/.bitcoin/bitcoin.conf
+			zdb --background --protect --admin superadmin
 		"
 	)!
 
+	// generate config from environment
 	r.add_zinit_cmd(
-		name: "bitcoind",
-		after: "bitcoind-setup",
+		name: "hub-config",
+		after: "zdb",
+		oneshot: true,
 		exec: "
-		    if [ -z \$BTCPWD ]; then
-			    BTCPWD=defaultbtc
+			if [ -z \$HUB_HOSTNAME ]; then
+				HUB_HOSTNAME=hub.example.io
 			fi
 
-			bitcoind -rpcbind=:: -rpcallowip=200::/7 -rpcpassword=\$BTCPWD
+			cd /code/hub/src
+
+			rm -f private.key
+			openssl genpkey -algorithm x25519 -out private.key
+
+			privkey=$(openssl pkey -in private.key -text | xargs | sed -e 's/.*priv\:\(.*\)pub\:.*/\1/' | xxd -r -p | base64)
+			seed=$(python -c 'import nacl; from nacl import utils; print(nacl.utils.random(32))' | sed 's/\\/\\\\/g')
+
+			sed -i \"s#THREEBOT-PRIVKEY#\$privkey#\" config.py
+			sed -i \"s/THREEBOT-SEED/\$seed/\" config.py
+			sed -i \"s/THREEBOT-APPID/TEST.TEST/\" config.py
+
+			sed -i 's/BACKEND-INTERNAL-HOST/127.0.0.1/' config.py 
+			sed -i 's/BACKEND-INTERNAL-PORT/9900/' config.py
+			sed -i 's/BACKEND-INTERNAL-PASS/superadmin/' config.py
+			sed -i 's/BACKEND-INTERNAL-NAME/default/' config.py
+
+			sed -i 's/BACKEND-PUBLIC-HOST/no.clue/' config.py
+			sed -i 's/BACKEND-PUBLIC-PORT/9900/' config.py
+			sed -i 's/BACKEND-PUBLIC-NAME/default/' config.py
+
+			sed -i 's#PUBLIC-WEBSITE#http://TEST#' config.py
 		"
 	)!
-	*/
+
+
+	// the hub server process
+	r.add_zinit_cmd(
+		name: "hub",
+		after: "hub-config",
+		exec: "
+		    cd /code/hub/src
+			python flist-uploader.py
+		"
+	)!
 
 	r.build(args.reset)!
 }
