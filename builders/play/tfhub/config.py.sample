@@ -16,24 +16,24 @@ config = {
     ## mode, anybody can delete/change 0-db contents.
     ##
     ## 0-db needs to run in 'user' mode, not sequential.
-    'backend-internal-host': "my-zdb-host",
-    'backend-internal-port': 9900,
-    'backend-internal-pass': '',
-    'backend-internal-name': 'default',
+    'backend-internal-host': "BACKEND-INTERNAL-HOST",
+    'backend-internal-port': BACKEND-INTERNAL-PORT,
+    'backend-internal-pass': 'BACKEND-INTERNAL-PASS',
+    'backend-internal-name': 'BACKEND-INTERNAL-NAME',
 
     ## 0-db public endpoint (host, port), this will be used
     ## to provide user information how to reach the backend
     ## when uploading something, this settings are applied on
     ## flist metadata when used internally and are displayed
     ## on the frontend but are not used for creation
-    'backend-public-host': "hub.tld",
-    'backend-public-port': 9900,
-    'backend-public-name': "default",
+    'backend-public-host': "BACKEND-PUBLIC-HOST",
+    'backend-public-port': BACKEND-PUBLIC-PORT,
+    'backend-public-name': "BACKEND-PUBLIC-NAME",
 
     ## Hub public reachable url
     ## this will be used to provide user an working url
     ## to reach flist files
-    'public-website': "https://hub.tld",
+    'public-website': "PUBLIC-WEBSITE",
 
     ## List of files to ignore inside users directories
     ## when showing users flist, we list the contents of the
@@ -60,7 +60,7 @@ config = {
     ## If you have a debug version of zflist, it will print
     ## extra debug information and json won't be parsed
     ## correctly
-    'zflist-bin': '/opt/0-flist/zflist/zflist',
+    'zflist-bin': 'ZFLIST-BIN',
 
     ## You can specify a special userdata (list of users
     ## directories) and workdir (temporary directories where
@@ -135,9 +135,9 @@ config = {
     ##
     ## Or the one-liner:
     ##   python -c "import nacl; from nacl import utils; print(nacl.utils.random(32))"
-    'threebot-privatekey': '',
+    'threebot-privatekey': 'THREEBOT-PRIVKEY',
     'threebot-appid': 'hub.tld',
-    'threebot-seed': b'',
+    'threebot-seed': THREEBOT-SEED,
 
     ## When using authentication, there is also possible to hard code
     ## a 'guest' token, this token will be matched like an itsyou.online
