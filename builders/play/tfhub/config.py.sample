@@ -136,7 +136,7 @@ config = {
     ## Or the one-liner:
     ##   python -c "import nacl; from nacl import utils; print(nacl.utils.random(32))"
     'threebot-privatekey': 'THREEBOT-PRIVKEY',
-    'threebot-appid': 'hub.tld',
+    'threebot-appid': 'THREEBOT-APPID',
     'threebot-seed': THREEBOT-SEED,
 
     ## When using authentication, there is also possible to hard code
