@@ -11,9 +11,9 @@ To achieve this, here are the steps the builder does:
 - Install `rfs` (formely `0-fs`) to be able to mount an flist inside the VM
 - Download a sample config file for `bitcoin.conf` from this repository
 - Enable SSH server in the image
-- All zinit script needed on runtime to prepare the machine
+- All `zinit` script needed on runtime to prepare the machine
 
-Note: because of a dependency inside `rfs`, the fuse library execute `fusermount` utility with an absolute
+> Note: because of a dependency inside `rfs`, the fuse library execute `fusermount` utility with an absolute
 path: `/usr/bin/fusermount`, by default, on our image, this helper is on `/bin/fusermount`, so we symlink it to make it works.
 
 ## Runtime
@@ -26,7 +26,7 @@ Here are the steps the image does on boot (runtime):
       first ensure that a disk a mounted in it's expected location (`/mnt`) and dire otherwise with an error in `/errors`.
     - The script create needed directories inside `/mnt` if they don't exists
     - The script download a bitcoin chain snapshot and save it inside `/mnt`. Saving it inside `/mnt` is important because
-    if the machine reboot, this file will be persisted and the same file will be reused to mount the base snapshot.
+      if the machine reboot, this file will be persisted and the same file will be reused to mount the base snapshot.
 2. `zerofs-mount`
     - This is where the flist magic happen, we open the snapshot content with `rfs` and expose the read-only filesystem.
     - We then mount the overlayfs inside `/root/.bitcoin` which will be used by `bitcoind` later
