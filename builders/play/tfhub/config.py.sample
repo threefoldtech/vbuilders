@@ -35,6 +35,17 @@ config = {
     ## to reach flist files
     'public-website': "PUBLIC-WEBSITE",
 
+    ## Local address to listen on
+    ## You can restrict ipv4, ipv6 or localhost here
+    ## Using '::' will listen on all address ipv4 and ipv6
+    ## 
+    ## Local port is the listening port, by default 5555
+    ## It's recommended to have a frontend webserver which
+    ## does proxy, like nginx or Caddy and offload TLS in the
+    ## meantime, hub by itself doesn't support SSL/TLS
+    'listen-addr': 'LISTEN-ADDR',
+    'listen-port': LISTEN-PORT,
+
     ## List of files to ignore inside users directories
     ## when showing users flist, we list the contents of the
     ## user directory, it should contains only flists
@@ -171,5 +182,5 @@ config = {
     ##
     ## When debug is set to True, you're in debug mode, when set
     ## to False, you're in release mode
-    'debug': True,
+    'debug': DEBUG-ENABLED,
 }
