@@ -115,8 +115,8 @@ pub fn build(args docker.BuildArgs) ! {
 			rm -f private.key
 			openssl genpkey -algorithm x25519 -out private.key
 
-			privkey=$(openssl pkey -in private.key -text | xargs | sed -e 's/.*priv\:\(.*\)pub\:.*/\1/' | xxd -r -p | base64)
-			seed=$(python -c 'import nacl; from nacl import utils; print(nacl.utils.random(32))' | sed 's/\\/\\\\/g')
+			privkey=\$(openssl pkey -in private.key -text | xargs | sed -e 's/.*priv\\:\\(.*\\)pub\\:.*/\\1/' | xxd -r -p | base64)
+			seed=\$(python -c 'import nacl; from nacl import utils; print(nacl.utils.random(32))' | sed 's/\\\\/\\\\\\\\/g')
 
 			sed -i \"s#THREEBOT-PRIVKEY#\$privkey#\" config.py
 			sed -i \"s/THREEBOT-SEED/\$seed/\" config.py
@@ -130,6 +130,10 @@ pub fn build(args docker.BuildArgs) ! {
 			sed -i 's/BACKEND-PUBLIC-HOST/no.clue/' config.py
 			sed -i 's/BACKEND-PUBLIC-PORT/9900/' config.py
 			sed -i 's/BACKEND-PUBLIC-NAME/default/' config.py
+
+			sed -i 's/LISTEN-ADDR/::/' config.py
+			sed -i 's/LISTEN-PORT/80/' config.py
+			sed -i 's/DEBUG-ENABLED/False/' config.py
 
 			sed -i 's#PUBLIC-WEBSITE#http://TEST#' config.py
 		"
