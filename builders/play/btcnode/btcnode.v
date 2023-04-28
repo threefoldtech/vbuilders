@@ -113,7 +113,11 @@ pub fn build(args docker.BuildArgs) ! {
 			    BTCPWD=defaultbtc
 			fi
 
-			bitcoind -rpcbind=:: -rpcallowip=200::/7 -rpcpassword=\$BTCPWD
+			if [ -z \$BTCUSER ]; then 
+				BTCUSER=user
+			fi
+
+			bitcoind -rpcbind=:: -rpcallowip=200::/7 -rpcpassword=\$BTCPWD -rpcuser=\$BTCUSER
 		"
 	)!
 

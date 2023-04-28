@@ -35,6 +35,7 @@ Here are the steps the image does on boot (runtime):
 4. `bitcoind`
     - Run the actual `bitcoind` daemon. The daemon will only accept connection via **Planetary Network**.
     - The password will be taken from environment variable (`BTCPWD`) or the default one (`defaultbtc`) will be used.
+    - The user will be taken from environment variable (`BTCUSER`) or the default one (`user`) will be used.
 
 ## How to build it
 
@@ -79,6 +80,7 @@ In order to run that Micro VM easily, just go to a grid playground (eg: `play.te
 5. Enable **public IPv6** and **Planetary Network**
 6. In Environment Variables:
     - Add a new `BTCPWD` variable with your desired password
+    - Add a new `BTCUSER` variable with your desired username
 7. Keep your `SSH_KEY` set in order to manage your machine
 8. Add a Disk:
     - Size: at least `50G` (more is better)
@@ -94,10 +96,10 @@ And now:
 
 You can query your bitcoin node remotely via:
 ```sh
-$ bitcoin-cli -rpcconnect=300:bda2:1631:aaf7:960c:2fc5:49b1:6b29 -rpcpassword=custompwd getblockscount
+$ bitcoin-cli -rpcconnect=300:bda2:1631:aaf7:960c:2fc5:49b1:6b29 -rpcpassword=custompwd getblockscount -rpcuser=customuser
 785305
 ```
 
-The `rpcconnect` is the machine Planetary Network address, the `rpcpassword` is your password set via environment variable.
+The `rpcconnect` is the machine Planetary Network address, the `rpcpassword` and rpcuser are the passward and the username you defined via environemnt variable.
 
 That's it !
