@@ -19,7 +19,7 @@ pub fn build(args docker.BuildArgs) ! {
 
 	r.add_run(
 		cmd: '
-		cd /code/web3_proxy
+		cd /code/web3_proxy/server
 		go build .
 		cp server /bin/web3proxy
 		'
