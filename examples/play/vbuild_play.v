@@ -11,12 +11,11 @@ import threefoldtech.builders.core.nodejsbuilder
 import threefoldtech.builders.core.natstools
 import threefoldtech.builders.core.caddy
 import threefoldtech.builders.play.goca
+import threefoldtech.builders.play.web3proxy
 import threefoldtech.builders.tfgrid.dashboard
 // import threefoldtech.builders.tfgrid.playground
 import threefoldtech.builders.tfgrid.tfchainbuilder
 import threefoldtech.builders.tfgrid.gridproxybuilder
-
-
 
 
 fn do() ! {
@@ -46,7 +45,8 @@ fn do() ! {
 	// rustbuilder.build(engine:&engine,reset:args.reset)!
 	// natstools.build(engine:&engine,reset:args.reset)!	
 	// caddy.build(engine:&engine,reset:args.reset)!	
-	goca.build(engine:&engine,reset:reset)!
+	// goca.build(engine:&engine,reset:reset)!
+	web3proxy.build(engine:&engine,reset:true)!
 
 }
 

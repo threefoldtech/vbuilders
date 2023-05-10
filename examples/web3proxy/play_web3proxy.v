@@ -29,7 +29,7 @@ fn do() ! {
 	}
 
 	
-	web3proxy.build(engine:&engine,reset:false)!
+	web3proxy.build(engine:&engine,reset:true)!
 
 }
 
