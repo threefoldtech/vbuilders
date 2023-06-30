@@ -58,7 +58,7 @@ pub fn build(args docker.BuildArgs) ! {
 	r.add_sshserver()!
 
 	// runtime dependencies
-	r.add_package(name: "fuse, libstdc++, libgomp, libstdc++-dev, musl-dev")!
+	r.add_package(name: "fuse, libstdc++, libgomp, libstdc++-dev, musl-dev, jq")!
 
 	// init script to download bitcoin snapshot
 	r.add_zinit_cmd(
@@ -76,7 +76,8 @@ pub fn build(args docker.BuildArgs) ! {
 			mkdir -p /mnt/workdir
 
 			if [ ! -f /mnt/bitcoin-snapshot.flist ]; then
-				wget https://btc.grid.tf/snapshots/bitcoin-snapshot-2024-04-07.flist -O /mnt/bitcoin-snapshot.flist
+				wget -O- https://btc.grid.tf/api/flist/snapshots/bitcoin-snapshot-latest.flist/light | jq -r .target > /mnt/snapshot-link
+				wget https://btc.grid.tf/snapshots/bitcoin-snapshot-latest.flist -O /mnt/bitcoin-snapshot.flist
 			fi
 		"
 	)!
@@ -117,7 +118,7 @@ pub fn build(args docker.BuildArgs) ! {
 				BTCUSER=user
 			fi
 
-			bitcoind -rpcbind=:: -rpcallowip=200::/7 -rpcpassword=\$BTCPWD -rpcuser=\$BTCUSER
+			bitcoind -rpcbind=:: -rpcallowip=200::/7 -rpcpassword=\$BTCPWD -rpcuser=\$BTCUSER -zmqpubhashtx=tcp://[::]:28332 -zmqpubhashblock=tcp://[::]:28333 -zmqpubrawblock=tcp://[::]:28332 -zmqpubrawtx=tcp://[::]:28333
 		"
 	)!
 
