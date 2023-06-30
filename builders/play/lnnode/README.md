@@ -10,10 +10,23 @@ node.
 Here are the steps the image does on boot (runtime):
 
 1. `lnd-setup`
-4. `lnd`
-    - Run the actual `lnd` daemon. The daemon will only accept connection via **Planetary Network**.
-    - The password will be taken from environment variable (`BTCPWD`) or the default one (`defaultbtc`) will be used.
-    - The user will be taken from environment variable (`BTCUSER`) or the default one (`user`) will be used.
+  - Check variable environment
+  - Create a wallet if it doesn't exists
+  - Prepare system environement
+2. `lnd`
+  - Run the actual `lnd` daemon. The daemon will only accept connection via **Planetary Network**.
+  - The password will be taken from environment variable (`BTCPWD`) or the default one (`defaultbtc`) will be used.
+  - The user will be taken from environment variable (`BTCUSER`) or the default one (`user`) will be used.
+
+The location `/safe` contains seed and password. You should mount a disk in order to make this location persistant.
+Otherwise you have to login into the machine and keep this directory safe somewhere. You can run the node without
+a disk mounted, this won't be treated as an issue.
+
+Wallet is automatically created based on password and seed, on runtime.
+
+Note: it seems that `lnd` have some issue parsing IPv6 for some command line arguments, in order to make things
+working and easier to maintain, a fake domain `bitcoind.local` is added into `/etc/hosts` pointing to the bitcoind
+node passed as environment variable.
 
 ## How to build it
 
@@ -74,6 +87,7 @@ And now:
 
 You can query your lnnode node remotely via:
 ```sh
+FIXME
 ```
 
 That's it !
