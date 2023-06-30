@@ -37,7 +37,7 @@ pub fn build(args docker.BuildArgs) ! {
 
 
 	// download sample config file from repository
-	configurl := "https://raw.githubusercontent.com/threefoldtech/builders/development-lnnode/builders/play/lnnode/lnd-default.conf"
+	configurl := "https://raw.githubusercontent.com/threefoldtech/builders/development/builders/play/lnnode/lnd-default.conf"
 	r.add_run(cmd: "wget $configurl -O /root/lnd-source.conf")!
 
 	r.add_from(image: 'base', alias: 'installer')!
