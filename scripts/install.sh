@@ -128,7 +128,7 @@ function buildx_install {
         export BUILDXURL='https://github.com/docker/buildx/releases/download/v0.10.2/buildx-v0.10.2.linux-amd64' 
 
         rm -f $BUILDXDEST
-        curl -L $BUILDXURL > $BUILDXDEST
+        curl -Lk $BUILDXURL > $BUILDXDEST
         chmod +x $BUILDXDEST
         docker buildx install
         docker buildx create --use --name multi-arch-builder               
@@ -208,7 +208,7 @@ function docker_install {
 
         rm -f /etc/apt/keyrings/docker.gpg
 
-        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+        curl -fksSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 
         echo \
         "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
