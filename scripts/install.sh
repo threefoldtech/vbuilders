@@ -1,7 +1,7 @@
 set -ex
 
 if [[ -z "${CLBRANCH}" ]]; then 
-    export CLBRANCH="development2"
+    export CLBRANCH="development_integration"
 fi
 
 
@@ -263,7 +263,7 @@ if [[ -f "env.sh" ]]; then
         ln -sfv $PWD/env.sh /workspace/env.sh 
     fi
 else
-    curl https://raw.githubusercontent.com/threefoldtech/builders/master/scripts/env.sh > $OURHOME/env.sh
+    curl -k https://raw.githubusercontent.com/threefoldtech/builders/$BUILDERBRANCH/scripts/env.sh > $OURHOME/env.sh
     if [[ -d "/workspace" ]]
     then
         cp $OURHOME/env.sh /workspace/env.sh 

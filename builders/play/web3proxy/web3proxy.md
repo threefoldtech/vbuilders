@@ -1,7 +1,7 @@
 
 ## Web 3 proxy
 
-see https://github.com/threefoldtech/web3_proxy/tree/development_check/server
+see https://github.com/threefoldtech/web3_proxy/tree/development/server
 
 ### to play with it manually
 
@@ -16,6 +16,7 @@ docker images
 you should see a web3proxy in the images
 
 ```bash
-docker run --name web3proxy -p 8080:8080 web3proxy:latest
+docker run --name web3proxy -p 8080:8080 -p 8081:8081 web3proxy:latest
 ```
+
 
