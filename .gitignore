@@ -4,7 +4,8 @@ bin/
 .lnddata/
 *.dSYM
 *.log
-
+docs/
+docsv/
 vbuild_base
 vbuild_tfgrid
 vbuild_play

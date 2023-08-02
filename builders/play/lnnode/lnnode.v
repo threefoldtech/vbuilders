@@ -16,45 +16,46 @@ pub fn build(args docker.BuildArgs) ! {
 	// starting from light base image
 	r.add_from(image: 'gobuilder', alias: 'builder')!
 
-	r.add_codeget(url: 'https://github.com/lightningnetwork/lnd', dest: "/code/lnd")!
-	r.add_codeget(url: 'https://github.com/lightninglabs/lndinit', dest: "/code/lndinit")!
-	r.add_package(name: "bash, bison, build-base, curl, linux-headers, make, pkgconf, python3, xz, autoconf, automake, libtool")!
+	r.add_codeget(url: 'https://github.com/lightningnetwork/lnd', dest: '/code/lnd')!
+	r.add_codeget(url: 'https://github.com/lightninglabs/lndinit', dest: '/code/lndinit')!
+	r.add_package(
+		name: 'bash, bison, build-base, curl, linux-headers, make, pkgconf, python3, xz, autoconf, automake, libtool'
+	)!
 
 	// building bitcoin required for musl on alpine
 	r.add_run(
-		cmd: "
+		cmd: '
 			cd /code/lnd
 			make install
-	"
+	'
 	)!
 
 	r.add_run(
-		cmd: "
+		cmd: '
 			cd /code/lndinit
 			make
-	"
+	'
 	)!
 
-
 	// download sample config file from repository
-	configurl := "https://raw.githubusercontent.com/threefoldtech/builders/development/builders/play/lnnode/lnd-default.conf"
-	r.add_run(cmd: "wget $configurl -O /root/lnd-source.conf")!
+	configurl := 'https://raw.githubusercontent.com/threefoldtech/builders/development/builders/play/lnnode/lnd-default.conf'
+	r.add_run(cmd: 'wget ${configurl} -O /root/lnd-source.conf')!
 
 	r.add_from(image: 'base', alias: 'installer')!
-	
-	r.add_copy(from: "builder", source: "/root/lnd-source.conf", dest: "/root/lnd-source.conf")!
-	r.add_copy(from: "builder", source: "/app/bin/lnd", dest: "/bin/lnd")!
-	r.add_copy(from: "builder", source: "/app/bin/lncli", dest: "/bin/lncli")!
-	r.add_copy(from: "builder", source: "/code/lndinit/lndinit-debug", dest: "/bin/lndinit")!
+
+	r.add_copy(from: 'builder', source: '/root/lnd-source.conf', dest: '/root/lnd-source.conf')!
+	r.add_copy(from: 'builder', source: '/app/bin/lnd', dest: '/bin/lnd')!
+	r.add_copy(from: 'builder', source: '/app/bin/lncli', dest: '/bin/lncli')!
+	r.add_copy(from: 'builder', source: '/code/lndinit/lndinit-debug', dest: '/bin/lndinit')!
 
 	r.add_sshserver()!
 
 	// runtime dependencies
-	r.add_package(name: "fuse, libstdc++, libgomp, libstdc++-dev, musl-dev, jq")!
+	r.add_package(name: 'fuse, libstdc++, libgomp, libstdc++-dev, musl-dev, jq')!
 
 	r.add_zinit_cmd(
-		name: "lnd-setup",
-		oneshot: true,
+		name: 'lnd-setup'
+		oneshot: true
 		exec: "
 			if [ -z \$BTCHOST ]; then
 			    echo 'Missing BTCHOST' >> /errors
@@ -86,10 +87,9 @@ pub fn build(args docker.BuildArgs) ! {
 		"
 	)!
 
-
 	r.add_zinit_cmd(
-		name: "lnd",
-		after: "lnd-setup",
+		name: 'lnd'
+		after: 'lnd-setup'
 		exec: "
 			if [ -z \$BTCHOST ]; then
 			    echo 'Missing BTCHOST' >> /errors
