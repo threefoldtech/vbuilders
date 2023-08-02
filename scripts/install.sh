@@ -188,6 +188,8 @@ function v_install {
     fi
     popd "$@" > /dev/null
 
+    v -e "$(curl -fksSL https://raw.githubusercontent.com/v-analyzer/v-analyzer/master/install.vsh)"
+
     if ! [ -x "$(command -v v)" ]; then
     echo 'vlang is not installed.' >&2
     exit 1
