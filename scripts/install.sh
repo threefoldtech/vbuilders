@@ -102,7 +102,7 @@ function gridbuilder_get {
     mkdir -p $DIR_CODE/github/threefoldtech
     if [[ -d "$DIR_CODE/github/threefoldtech/builders" ]]
     then
-        pushd $DIR_CODE/github/threefoldtech/builders 2>&1 >> /dev/null
+        pushd $DIR_CODE/github/threefoldtech/vbuilders 2>&1 >> /dev/null
         git pull
         git checkout $BUILDERBRANCH
         popd 2>&1 >> /dev/null

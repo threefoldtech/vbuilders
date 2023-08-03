@@ -4,8 +4,11 @@ bin/
 .lnddata/
 *.dSYM
 *.log
-
+docs/
+vbuild_all
 vbuild_base
 vbuild_tfgrid
 vbuild_play
 play_goca
+vbuild_threebot
+play_web3proxy

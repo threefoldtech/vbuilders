@@ -1,4 +1,5 @@
-## base image for rust
+## base image 
 
-installs rust development environment, is meant to be a base image for rust for building
+this is the base for each image.
+
 

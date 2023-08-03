@@ -15,6 +15,7 @@ brew install mosh
 ssh root@$SERVER apt update
 ssh root@$SERVER apt install mosh -y
 ssh root@$SERVER locale-gen
+# ssh root@$SERVER locale-gen en_US.UTF-8
 ```
 
 > more info see https://mosh.org/
