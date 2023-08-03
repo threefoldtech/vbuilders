@@ -1,4 +1,3 @@
-
 module web3proxy
 
 import freeflowuniverse.crystallib.docker
@@ -17,9 +16,14 @@ pub fn build(args docker.BuildArgs) ! {
 
 	r.add_from(image: 'gobuilder', alias: 'builder')!
 
-	web3_proxy_branch:='development_v_ui' //branches need to be the same
+	web3_proxy_branch := 'development_v_ui' // branches need to be the same
 
-	r.add_codeget(url: 'https://github.com/threefoldtech/web3_proxy/tree/$web3_proxy_branch/server', dest: '/code/web3_proxy', pull:true,reset:true)!
+	r.add_codeget(
+		url: 'https://github.com/threefoldtech/web3_proxy/tree/${web3_proxy_branch}/server'
+		dest: '/code/web3_proxy'
+		pull: true
+		reset: true
+	)!
 
 	r.add_run(
 		cmd: '
@@ -33,7 +37,10 @@ pub fn build(args docker.BuildArgs) ! {
 
 	r.add_copy(from: 'builder', source: '/bin/web3proxy', dest: '/bin/web3proxy')!
 
-	r.add_codeget(url: 'https://github.com/threefoldtech/web3_proxy/tree/$web3_proxy_branch', dest: '/code/web3_proxy')!
+	r.add_codeget(
+		url: 'https://github.com/threefoldtech/web3_proxy/tree/${web3_proxy_branch}'
+		dest: '/code/web3_proxy'
+	)!
 
 	r.add_run(
 		cmd: '
@@ -43,7 +50,7 @@ pub fn build(args docker.BuildArgs) ! {
 		'
 	)!
 
-	r.add_expose(ports: ['8080','8081'])!
+	r.add_expose(ports: ['8080', '8081'])!
 
 	r.add_zinit_cmd(
 		name: 'web3proxy'
@@ -63,5 +70,4 @@ pub fn build(args docker.BuildArgs) ! {
 	)!
 
 	r.build(args.reset)!
-
 }

@@ -25,24 +25,23 @@ pub fn build(args docker.BuildArgs) ! {
 		cp 3bot /usr/bin/3bot
 		'
 	)!
-    r.add_run(
+	r.add_run(
 		cmd: '
         mkdir -p /var/lib/sftpgo /sftpgo
         cp sftpgo.json /var/lib/sftpgo/
 		'
-    )!
+	)!
 
-    r.add_workdir(workdir: '/var/lib/sftpgo')!
-    r.add_run(cmd: 'git clone https://github.com/freeflowuniverse/aydo /sftpgo')!
-    
-    r.add_expose(ports: ['8080','8060'])!
-	
-    r.add_entrypoint(cmd: '/usr/bin/3bot -sftp-config-dir .')!
+	r.add_workdir(workdir: '/var/lib/sftpgo')!
+	r.add_run(cmd: 'git clone https://github.com/freeflowuniverse/aydo /sftpgo')!
+
+	r.add_expose(ports: ['8080', '8060'])!
+
+	r.add_entrypoint(cmd: '/usr/bin/3bot -sftp-config-dir .')!
 
 	r.build(args.reset)!
 }
 
 fn main() {
-
 	build() or { panic(err) }
 }

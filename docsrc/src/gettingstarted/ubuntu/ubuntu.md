@@ -41,8 +41,8 @@ rm -f /root/env.sh
 #if you want to reset and make sure all is clean (BE CAREFULL WILL REMOVE CODE DIRS)
 export FULLRESET=1
 #the next line is needed if you want to change a branch (first one is for crylstallib, 2nd builders)
-# export CLBRANCH=development2
-# export BUILDERBRANCH=development
+export CLBRANCH=development_integration
+export BUILDERBRANCH=development
 curl https://raw.githubusercontent.com/threefoldtech/builders/development/scripts/install.sh > /tmp/install.sh && bash /tmp/install.sh
 ```
 
@@ -68,7 +68,7 @@ v -cg run /root/code/github/threefoldtech/builders/examples/goca/play_goca.v
 ### to make sure you are using the right branch of crystal and builder tools
 
 ```bash
-export CLBRANCH=development2
+export CLBRANCH=development_integration
 export BUILDERBRANCH=development
 pushd ~/.vmodules/freeflowuniverse/crystallib && git pull && git checkout $CLBRANCH && popd
 pushd ~/.vmodules/threefoldtech/builders && git pull && git checkout $BUILDERBRANCH && popd
