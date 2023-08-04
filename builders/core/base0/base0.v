@@ -26,6 +26,6 @@ pub fn build(args docker.BuildArgs) ! {
 	r.add_file_embedded(source: 'env.sh', dest: '/')!
 
 	r.add_cmd(cmd: '/bin/shell.sh')!
-
 	r.build(args.reset)!
+
 }

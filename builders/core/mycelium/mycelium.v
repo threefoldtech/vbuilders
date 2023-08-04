@@ -20,6 +20,7 @@ pub fn build(args docker.BuildArgs) ! {
 
 	r.add_run(
 		cmd: '
+		source ~/.cargo/env
 		cd /code/mycelium
 		cargo build
 		cp /code/mycelium/target/debug/mycelium /bin/mycelium
