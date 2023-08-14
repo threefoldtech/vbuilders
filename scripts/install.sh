@@ -100,7 +100,7 @@ function crystal_lib_get {
 function gridbuilder_get {
 
     mkdir -p $DIR_CODE/github/threefoldtech
-    if [[ -d "$DIR_CODE/github/threefoldtech/builders" ]]
+    if [[ -d "$DIR_CODE/github/threefoldtech/vbuilders" ]]
     then
         pushd $DIR_CODE/github/threefoldtech/vbuilders 2>&1 >> /dev/null
         git pull
@@ -108,15 +108,15 @@ function gridbuilder_get {
         popd 2>&1 >> /dev/null
     else
         pushd $DIR_CODE/github/threefoldtech 2>&1 >> /dev/null
-        git clone --depth 1 --no-single-branch git@github.com:threefoldtech/builders.git
-        cd builders        
+        git clone --depth 1 --no-single-branch git@github.com:threefoldtech/vbuilders.git
+        cd vbuilders        
         git checkout $BUILDERBRANCH
         popd 2>&1 >> /dev/null
     fi
 
     mkdir -p ~/.vmodules/threefoldtech
     rm -f ~/.vmodules/threefoldtech/builders
-    ln -s ~/code/github/threefoldtech/builders/builders ~/.vmodules/threefoldtech/builders
+    ln -s ~/code/github/threefoldtech/vbuilders/builders ~/.vmodules/threefoldtech/builders
 
 
 }
