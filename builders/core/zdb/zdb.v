@@ -12,7 +12,7 @@ pub fn build(args docker.BuildArgs) ! {
 	// specify we want to build an alpine version
 	mut r := engine.recipe_new(name: 'zdb', platform: .alpine)
 
-	r.add_from(image: 'cbuilder')!
+	r.add_from(image: 'cbuilder',alias: 'builder')!
 	
 	r.add_codeget(url: 'git@github.com:threefoldtech/0-db.git', dest: '/code/zdb')!	
 
@@ -23,18 +23,19 @@ pub fn build(args docker.BuildArgs) ! {
 		# make -C /code/zdb/zdbd release		
 		# make -C /code/zdb/tools release
 		cd  /code/zdb
-		make
+		make release
+		cp /code/zdb/bin/zdb /bin/
 	"
 	)!
 
-	// r.add_from(image: 'base', alias: 'zdb')!
-    // // we are now in phase 2, and start from a clean image, we call this layer 'installer'
-    // //we now add the file as has been build in step one to phase 2
-	// r.add_copy(from:"builder", source:'/bin/mycelium', dest:"/bin/mycelium")!
+	r.add_from(image: 'base', alias: 'zdb')!
+    // we are now in phase 2, and start from a clean image, we call this layer 'installer'
+    //we now add the file as has been build in step one to phase 2
+	r.add_copy(from:"builder", source:'/bin/zdb', dest:"/bin/zdb")!
 
-	r.add_expose(ports:['9651'])!
+	r.add_expose(ports:['9900'])!
 
-	// r.add_zinit_cmd(name:"caddy", exec:"/bin/caddy")!	
+	r.add_zinit_cmd(name:"zdb", exec:"/bin/zdb")!	
 
 
 	r.build(args.reset)!

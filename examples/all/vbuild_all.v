@@ -11,7 +11,7 @@ import threefoldtech.builders.core.zdb
 // import threefoldtech.builders.core.rustbuilder
 // import threefoldtech.builders.core.nodejsbuilder
 // import threefoldtech.builders.core.natstools
-// import threefoldtech.builders.core.caddy
+import threefoldtech.builders.core.caddy
 // import threefoldtech.builders.core.mycelium
 // import threefoldtech.builders.play.goca
 // import threefoldtech.builders.tfgrid.web3proxy
