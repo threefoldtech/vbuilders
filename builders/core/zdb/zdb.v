@@ -39,7 +39,5 @@ pub fn build(args docker.BuildArgs) ! {
 
 	r.add_zinit_cmd(name:"zdb", exec:"/bin/zdb")!	
 
-
 	r.build(args.reset)!
-	
 }

@@ -16,7 +16,15 @@ fn do() ! {
 
 	zdb.build(engine:&engine, reset:true)!
 
-	// TODO: run the container
+	mut env := map[string]string{}
+	env['SSH_AUTH_SOCK'] = '/run/host-services/ssh-auth.sock'
+
+	mut container := engine.container_create(name:"zdb", mounted_volumes: ["/tmp/builder/zdb:/src", "/run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock"],
+				image_repo:"zdb", image_tag:"latest", hostname: "zdb", privileged: true, env: env, command: '')!
+		
+	container.shell(cmd: '/bin/shell.sh')!
+	
+	container.delete()!
 }
 
 fn main() {
