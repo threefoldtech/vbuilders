@@ -1,6 +1,7 @@
 module zdb
 
 import freeflowuniverse.crystallib.docker
+import threefoldtech.builders.core.base
 import threefoldtech.builders.core.cbuilder
 
 pub fn build(args docker.BuildArgs) ! {
@@ -8,11 +9,12 @@ pub fn build(args docker.BuildArgs) ! {
 
 	// make sure dependency has been build
 	cbuilder.build(engine: engine, reset: args.reset, strict: args.strict)!
+	base.build(engine: engine, reset: args.reset, strict: args.strict)!
 
 	// specify we want to build an alpine version
 	mut r := engine.recipe_new(name: 'zdb', platform: .alpine)
 
-	r.add_from(image: 'cbuilder',alias: 'builder')!
+	r.add_from(image: 'cbuilder', alias: 'builder')!
 	
 	r.add_codeget(url: 'git@github.com:threefoldtech/0-db.git', dest: '/code/zdb')!	
 
@@ -36,7 +38,6 @@ pub fn build(args docker.BuildArgs) ! {
 	r.add_expose(ports:['9900'])!
 
 	r.add_zinit_cmd(name:"zdb", exec:"/bin/zdb")!	
-
 
 	r.build(args.reset)!
 }
