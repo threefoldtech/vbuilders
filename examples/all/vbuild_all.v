@@ -9,7 +9,7 @@ import freeflowuniverse.crystallib.docker
 // import threefoldtech.builders.tfgrid.tfhub
 // import threefoldtech.builders.core.gobuilder
 // import threefoldtech.builders.core.vbuilder
-import threefoldtech.builders.core.rustbuilder
+// import threefoldtech.builders.core.rustbuilder
 // import threefoldtech.builders.core.nodejsbuilder
 // import threefoldtech.builders.core.natstools
 // import threefoldtech.builders.core.caddy
@@ -21,12 +21,16 @@ import threefoldtech.builders.core.rustbuilder
 // import threefoldtech.builders.tfgrid.tfchainbuilder
 // import threefoldtech.builders.tfgrid.gridproxybuilder
 // import threefoldtech.builders.play.sonicsearch
-import threefoldtech.builders.play.mdbook
+// import threefoldtech.builders.play.mdbook
+// import threefoldtech.builders.core.syncthing
+// import threefoldtech.builders.core.coredns
+// import threefoldtech.builders.play.zola
+import threefoldtech.builders.tfgrid.web3gwdev
 
 
 fn do() ! {
 
-	reset:=false
+	// reset:=false
 
 	mut engine := docker.new()!
 
@@ -45,7 +49,12 @@ fn do() ! {
 
 	// mycelium.build(engine:&engine,reset:true)!
 	// sonicsearch.build(engine:&engine,reset:true)!
-	mdbook.build(engine:&engine,reset:true)!
+	// mdbook.build(engine:&engine,reset:true)!
+	// syncthing.build(engine:&engine,reset:true)!
+	// coredns.build(engine:&engine,reset:true)!
+	// zola.build(engine:&engine,reset:true)!
+	web3gwdev.build(engine:&engine,reset:true)!
+	
 
 }
 

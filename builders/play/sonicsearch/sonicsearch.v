@@ -16,7 +16,6 @@ pub fn build(args docker.BuildArgs) ! {
 
 	r.add_from(image: 'rustbuilder', alias: 'builder')!
 
-	apk add llvm16-dev
 	r.add_package(name: 'llvm16-dev, libc6-compat, g++, cmake, make, libc-dev, clang16-libclang')!
 
 	r.add_rustbuild_from_code(url: 'https://github.com/valeriansaliou/sonic', name: 'sonicsearch', debug:true)!	

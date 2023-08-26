@@ -16,6 +16,6 @@ pub fn build(args docker.BuildArgs) ! {
 
 	r.add_from(image: 'base')!
 	r.add_gobuilder()!
-
+	r.add_zinit()!	
 	r.build(args.reset)!
 }

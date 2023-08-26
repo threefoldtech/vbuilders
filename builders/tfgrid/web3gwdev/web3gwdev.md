@@ -1,7 +1,7 @@
 
-## Web 3 proxy
+## Web 3 Gateway Development
 
-see https://github.com/threefoldtech/web3_proxy/tree/development/server
+see https://github.com/threefoldtech/3bot/tree/development_integration/web3gw/server
 
 ### to play with it manually
 

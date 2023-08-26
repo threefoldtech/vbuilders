@@ -1,4 +1,4 @@
-module web3proxy
+module web3gwdev
 
 import freeflowuniverse.crystallib.docker
 import threefoldtech.builders.core.gobuilder
@@ -12,30 +12,23 @@ pub fn build(args docker.BuildArgs) ! {
 	vbuilder.build(engine: engine, reset: false, strict: args.strict)!
 
 	// specify we want to build an alpine version
-	mut r := engine.recipe_new(name: 'web3proxy', platform: .alpine)
+	mut r := engine.recipe_new(name: 'web3gwdev', platform: .alpine)
 
 	r.add_from(image: 'gobuilder', alias: 'builder')!
 
 	web3_proxy_branch := 'development_v_ui' // branches need to be the same
 
-	r.add_codeget(
+	r.add_gobuild_from_code(
 		url: 'https://github.com/threefoldtech/web3_proxy/tree/${web3_proxy_branch}/server'
-		dest: '/code/web3_proxy'
-		pull: true
-		reset: true
-	)!
+		name:"web3gw"
+		buildcmd:"go build ."
+		copycmd:"cp server /bin/web3gw"
+	)!	
 
-	r.add_run(
-		cmd: '
-		cd /code/web3_proxy
-		go build .
-		cp server /bin/web3proxy
-		'
-	)!
 
 	r.add_from(image: 'vbuilder', alias: 'installer')!
 
-	r.add_copy(from: 'builder', source: '/bin/web3proxy', dest: '/bin/web3proxy')!
+	r.add_copy(from: 'builder', source: '/bin/web3gwdev', dest: '/bin/web3gwdev')!
 
 	r.add_codeget(
 		url: 'https://github.com/threefoldtech/web3_proxy/tree/${web3_proxy_branch}'
@@ -53,10 +46,10 @@ pub fn build(args docker.BuildArgs) ! {
 	r.add_expose(ports: ['8080', '8081'])!
 
 	r.add_zinit_cmd(
-		name: 'web3proxy'
+		name: 'web3gwdev'
 		exec: '
-				echo we did it, web3proxy is there
-				/bin/web3proxy
+				echo we did it, web3gwdev is there
+				/bin/web3gwdev
 			'
 	)!
 

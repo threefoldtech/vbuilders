@@ -18,8 +18,6 @@ pub fn build(args docker.BuildArgs) ! {
 
 	r.add_rust_package(name:"mdbook, mdbook-echarts, mdbook-mermaid")!
 
-	// r.add_rust_package(name:"mdbook-plantuml")!
-
 	r.add_download(url:'https://cdnjs.cloudflare.com/ajax/libs/echarts/5.4.3/@name',
 			name:'echarts.min.js'
 			reset:false
@@ -28,11 +26,19 @@ pub fn build(args docker.BuildArgs) ! {
 			maxsize_kb:2000
 		)!
 
+	r.add_run(cmd: '
+		source ~/.cargo/env
+		cargo install mdbook-plantuml --no-default-features --features plantuml-server
+		')!	
 
-	// r.add_from(image: 'base', alias: 'installer')!
+	r.add_from(image: 'base', alias: 'installer')!
     // we are now in phase 2, and start from a clean image, we call this layer 'installer'
-    //we now add the file as has been build in step one to phase 2
-	// r.add_copy(from:"builder", source:'/bin/mdbook', dest:"/bin/mdbook")!
+    // we now add the file as has been build in step one to phase 2
+	r.add_copy(from:"builder", source:'/root/.cargo/bin/mdbook', dest:"/bin/mdbook")!
+	r.add_copy(from:"builder", source:'/root/.cargo/bin/mdbook-echarts', dest:"/bin/mdbook-echarts")!
+	r.add_copy(from:"builder", source:'/root/.cargo/bin/mdbook-mermaid', dest:"/bin/mdbook-mermaid")!
+	r.add_copy(from:"builder", source:'/root/.cargo/bin/mdbook-plantuml', dest:"/bin/mdbook-plantuml")!
+	r.add_copy(from:"builder", source:'/assets/echarts.min.js', dest:"/assets/echarts.min.js")!
 
 	// r.add_expose(ports:['9651'])!
 

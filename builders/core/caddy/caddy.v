@@ -7,7 +7,7 @@ pub fn build(args docker.BuildArgs) ! {
 	mut engine := args.engine
 
 	// make sure dependency has been build
-	gobuilder.build(engine: engine, reset: args.reset, strict: args.strict)!
+	gobuilder.build(engine: engine)!
 
 	// specify we want to build an alpine version
 	mut r := engine.recipe_new(name: 'caddy', platform: .alpine)
