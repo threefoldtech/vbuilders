@@ -13,7 +13,7 @@ pub fn build(args docker.BuildArgs) ! {
 	mut r := engine.recipe_new(name: 'tfhub', platform: .alpine)
 
 	// starting from light base image
-	r.add_from(image: 'base', alias: 'builder')!
+	r.add_from(image: 'cbuilder', alias: 'builder')!
 
 	deps := 'alpine-sdk git autoconf automake libtool libtar-dev zlib-dev jansson-dev capnproto-dev hiredis-dev sqlite-dev libb2-dev fts musl-fts-dev linux-headers snappy-dev curl-dev'
 

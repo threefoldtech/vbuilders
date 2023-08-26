@@ -5,7 +5,8 @@ module main
 import freeflowuniverse.crystallib.docker
 
 // import threefoldtech.builders.core.base0
-import threefoldtech.builders.core.zdb
+// import threefoldtech.builders.core.zdb
+import threefoldtech.builders.tfgrid.tfhub
 // import threefoldtech.builders.core.gobuilder
 // import threefoldtech.builders.core.vbuilder
 // import threefoldtech.builders.core.rustbuilder
@@ -27,7 +28,8 @@ fn do() ! {
 
 	mut engine := docker.new()!
 
-	zdb.build(engine:&engine,reset:reset)!
+	// zdb.build(engine:&engine,reset:reset)!
+	tfhub.build(engine:&engine,reset:reset)!
 	
 	// gobuilder.build(engine:&engine,reset:reset)!
 	// nodejsbuilder.build(engine:&engine,reset:reset)!
