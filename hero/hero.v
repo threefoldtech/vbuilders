@@ -53,11 +53,11 @@ fn main() {
 
 
 	//code mgmt
-	mut getexamples_cmd := Command{
-		name: 'getstarted'
-		description: 'get the examples'
-		execute: get_examples
-	}
+	// mut getexamples_cmd := Command{
+	// 	name: 'getstarted'
+	// 	description: 'get the examples'
+	// 	execute: get_examples
+	// }
 	// docgen_cmd.add_flag(Flag{
 	// 	flag: .bool
 	// 	required: false
