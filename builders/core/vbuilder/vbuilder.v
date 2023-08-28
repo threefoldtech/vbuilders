@@ -15,7 +15,7 @@ pub fn build(args docker.BuildArgs) ! {
 	r.add_from(image: 'cbuilder')!
 	r.add_vbuilder()!
 
-	r.add_zinit()!		
+	r.add_zinit()!
 
 	r.build(args.reset)!
 }

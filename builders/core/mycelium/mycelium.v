@@ -16,7 +16,7 @@ pub fn build(args docker.BuildArgs) ! {
 
 	r.add_from(image: 'rustbuilder', alias: 'builder')!
 
-	r.add_codeget(url: 'git@github.com:threefoldtech/mycelium.git', dest: '/code/mycelium')!	
+	r.add_codeget(url: 'git@github.com:threefoldtech/mycelium.git', dest: '/code/mycelium')!
 
 	r.add_run(
 		cmd: '
@@ -27,13 +27,12 @@ pub fn build(args docker.BuildArgs) ! {
 	'
 	)!
 
-
 	r.add_from(image: 'base', alias: 'installer')!
-    // we are now in phase 2, and start from a clean image, we call this layer 'installer'
-    //we now add the file as has been build in step one to phase 2
-	r.add_copy(from:"builder", source:'/bin/mycelium', dest:"/bin/mycelium")!
+	// we are now in phase 2, and start from a clean image, we call this layer 'installer'
+	// we now add the file as has been build in step one to phase 2
+	r.add_copy(from: 'builder', source: '/bin/mycelium', dest: '/bin/mycelium')!
 
-	r.add_expose(ports:['9651'])!
+	r.add_expose(ports: ['9651'])!
 
 	// r.add_zinit_cmd(name:"caddy", exec:"/bin/caddy")!	
 

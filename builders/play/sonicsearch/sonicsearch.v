@@ -18,12 +18,15 @@ pub fn build(args docker.BuildArgs) ! {
 
 	r.add_package(name: 'llvm16-dev, libc6-compat, g++, cmake, make, libc-dev, clang16-libclang')!
 
-	r.add_rustbuild_from_code(url: 'https://github.com/valeriansaliou/sonic', name: 'sonicsearch', debug:true)!	
-
+	r.add_rustbuild_from_code(
+		url: 'https://github.com/valeriansaliou/sonic'
+		name: 'sonicsearch'
+		debug: true
+	)!
 
 	// r.add_from(image: 'base', alias: 'installer')!
-    // we are now in phase 2, and start from a clean image, we call this layer 'installer'
-    //we now add the file as has been build in step one to phase 2
+	// we are now in phase 2, and start from a clean image, we call this layer 'installer'
+	// we now add the file as has been build in step one to phase 2
 	// r.add_copy(from:"builder", source:'/bin/sonicsearch', dest:"/bin/sonicsearch")!
 
 	// r.add_expose(ports:['9651'])!

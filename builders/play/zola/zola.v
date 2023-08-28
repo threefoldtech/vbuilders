@@ -16,15 +16,15 @@ pub fn build(args docker.BuildArgs) ! {
 
 	r.add_from(image: 'rustbuilder', alias: 'builder')!
 
-
-	r.add_rustbuild_from_code(url: 'https://github.com/getzola/zola', name: 'zola', 
-		buildcmd:'cargo install --path . --locked',
-		copycmd:'cp target/release/zola /bin/zola')!	
-
+	r.add_rustbuild_from_code(
+		url: 'https://github.com/getzola/zola'
+		name: 'zola'
+		buildcmd: 'cargo install --path . --locked'
+		copycmd: 'cp target/release/zola /bin/zola'
+	)!
 
 	r.add_from(image: 'base', alias: 'installer')!
-	r.add_copy(from:"builder", source:'/bin/zola', dest:"/bin/zola")!
-
+	r.add_copy(from: 'builder', source: '/bin/zola', dest: '/bin/zola')!
 
 	// r.add_expose(ports:['9651'])!
 
@@ -32,5 +32,3 @@ pub fn build(args docker.BuildArgs) ! {
 
 	r.build(args.reset)!
 }
-
-
