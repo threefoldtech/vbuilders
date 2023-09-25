@@ -333,7 +333,7 @@ fi
 # clear
 # ct_help
 
-cp /root/code/github/threefoldtech/builders/scripts/vrun /usr/local/bin
+cp /root/code/github/threefoldtech/vbuilders/scripts/vrun /usr/local/bin/
 chmod 770  /usr/local/bin/vrun
 
 pushd ~/.vmodules/freeflowuniverse/crystallib
