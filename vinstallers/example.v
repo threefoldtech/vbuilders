@@ -2,7 +2,9 @@ module main
 
 
 import freeflowuniverse.crystallib.installers.caddy
+import freeflowuniverse.crystallib.installers.rust
 import freeflowuniverse.crystallib.installers.postgresql
+import freeflowuniverse.crystallib.installers.fungistor
 import freeflowuniverse.crystallib.tmux
 import os
 
@@ -33,10 +35,15 @@ fn do() ! {
 
 	t.window_new(name: 'mc', cmd: 'mc', reset: true)!	 //launch a window with mc
 
-	caddy.install(reset:true)! //will get the binary and put in /usr/local/bin
+	caddy.install(reset:false)! //will get the binary and put in /usr/local/bin
 	caddy.configuration_set(path:"${configpath}/Caddyfile",restart:true)!
 
-	mut db:=postgresql.new(passwd:'meet007',reset:true)!
+	// mut db:=postgresql.new(passwd:'zanzibar7',reset:true)!
+
+	rust.install()!
+	//to use do: source $HOME/.cargo/env
+
+	fungistor.install()!
 
 
 
