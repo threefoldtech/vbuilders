@@ -22,5 +22,14 @@ curl https://raw.githubusercontent.com/threefoldtech/vbuilders/development/scrip
 bash /tmp/install.sh
 ```
 
+## Example 
 
+```bash
+#go to branch of kristof for now
+cd ~/code/github/freeflowuniverse/crystallib
+git checkout development_kristof 
+git pull
+#example installers for caddy, ...
+vrun ~/code/github/threefoldtech/vbuilders/vinstallers/example.v
+```
 
