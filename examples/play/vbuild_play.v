@@ -11,6 +11,7 @@ import threefoldtech.builders.core.nodejsbuilder
 import threefoldtech.builders.core.natstools
 import threefoldtech.builders.core.caddy
 import threefoldtech.builders.play.goca
+import threefoldtech.builders.play.sftpgo
 import threefoldtech.builders.play.web3proxy
 import threefoldtech.builders.tfgrid.dashboard
 // import threefoldtech.builders.tfgrid.playground
@@ -46,6 +47,7 @@ fn do() ! {
 	// natstools.build(engine:&engine,reset:args.reset)!	
 	// caddy.build(engine:&engine,reset:args.reset)!	
 	// goca.build(engine:&engine,reset:reset)!
+	// sftpgo.build(engine:&engine,reset:true)!
 	web3proxy.build(engine:&engine,reset:true)!
 
 }

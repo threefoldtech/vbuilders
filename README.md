@@ -22,7 +22,7 @@ curl https://raw.githubusercontent.com/threefoldtech/vbuilders/development/scrip
 bash /tmp/install.sh
 ```
 
-## Example 
+## Example
 
 ```bash
 #go to branch of kristof for now

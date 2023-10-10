@@ -81,13 +81,13 @@ function crystal_lib_get {
     then
         pushd $DIR_CODE/github/freeflowuniverse/crystallib 2>&1 >> /dev/null
         git pull
-        git checkout $CLBRANCH
+        git checkout $BUILDERBRANCH
         popd 2>&1 >> /dev/null
     else
         pushd $DIR_CODE/github/freeflowuniverse 2>&1 >> /dev/null
         git clone --depth 1 --no-single-branch git@github.com:freeflowuniverse/crystallib.git
         cd crystallib
-        git checkout $CLBRANCH
+        git checkout $BUILDERBRANCH
         popd 2>&1 >> /dev/null
     fi
     mkdir -p ~/.vmodules/freeflowuniverse
