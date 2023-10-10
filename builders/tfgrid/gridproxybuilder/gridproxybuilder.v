@@ -1,6 +1,6 @@
 module gridproxybuilder
 
-import freeflowuniverse.crystallib.docker
+import freeflowuniverse.crystallib.osal.docker
 import threefoldtech.builders.core.gobuilder
 
 pub fn build(args docker.BuildArgs) ! {

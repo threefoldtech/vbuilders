@@ -1,6 +1,6 @@
 module zola
 
-import freeflowuniverse.crystallib.docker
+import freeflowuniverse.crystallib.osal.docker
 import threefoldtech.builders.core.rustbuilder
 
 pub fn build(args docker.BuildArgs) ! {

@@ -10,7 +10,7 @@ installs rust development environment, is meant to be a base image for rust for 
 ```go
 module mycelium
 
-import freeflowuniverse.crystallib.docker
+import freeflowuniverse.crystallib.osal.docker
 import threefoldtech.builders.core.rustbuilder
 
 pub fn build(args docker.BuildArgs) ! {

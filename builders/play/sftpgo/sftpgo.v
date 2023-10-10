@@ -1,6 +1,6 @@
 module sftpgo
 
-import freeflowuniverse.crystallib.docker
+import freeflowuniverse.crystallib.osal.docker
 
 pub fn build(args docker.BuildArgs) ! {
 	mut engine := args.engine

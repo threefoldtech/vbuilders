@@ -1,6 +1,6 @@
 module zdb
 
-import freeflowuniverse.crystallib.docker
+import freeflowuniverse.crystallib.osal.docker
 import threefoldtech.builders.core.base
 import threefoldtech.builders.core.cbuilder
 

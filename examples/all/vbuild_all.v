@@ -2,7 +2,7 @@
 module main
 
 
-import freeflowuniverse.crystallib.docker
+import freeflowuniverse.crystallib.osal.docker
 
 // import threefoldtech.builders.core.base0
 // import threefoldtech.builders.core.zdb
@@ -22,6 +22,7 @@ import freeflowuniverse.crystallib.docker
 // import threefoldtech.builders.tfgrid.gridproxybuilder
 // import threefoldtech.builders.play.sonicsearch
 // import threefoldtech.builders.play.mdbook
+// import threefoldtech.builders.play.sftpgo
 // import threefoldtech.builders.core.syncthing
 // import threefoldtech.builders.core.coredns
 // import threefoldtech.builders.play.zola
@@ -53,6 +54,7 @@ fn do() ! {
 	// syncthing.build(engine:&engine,reset:true)!
 	// coredns.build(engine:&engine,reset:true)!
 	// zola.build(engine:&engine,reset:true)!
+	// sftpgo.build(engine:&engine,reset:true)!
 	web3gwdev.build(engine:&engine,reset:true)!
 	
 

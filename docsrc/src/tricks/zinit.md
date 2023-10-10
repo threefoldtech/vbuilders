@@ -5,7 +5,7 @@ Zinit is our own init manager from ZOS
 ```golang
 module goca
 
-import freeflowuniverse.crystallib.docker
+import freeflowuniverse.crystallib.osal.docker
 import threefoldtech.vbuilder.core.gobuilder
 
 pub fn build(args docker.BuildArgs) ! {

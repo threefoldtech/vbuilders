@@ -1,6 +1,6 @@
 module rust0
 
-import freeflowuniverse.crystallib.docker
+import freeflowuniverse.crystallib.osal.docker
 import threefoldtech.builders.core.base
 
 const rustversion = '1.72.0'
