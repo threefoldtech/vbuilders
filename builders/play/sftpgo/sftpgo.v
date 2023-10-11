@@ -7,11 +7,10 @@ pub fn build(args docker.BuildArgs) ! {
 
 	println(' - build sftpgo: reset:${args.reset}')
 
-	mut r := engine.recipe_new(name: '3bot', platform: .alpine)
+	mut r := engine.recipe_new(name: 'sftpgo', platform: .alpine)
 
-	r.add_from(image: 'golang', tag: '1.20-bullseye')!
+	r.add_from(image: 'golang', tag: '1.20-bullseye', alias: "aydo-builder")!
 
-	r.add_run(cmd: 'apk add git')!
 	r.add_run(
 		cmd: '
 		git clone https://github.com/freeflowuniverse/aydo.git /aydo
@@ -20,18 +19,28 @@ pub fn build(args docker.BuildArgs) ! {
 	'
 	)!
 
+	configurl := 'https://raw.githubusercontent.com/threefoldtech/tf-images/development/tfgrid3/aydo'
+	r.add_run(cmd: 'wget ${configurl}/ds.conf.tmpl -O /root/ds.conf.tmpl')!
+	r.add_run(cmd: '
+	mkdir /root/sftpgo
+	mkdir /root/zinit
+	')!
+	r.add_run(cmd: 'wget ${configurl}/sftpgo/sftpgo.json -O /root/sftpgo/sftpgo.json')!
+	r.add_run(cmd: 'wget ${configurl}/zinit/onlyoffice.yaml -O /root/zinit/onlyoffice.yaml')!
+	r.add_run(cmd: 'wget ${configurl}/zinit/sftpgo.yaml -O /root/zinit/sftpgo.yaml')!
+	r.add_run(cmd: 'wget ${configurl}/zinit/sshd.yaml -O /root/zinit/sshd.yaml')!
+	r.add_run(cmd: 'wget ${configurl}/zinit/sshkey.yaml -O /root/zinit/sshkey.yaml')!
+
 	r.add_from(image: 'onlyoffice/documentserver', tag: '7.3')!
-	r.add_run(
-		cmd: '
-		cp zinit /etc/zinit
-		cp sftpgo /var/lib/sftpgo
-		cp ds.conf.tmpl /etc/onlyoffice/documentserver/nginx/ds.conf.tmpl
-		cp /aydo/sftpgo /usr/bin/
-		cp /aydo/templates /usr/share/sftpgo/templates
-		cp /aydo/static /usr/share/sftpgo/static
-		cp /aydo/openapi /usr/share/sftpgo/openapi
-	'
-	)!
+
+	r.add_copy(from: "aydo-builder", source: "/root/zinit", dest: "/etc/zinit")!
+	r.add_copy(from: "aydo-builder", source: "/root/sftpgo/sftpgo.json", dest: "/var/lib/sftpgo/sftpgo.json")!
+	r.add_copy(from: "aydo-builder", source: "/root/ds.conf.tmpl", dest: "/etc/onlyoffice/documentserver/nginx/ds.conf.tmpl")!
+
+	r.add_copy(from: "aydo-builder", source: "/aydo/sftpgo", dest: "/usr/bin/")!
+	r.add_copy(from: "aydo-builder", source: "/aydo/templates", dest: "/usr/share/sftpgo/templates")!
+	r.add_copy(from: "aydo-builder", source: "/aydo/static", dest: "/usr/share/sftpgo/static")!
+	r.add_copy(from: "aydo-builder", source: "/aydo/openapi", dest: "/usr/share/sftpgo/openapi")!
 
 	r.add_run(
 		cmd: '
