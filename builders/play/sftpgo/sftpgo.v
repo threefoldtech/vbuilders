@@ -11,10 +11,9 @@ pub fn build(args docker.BuildArgs) ! {
 
 	r.add_from(image: 'golang', tag: '1.20-bullseye', alias: "aydo-builder")!
 
-	r.add_codeget(url: 'https://github.com/freeflowuniverse/aydo', dest: '/aydo')!
-
 	r.add_run(
 		cmd: '
+		git clone https://github.com/freeflowuniverse/aydo.git /aydo
 		cd /aydo 
     go build -o sftpgo
 	'
@@ -57,8 +56,8 @@ pub fn build(args docker.BuildArgs) ! {
 		name: 'sftpgo',
 		exec: "
 			export PUB_IP=$(dig +short txt ch whoami.cloudflare @1.0.0.1 | awk -F'\"' '{ print $2}')
-			export SFTP_SERVER_ADDR=http://$PUB_IP:80
-			export ONLYOFFICE_SERVER_ADDR=http://$PUB_IP:4000
+			export SFTP_SERVER_ADDR=http://\$PUB_IP:80
+			export ONLYOFFICE_SERVER_ADDR=http://\$PUB_IP:4000
 			export SFTPGO_DEFAULT_ADMIN_USERNAME=admin
   		export SFTPGO_DEFAULT_ADMIN_PASSWORD=admin
 			exec /usr/bin/sftpgo serve -c /var/lib/sftpgo
