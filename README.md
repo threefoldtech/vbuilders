@@ -12,6 +12,8 @@ Our requirements
 
 Documentation on https://threefoldtech.github.io/builders
 
+> there are a lot of docker examples in https://github.com/threefoldtech/tf-images, look for inspiration there before creating the vbuilders
+
 
 ## Get started with crystallib & builders
 
@@ -27,8 +29,6 @@ bash /tmp/install.sh
 ```bash
 #go to branch of kristof for now
 cd ~/code/github/freeflowuniverse/crystallib
-git checkout development_kristof 
-git pull
 #example installers for caddy, ...
 vrun ~/code/github/threefoldtech/vbuilders/vinstallers/example.v
 ```
