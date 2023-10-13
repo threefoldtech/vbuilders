@@ -20,11 +20,10 @@ pub fn build(args docker.BuildArgs) ! {
 
 	r.add_gobuild_from_code(
 		url: 'https://github.com/threefoldtech/web3_proxy/tree/${web3_proxy_branch}/server'
-		name:"web3gw"
-		buildcmd:"go build ."
-		copycmd:"cp server /bin/web3gw"
-	)!	
-
+		name: 'web3gw'
+		buildcmd: 'go build .'
+		copycmd: 'cp server /bin/web3gw'
+	)!
 
 	r.add_from(image: 'vbuilder', alias: 'installer')!
 

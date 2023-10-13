@@ -14,18 +14,19 @@ pub fn build(args docker.BuildArgs) ! {
 
 	r.files << $embed_file('templates/coredns_start.sh')
 
-	r.add_from(image: 'gobuilder', alias: 'builder')!	
+	r.add_from(image: 'gobuilder', alias: 'builder')!
 
 	r.add_package(name: 'make')!
 
-	r.add_gobuild_from_code(url:"https://github.com/coredns/coredns",
-		name:"coredns",
-		buildcmd:"make"
-		copycmd:"cp coredns /bin/coredns"
-		)!
+	r.add_gobuild_from_code(
+		url: 'https://github.com/coredns/coredns'
+		name: 'coredns'
+		buildcmd: 'make'
+		copycmd: 'cp coredns /bin/coredns'
+	)!
 
 	r.add_from(image: 'base', alias: 'installer')!
-	r.add_copy(from:"builder", source:"/bin/coredns", dest:"/bin/coredns")!
+	r.add_copy(from: 'builder', source: '/bin/coredns', dest: '/bin/coredns')!
 
 	// r.add_expose(ports:['8384'])!
 

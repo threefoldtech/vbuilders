@@ -14,14 +14,16 @@ pub fn build(args docker.BuildArgs) ! {
 
 	r.files << $embed_file('templates/syncthing_start.sh')
 
-	r.add_from(image: 'gobuilder', alias: 'builder')!	
+	r.add_from(image: 'gobuilder', alias: 'builder')!
 
-	r.add_gobuild_from_code(url:"https://github.com/syncthing/syncthing/tree/v1.24.0-rc.1",
-		name:"syncthing",
-		buildcmd:"go run build.go",
-		copycmd:"cp bin/syncthing /bin/syncthing")!
+	r.add_gobuild_from_code(
+		url: 'https://github.com/syncthing/syncthing/tree/v1.24.0-rc.1'
+		name: 'syncthing'
+		buildcmd: 'go run build.go'
+		copycmd: 'cp bin/syncthing /bin/syncthing'
+	)!
 
-// buildcmd:"go run build.go --with-next-gen-gui",
+	// buildcmd:"go run build.go --with-next-gen-gui",
 
 	// r.add_run(
 	// 	cmd: '
@@ -30,17 +32,16 @@ pub fn build(args docker.BuildArgs) ! {
 	// '
 	// )!
 
-
 	r.add_from(image: 'base', alias: 'installer')!
-    // // we are now in phase 2, and start from a clean image, we call this layer 'installer'
-    // //we now add the file as has been build in step one to phase 2
-	r.add_copy(from:"builder", source:"/bin/syncthing", dest:"/bin/syncthing")!
+	// // we are now in phase 2, and start from a clean image, we call this layer 'installer'
+	// //we now add the file as has been build in step one to phase 2
+	r.add_copy(from: 'builder', source: '/bin/syncthing', dest: '/bin/syncthing')!
 
-	r.add_expose(ports:['8384'])!
+	r.add_expose(ports: ['8384'])!
 
 	r.add_file_embedded(source: 'syncthing_start.sh', dest: '/bin/syncthing_start.sh')!
 
-	r.add_zinit_cmd(name:"syncthing", exec:"/bin/syncthing_start.sh")!	
+	r.add_zinit_cmd(name: 'syncthing', exec: '/bin/syncthing_start.sh')!
 
 	r.build(args.reset)!
 }

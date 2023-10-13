@@ -168,7 +168,7 @@ function v_install {
         pushd $DIR_CODE_INT
         sudo rm -rf $DIR_CODE_INT/v
         if [[ "$OSTYPE" == "linux-gnu"* ]]; then 
-            os_package_install "libgc-dev gcc make"
+            os_package_install "libgc-dev gcc make libpq-dev"
         elif [[ "$OSTYPE" == "darwin"* ]]; then
             brew install bdw-gc
         else
@@ -332,6 +332,11 @@ fi
 # build
 # clear
 # ct_help
+
+tmux ls
+
+cp /root/code/github/threefoldtech/vbuilders/scripts/vrun /usr/local/bin/
+chmod 770  /usr/local/bin/vrun
 
 pushd ~/.vmodules/freeflowuniverse/crystallib
 git status

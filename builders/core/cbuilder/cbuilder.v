@@ -15,10 +15,10 @@ pub fn build(args docker.BuildArgs) ! {
 	mut r := engine.recipe_new(name: 'cbuilder', platform: .alpine)
 
 	r.add_from(image: 'base0')!
-	
+
 	r.add_package(name: 'git, musl-dev, clang, gcc, make')!
 
-	r.add_zinit()!	
-	
+	r.add_zinit()!
+
 	r.build(args.reset)!
 }

@@ -1,0 +1,51 @@
+https://git.meet.tf {
+    tls info@incubaid.com
+	encode gzip
+    reverse_proxy {$HOST}:3000
+}
+
+https://trigger.meet.tf {
+    respond "Hello, World!"
+}
+
+# https://id.meet.tf {
+#     tls info@incubaid.com
+#     reverse_proxy h2c://{$HOST}:8080
+#     tls internal #only non production    
+# }
+
+
+# https://tftechvote.meet.tf {
+#     tls info@incubaid.com
+#     reverse_proxy localhost:8081
+# }
+
+# https://trigger.meet.tf {
+#     tls info@incubaid.com
+#     reverse_proxy localhost:9988
+# }
+
+# https://chat.meet.tf {
+#     tls info@incubaid.com
+#     reverse_proxy localhost:8008
+#     handle_path /matrix/* {
+#         reverse_proxy mymatrix:8008
+#         uri strip_prefix /matrix
+#     }    
+# }
+
+
+# https://meet.tf {
+#     reverse_proxy localhost:8008
+#     handle /.well-known/matrix/server {
+#         header Content-Type application/json
+#         header Access-Control-Allow-Origin *
+#         respond `{"m.server": "chat.meet.tf:443"}`
+#     }
+#     handle /.well-known/matrix/client {
+#         header Content-Type application/json
+#         header Access-Control-Allow-Origin *
+#         respond `{"m.homeserver": {"base_url": "https://chat.meet.tf"}}`
+#     }    
+# }
+

@@ -1,2 +1,2 @@
 
-baobab https://github.com/threefoldtech/vbuilders/tree/development/3builders/examples/1
+hero https://github.com/threefoldtech/vbuilders/tree/development/3builders/examples/1

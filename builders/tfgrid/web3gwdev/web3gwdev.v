@@ -16,14 +16,14 @@ pub fn build(args docker.BuildArgs) ! {
 
 	r.add_from(image: 'gobuilder', alias: 'builder')!
 
-	gitbranch := 'development_integration' 
+	gitbranch := 'development_integration'
 
 	r.add_gobuild_from_code(
 		url: 'https://github.com/threefoldtech/3bot/tree/${gitbranch}/web3gw/server'
-		name:"web3gw"
-		buildcmd:"go build ."
-		copycmd:"cp server /bin/web3gw"
-	)!	
+		name: 'web3gw'
+		buildcmd: 'go build .'
+		copycmd: 'cp server /bin/web3gw'
+	)!
 
 	r.add_from(image: 'vbuilder', alias: 'installer')!
 
@@ -38,9 +38,6 @@ pub fn build(args docker.BuildArgs) ! {
 		url: 'https://github.com/threefoldtech/3bot/tree/${gitbranch}/web3gw/client'
 		dest: '/code/client'
 	)!
-
-
-	
 
 	r.build(args.reset)!
 }
