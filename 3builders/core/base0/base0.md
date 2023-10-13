@@ -21,9 +21,9 @@
 	names:'redis, dumb-init, curl, git, tmux, zsh, bash, ca-certificates'
 
 !!builder.recipe_add_run name:base0
-    cmd:'
+    cmd:
 		echo "THREEFOLD BASE DEV ENV WELCOMES YOU" > /etc/motd		
-	' 
+	    echo "yes"
 
 !!builder.recipe_add_cmd name:base0 
     cmd: '/bin/shell.sh'
