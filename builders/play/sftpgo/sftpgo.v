@@ -26,7 +26,7 @@ pub fn build(args docker.BuildArgs) ! {
 	mkdir /root/sftpgo
 	mkdir /root/zinit
 	')!
-	r.add_run(cmd: 'wget ${configurl}/sftpgo/sftpgo.json -O /root/sftpgo/sftpgo.json')!
+	r.add_run(cmd: 'wget ${configurl}/sftpgo.json -O /root/sftpgo/sftpgo.json')!
 
 	r.add_from(image: 'onlyoffice/documentserver', tag: '7.3')!
 
@@ -38,7 +38,13 @@ pub fn build(args docker.BuildArgs) ! {
 	r.add_copy(from: "aydo-builder", source: "/aydo/static", dest: "/usr/share/sftpgo/static")!
 	r.add_copy(from: "aydo-builder", source: "/aydo/openapi", dest: "/usr/share/sftpgo/openapi")!
 
-	r.add_sshserver()!
+	r.add_run(
+		cmd: '
+		apt update
+		apt install -y openssh-server dnsutils
+	'
+	)!
+	
 	r.add_zinit_cmd(
 		name: 'onlyoffice'
 		exec: '
@@ -64,7 +70,13 @@ pub fn build(args docker.BuildArgs) ! {
 		"
 	)!
 	
-	r.add_zinit()!
+	r.add_run(
+		cmd: '
+		wget -O /sbin/zinit https://github.com/threefoldtech/zinit/releases/download/v0.2.11/zinit 
+		chmod +x /sbin/zinit
+	'
+	)!
+	r.add_entrypoint(cmd: 'zinit init')!
 
 	r.build(args.reset)!
 }
