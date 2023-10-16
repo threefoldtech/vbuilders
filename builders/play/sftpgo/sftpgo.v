@@ -7,7 +7,7 @@ pub fn build(args docker.BuildArgs) ! {
 
 	println(' - build sftpgo: reset:${args.reset}')
 
-	mut r := engine.recipe_new(name: 'sftpgo', platform: .alpine)
+	mut r := engine.recipe_new(name: 'sftpgo', platform: .ubuntu)
 
 	r.add_from(image: 'golang', tag: '1.20-bullseye', alias: "aydo-builder")!
 
@@ -38,13 +38,7 @@ pub fn build(args docker.BuildArgs) ! {
 	r.add_copy(from: "aydo-builder", source: "/aydo/static", dest: "/usr/share/sftpgo/static")!
 	r.add_copy(from: "aydo-builder", source: "/aydo/openapi", dest: "/usr/share/sftpgo/openapi")!
 
-	r.add_run(
-		cmd: '
-		apt update
-		apt install -y openssh-server dnsutils
-	'
-	)!
-	
+	r.add_sshserver()!
 	r.add_zinit_cmd(
 		name: 'onlyoffice'
 		exec: '
@@ -70,13 +64,7 @@ pub fn build(args docker.BuildArgs) ! {
 		"
 	)!
 	
-	r.add_run(
-		cmd: '
-		wget -O /sbin/zinit https://github.com/threefoldtech/zinit/releases/download/v0.2.11/zinit 
-		chmod +x /sbin/zinit
-	'
-	)!
-	r.add_entrypoint(cmd: 'zinit init')!
+	r.add_zinit()!
 
 	r.build(args.reset)!
 }
