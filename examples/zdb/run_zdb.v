@@ -1,6 +1,6 @@
 module main
 
-import freeflowuniverse.crystallib.docker
+import freeflowuniverse.crystallib.osal.docker
 import threefoldtech.builders.core.zdb
 
 fn do() ! {

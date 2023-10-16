@@ -1,6 +1,6 @@
 module tfhub
 
-import freeflowuniverse.crystallib.docker
+import freeflowuniverse.crystallib.osal.docker
 import threefoldtech.builders.core.base
 
 pub fn build(args docker.BuildArgs) ! {

@@ -1,6 +1,6 @@
 module base0
 
-import freeflowuniverse.crystallib.docker
+import freeflowuniverse.crystallib.osal.docker
 
 pub fn build(args docker.BuildArgs) ! {
 	println(' - build base0: reset:${args.reset}')

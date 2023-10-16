@@ -1,6 +1,6 @@
 module rustbuilder
 
-import freeflowuniverse.crystallib.docker
+import freeflowuniverse.crystallib.osal.docker
 import threefoldtech.builders.core.rust0
 
 pub fn build(args docker.BuildArgs) ! {

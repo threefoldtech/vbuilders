@@ -1,6 +1,6 @@
 module web3gwdev
 
-import freeflowuniverse.crystallib.docker
+import freeflowuniverse.crystallib.osal.docker
 import threefoldtech.builders.core.gobuilder
 import threefoldtech.builders.core.vbuilder
 
