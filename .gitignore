@@ -2,3 +2,14 @@ scry
 compose/tfgrid/bin
 bin/
 .lnddata/
+*.dSYM
+*.log
+docs/
+vbuild_all
+docsv/
+vbuild_base
+vbuild_tfgrid
+vbuild_play
+play_goca
+vbuild_threebot
+play_web3proxy
