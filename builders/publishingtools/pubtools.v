@@ -14,7 +14,7 @@ pub fn build(args docker.BuildArgs) ! {
 		cmd: 'apt update'
 	)!
 	r.add_run(
-		cmd: 'apt -y install curl wget git make build-essential  unzip vim libgc-dev'
+		cmd: 'apt -y install sudo curl wget git make build-essential  unzip vim libgc-dev'
 	)!
 	r.add_run(cmd: 'apt install -y debian-keyring debian-archive-keyring apt-transport-https')!
 	r.add_run(
